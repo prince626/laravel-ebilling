@@ -149,7 +149,7 @@
                     @foreach ($subscription as $sub)
                     <tr>
                         {{-- <td>{{ $sub->user_id }}</td> --}}
-                        <td>#{{ $sub->subs_id }}</td>
+                        <td><strong>#{{ $sub->subs_id }}</strong></td>
                         <td>{{ $sub->email }}</td>
                         <td>{{ $sub->phone }}</td>
                         <td>{{ $sub->software }}</td>
@@ -169,7 +169,7 @@
                         {{-- <td>{{ $sub->Duration }}</td>
                         <td>{{ $sub->durationType }}</td> --}}
                         {{-- <td>{{ $sub->startDate }}</td> --}}
-                        <td>{{ $sub->expiryDate }}</td>
+                        <td><strong>{{ $sub->expiryDate }}</strong></td>
                         <td>@if ($sub->activationStatus)
                             <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
                                 <i class="fas fa-toggle-on" style="color: green;font-size:25px;"></i>
@@ -180,7 +180,7 @@
                             </a>
                             @endif
                         </td>
-                        <td>{{ $sub->amount }}</td>
+                        <td><strong>₹{{ $sub->amount }}</strong></td>
 
                         <td class="text-center">
                             @if ($sub->paymentStatus === 'paid')
@@ -191,7 +191,7 @@
                         padding:4px;border-radius:8px;font-weight:bold;">Unpaid</p>
                             @endif
                         </td>
-                     
+
 
                         {{-- <td>{{ $sub->paymentStatus }}</td> --}}
                         {{-- <td class="text-center">
@@ -210,13 +210,13 @@
                         <td style="align-items: center;">
                             @if ($sub->paymentStatus === 'paid')
                             {{-- <button class="btn btn-{{ $sub->activationStatus ? 'danger' : 'success' }}"> --}}
-                                <div class="filter mt-1">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
-                                    <ul class="invoice-dropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                        <li class="" ><i class="fa-regular fa-pen-to-square text-primary"></i><a class="dropdown-item" href="/api/user/update_view_subs/{{$sub->subs_id}}">Update</a></li>
-                                        <li data-bs-toggle="modal" data-bs-target="#exampleModal{{ $sub->subs_id }}"><i class="fa-solid fa-trash-can text-danger"></i><a class="dropdown-item" href="#delete">Delete</a></li>
-                                    </ul>
-                                </div>
+                            <div class="filter mt-1">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
+                                <ul class="invoice-dropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class=""><i class="fa-regular fa-pen-to-square text-primary"></i><a class="dropdown-item" href="/api/user/update_view_subs/{{$sub->subs_id}}">Update</a></li>
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal{{ $sub->subs_id }}"><i class="fa-solid fa-trash-can text-danger"></i><a class="dropdown-item" href="#delete">Cancel</a></li>
+                                </ul>
+                            </div>
                             {{-- </button> --}}
                             {{-- /api/user/user_update_plan/{{$sub->subs_id}} --}}
                             {{-- <a href="/api/user/update_view_subs/{{$sub->subs_id}}" class="m-1 "> <i class="fa-regular fa-pen-to-square" style="font-size:25px;"></i></a>
@@ -234,7 +234,7 @@
         </div>
         @foreach ($subscription as $sub)
         <div class="modal fade" id="exampleModal{{ $sub->subs_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog  modal-lg" role="document">
                 <div class="modal-content">
 
                     <form action="/api/user/cancel_subs/{{ $sub->subs_id }}" method="POST" class="php-email-form">
@@ -246,13 +246,13 @@
                             </button> --}}
                         </div>
                         <div class="modal-body">
-                            <p class="">Are you sure to delete your subscription.This service will be cancel immediately.</p>
+                            <strong class="">Are you sure to delete your subscription.This service will be cancel immediately.</strong>
                             <div class="form-group">
-                                {{-- <label for="message-text" class="col-form-label">Reason:</label> --}}
-                                <textarea class="form-control" placeholder="Enter Your Cancellation Reason" required name="cancelationReason" id="message-text"></textarea>
+                                <label for="message-text" class="col-form-label">Cancellation Reason:</label>
+                                <textarea type="text" class="form-control" placeholder="Enter Your  Reason" required name="cancelationReason" id="message-text"></textarea>
                             </div>
                         </div>
-                        <footer class="modal-footer">
+                        <footer class="modal-footer justify-content-start">
                             <div class="col-md-12 text-center">
                                 <div class="loading">Loading</div>
                                 <div class="error-message"></div>
@@ -261,9 +261,8 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Keep Plan</button>
-
-                            <button type="submit" class="btn btn-danger">Cancel Subscription</button>
+                                <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Keep Plan</button>
+                                <button type="submit" class="btn btn-danger">Cancel Subscription</button>
                         </footer>
                     </form>
                 </div>

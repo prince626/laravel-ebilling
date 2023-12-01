@@ -22,15 +22,15 @@ class CalculateHelper
         $userDurationType = $user->durationType;
         if ($userDuration === 1) {
             if ($userDurationType === 'Month') {
-                $expiryDate = Carbon::now('Asia/Kolkata')->addMonth();
+                $expiryDate = Carbon::now('Asia/Kolkata')->addDays(30);
             } elseif ($userDurationType === 'Year') {
-                $expiryDate = Carbon::now('Asia/Kolkata')->addYear();
+                $expiryDate = Carbon::now('Asia/Kolkata')->addDays(365);
             }
         } elseif ($userDuration === 3) {
             if ($userDurationType === 'Month') {
-                $expiryDate = Carbon::now('Asia/Kolkata')->addMonths(3);
+                $expiryDate = Carbon::now('Asia/Kolkata')->addDays(30 * 3);
             } elseif ($userDurationType === 'Year') {
-                $expiryDate = Carbon::now('Asia/Kolkata')->addYears(3);
+                $expiryDate = Carbon::now('Asia/Kolkata')->addDays(365 * 3);
             }
         }
         return $expiryDate;

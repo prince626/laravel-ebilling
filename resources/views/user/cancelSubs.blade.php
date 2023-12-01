@@ -13,8 +13,101 @@
     @if($cancelSubs==null)
     <h1>User has no cancel Subscription</h1>
     @else
-    <h1>Cancel Subscription Details</h1>
+    <h1>Canceled Subscription Details</h1>
+    <section class="section dashboard">
+        <div class="row">
 
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">Total <span>|Canceled Subscriptions</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-receipt"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ count($cancelSubs) }}</h6>
+                                        {{-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> --}}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Refund<span>| Process Subscriptions </span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-journal text-warning" ></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>{{ $cancelSubs->where('refundStatus', 'Processing')->count() }}</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">Refund <span>| Pending Amount</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-rupee text-danger"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>₹{{ $cancelSubs->where('refundStatus', 'Processing')->sum('refundAmount') }}</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">Total <span>| Refunded Amount</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-rupee text-success"></i>
+
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>₹{{ $cancelSubs->where('refundStatus', 'completed')->sum('refundAmount') }}</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -38,23 +131,23 @@
                 @foreach ($cancelSubs as $sub)
                 <tr>
                     {{-- <td>{{ $sub->user_id }}</td> --}}
-                    <td>#{{ $sub->subs_id }}</td>
+                    <td><strong>#{{ $sub->subs_id }}</strong></td>
                     <td>{{ $sub->email }}</td>
                     {{-- <td>{{ $sub->phone }}</td> --}}
 
                     <td>{{ $sub->software }}</td>
                     {{-- <td>{{ $sub->subscriptionType }}</td>
                     <td>{{ $sub->planInfo }}</td> --}}
-                    <td>{{ $sub->amount }}</td>
+                    <td><strong>₹{{ $sub->amount }}</strong></td>
+                    <td><strong>₹{{ $sub->refundAmount }}</strong></td>
                     <td>{{ $sub->cancelationReason }}</td>
                     <td>{{ $sub->cancelationDate }}</td>
-                    <td>{{ $sub->refundAmount }}</td>
                     <td>
                         @if ($sub->refundStatus === 'completed')
-                        <p class="text-success text-center w-100" style="background: #8bd98e;
+                        <p class="text-light bg-success text-center w-100" style="
                         padding:4px;border-radius:8px;font-weight:bold;">Completed</p>
                         @elseif ($sub->refundStatus === 'Processing')
-                        <p class="text-danger text-center" style="background: #caa5a5;
+                        <p class="text-light bg-warning text-center" style="
                         padding:4px;border-radius:8px;font-weight:bold;">Processing</p>
 
                         @endif

@@ -11,8 +11,8 @@
         <h1>Data Tables</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item"><a href="index.html">User</a></li>
+                <li class="breadcrumb-item">Notification</li>
                 <li class="breadcrumb-item active">Data</li>
             </ol>
         </nav>
@@ -43,7 +43,7 @@
                                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">All</button>
                                         </li>
                                         <div class="float-end ms-auto">
-                                            <a href="/api/user/read_all/{{$user?$user->user_id:''}}" class="activateAction"><button class="btn btn-primary ">Marked All</button></a>
+                                            <a href="/api/user/read_all/{{$user?$user->user_id:''}}" class="activateAction"><p class="p-2 text-light bg-primary ">Marked All</p></a>
                                         </div>
                                         {{-- <li class="nav-item">
                                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
@@ -58,14 +58,14 @@
 
                                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                             <div class="row">
-                                                <div class="col-lg-12">
+                                                <div class="table-responsive">
 
                                                     <h5 class="card-title">Datatables</h5>
 
-                                                    <table class="table dataTable table-striped" id="dataTable" width="100%" cellspacing="0">
+                                                    <table class="table dataTable table-striped " id="dataTable" width="100%" cellspacing="0">
                                                         <thead>
                                                             <tr>
-                                                                <th>userId</th>
+                                                                <th>UserId</th>
                                                                 <th>Email</th>
                                                                 <th>Message</th>
                                                                 <th>Type</th>
@@ -87,8 +87,8 @@
                                                             @foreach ($messages as $message)
                                                             <tr class="" style="color: {{ $message->type === 'alert' ? 'red' : 'inherit' }}; background-color: {{ $message->type === 'alert' ? 'red' : 'inherit' }};">
 
-                                                                <td>{{ $message->user_id }}</td>
-                                                                <td><strong>{{ $message->email }} </strong> </td>
+                                                                <td><strong>#{{ $message->user_id }}</strong></td>
+                                                                <td>{{ $message->email }}  </td>
                                                                 <td>{{ $message->message }}</td>
                                                                 <td>@if ($message->type === 'success')
                                                                     <p class=" text-light bg-success text-center" style="border-radius:8px
@@ -108,7 +108,6 @@
                                                                     $createdAt = Carbon\Carbon::parse($message->created_at, 'Asia/Kolkata');
                                                                     $now = Carbon\Carbon::now('Asia/Kolkata');
                                                                     @endphp
-
                                                                     @if ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
                                                                     {{ $createdAt->format('Y-m-d H:i:s') }} {{-- Display the full date and time --}}
                                                                     @elseif ($now->diffInMinutes($createdAt) >= 60) {{-- Check if the message is older than an hour --}}
@@ -134,14 +133,14 @@
 
                                             <!-- Profile Edit Form -->
                                             {{-- <div class="row"> --}}
-                                            <div class="col-lg-12">
+                                            <div class="table-responsive">
 
                                                 <h5 class="card-title">Datatables</h5>
 
                                                     <table class="table dataTable table-striped" id="dataTable" width="100%" cellspacing="0">
                                                         <thead>
                                                             <tr>
-                                                                <th>userId</th>
+                                                                <th>UserId</th>
                                                                 <th>Email</th>
                                                                 <th>Message</th>
                                                                 <th>Type</th>
@@ -163,8 +162,8 @@
                                                             @foreach ($allMessages as $message)
                                                             <tr class="" style="color: {{ $message->type === 'alert' ? 'red' : 'inherit' }}; background-color: {{ $message->type === 'alert' ? 'red' : 'inherit' }};">
 
-                                                                <td>{{ $message->user_id }}</td>
-                                                                <td><strong>{{ $message->email }} </strong> </td>
+                                                                <td><strong>#{{ $message->user_id }}</strong></td>
+                                                                <td>{{ $message->email }} </td>
                                                                 <td>{{ $message->message }}</td>
                                                                 <td>@if ($message->type === 'success')
                                                                     <p class=" text-light bg-success text-center" style="border-radius:8px
@@ -182,7 +181,7 @@
                                                                     padding:4px;border-radius:8px;font-weight:bold;">Mark As Read</p>
                                                                     @else
                                                                     <a href="/api/user/read/{{$message->sno}}" class="activateAction"> <p class=" text-center text-light bg-primary" style="
-                                                                        padding:0px;border-radius:8px;font-weight:bold;">Mark As Read</p></a>
+                                                                        padding:4px;border-radius:8px;font-weight:bold;">Mark As Read</p></a>
                                                                     @endif
 
                                                                 </td>

@@ -77,15 +77,15 @@ class updateSubscription extends Controller
             $userDurationType = $duration->durationType;
             if ($userDuration === 1) {
                 if ($userDurationType === 'Month') {
-                    $expiryDate = Carbon::now('Asia/Kolkata')->addMonth();
+                    $expiryDate = Carbon::now('Asia/Kolkata')->addDays(30);
                 } elseif ($userDurationType === 'Year') {
-                    $expiryDate = Carbon::now('Asia/Kolkata')->addYear();
+                    $expiryDate = Carbon::now('Asia/Kolkata')->addDays(365); // Assuming a year has 365 days
                 }
             } elseif ($userDuration === 3) {
                 if ($userDurationType === 'Month') {
-                    $expiryDate = Carbon::now('Asia/Kolkata')->addMonths(3);
+                    $expiryDate = Carbon::now('Asia/Kolkata')->addDays(30 * 3); // 30 days per month for 3 months
                 } elseif ($userDurationType === 'Year') {
-                    $expiryDate = Carbon::now('Asia/Kolkata')->addYears(3);
+                    $expiryDate = Carbon::now('Asia/Kolkata')->addDays(365 * 3); // Assuming a year has 365 days for 3 years
                 }
             }
             // $expiryDate = CalculateHelper::calculateExpiryDate($duration);

@@ -10,9 +10,9 @@
         <div class="card-header">
             <i class="fa fa-table"></i> Data Table Example
         </div>
-        <div class="card-body">
+        <div class="card-body mt-3">
             <div class="table-responsive">
-                <table class="table datatable" id="dataTable" width="100%" cellspacing="0">
+                <table class="table dataTable " id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
@@ -37,7 +37,7 @@
                     <tbody>
                         @foreach ($tickets as $ticket)
                         <tr>
-                            <td>#{{ $ticket->ticketId }}</td>
+                            <td><strong>#{{ $ticket->ticketId }}</strong></td>
                             <td>{{ $ticket->email }}</td>
 
                             <td>{{ $ticket->software_name }}</td>
@@ -65,14 +65,12 @@
                                 <button class="btn btn-warning text-light " style="border-radius: 16px;">closed</button>
                                 {{-- <a href="api/user/ticket/action/{{$ticket->ticketId}}"><button class="btn btn-success">Open Ticket</button></a> --}}
                                 @elseif ($ticket->status === 'open')
-                                <button class="btn btn-success" style="border-radius: 16px;">Opened</button>
+                                <p class="text-light bg-success p-1 text-center" style="border-radius: 8px;">Opened</p>
                                 @elseif ($ticket->status === 'solved')
-                                <button class="btn btn-success" style="border-radius: 16px;">Solved</button>
+                                <p class="text-light bg-success p-1 text-center" style="border-radius: 8px;">Solved</p>
                                 @elseif ($ticket->status === 'generated')
-                                <button class="btn btn-success" style="border-radius: 16px;">Generated</button>
-                                @elseif ($ticket->status === 'completed')
-                                <strong class="text-light bg-success" style="padding:7px;border-radius:8px" class="text-success">Solved</strong>
-
+                                <p class="text-light bg-success p-1 text-center" style="border-radius: 8px;">Generated</p>
+                          
                                 {{-- Display the chat conversation when the status is "open" --}}
                                 <div>
                                     {{-- Your chat conversation display logic goes here --}}
@@ -90,7 +88,7 @@
                             </td>
                             {{-- <a href="userChat/{{$ticket->ticketId}}"><button class="btn btn-info">Reply Admin</button></a></td> --}}
                             @elseif ($ticket->status === 'unread' ||$ticket->status === 'generated')
-                            <td><button class="btn btn-success" style="border-radius: 16px;">Unread</button></td>
+                            <td><p class="text-light bg-success p-1 text-center" style="border-radius: 8px;">Unread</p></td>
                             @elseif ($ticket->status === 'closed' || $ticket->status === 'solved'  )
                             <td><a href="/api/user/ticket/action/{{$ticket->ticketId}}" class="activateAction"><button class="btn btn-success"style="padding:7px;border-radius:8px">Open Ticket</button></a> </td>
                            @endif

@@ -65,8 +65,11 @@ class forgetPasswordController extends Controller
 
             if (HashHelper::verifyWithSalt($req->currentPassword, $user->password, $salt)) {
                 // $hashPassword = HashHelper::encrypt($req->password);
+                if (HashHelper::verifyWithSalt($req->password, $user->password, $salt)) {
+                    return SendResponse::jsonError($ret, 'password_error', 'New password must be different from the current password');
+                }
                 $ret->trace .= 'Intigrity_check, ';
-                $user->password =HashHelper::hashWithSalt($req->password, $salt);
+                $user->password = HashHelper::hashWithSalt($req->password, $salt);
                 $user->save();
                 $ret->trace .= 'password_changed, ';
                 $response = UpdateHelper::notification($req, 'isUser', $user, "User password has been changed successfully", 'success');
@@ -79,7 +82,7 @@ class forgetPasswordController extends Controller
                 // $response = redirect('api/user/get/profile?message=' . urlencode($message));
                 return $response;
             } else {
-                return SendResponse::jsonError($ret, 'Integrity_error', 'Old password Not match');
+                return SendResponse::jsonError($ret, 'password_error', 'Old password Not match');
             }
             // if ($plainPassword == $req->password) {
             //     return SendResponse::jsonError($ret, 'Integrity_error', 'current password and old password are same try different password');
@@ -115,7 +118,7 @@ class forgetPasswordController extends Controller
             $ret->trace .= 'Intigrity_check, ';
 
             $createToken =  HashHelper::createCustomToken();
-            $salt ='Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
             $emailOtp = 12345;
             $phoneOtp = 12345;
             $user->save([

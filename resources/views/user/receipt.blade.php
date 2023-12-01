@@ -149,7 +149,7 @@
                 <tbody>
                     @foreach ($invoiceReceipt as $receipt)
                     <tr>
-                        <td>#{{ $receipt->receipt_no }}</td>
+                        <td><strong>#{{ $receipt->receipt_no }}</strong></td>
                         {{-- <td>{{ $receipt->user_id }}</td> --}}
                         {{-- <td>{{ $receipt->subs_id }}</td> --}}
                         {{-- <td>{{ $receipt->email }}</td> --}}
@@ -157,7 +157,7 @@
                         <td>{{ $receipt->invoice_date }}</td>
                         <td>{{ $receipt->due_date }}</td>
                         {{-- <td>{{ $receipt->planInfo }}</td> --}}
-                        <td>{{ $receipt->paid_amount }}</td>
+                        <td><strong>₹{{ $receipt->paid_amount }}</strong></td>
                         <td class="text-center">
                             @if ($receipt->paymentStatus === 'paid')
                             <p class="text-light bg-success text-center" style="

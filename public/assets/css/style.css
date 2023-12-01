@@ -23,10 +23,19 @@ body {
   color: #444444;
 }
 
+/* datatables */
 label {
   text-transform: capitalize;
 }
 
+select[name="dataTable_length"] {
+  border-radius: 40px !important;
+  margin: 2px;
+}
+.dataTables_filter input[type="search"]{
+  border-radius: 20px !important;
+  outline: none;
+}
 a {
   color: #4154f1;
   text-decoration: none;
@@ -390,15 +399,17 @@ h6 {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color:#131417;
- 
+  background-color: #131417;
+
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
-.header li a{
+
+.header li a {
   color: white !important;
 }
+
 .header .toggle-sidebar-btn {
   font-size: 32px;
   padding-left: 10px;
@@ -623,11 +634,12 @@ h6 {
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   /* background-color: #fff; */
-  background-color:#1E1F26;
+  background-color: #1E1F26;
 }
-.sidebar li a{
-color:white !important;
-background-color: #1E1F26 !important;
+
+.sidebar li a {
+  color: white !important;
+  background-color: #1E1F26 !important;
 }
 
 @media (max-width: 1199px) {
@@ -1533,10 +1545,11 @@ input[type='radio'] {
 .pricingTable {
   margin: 40px auto;
 }
-option{
+
+option {
   /* font-size: 17.8px; */
   padding: 12px;
-  background-color:rgba(226, 223, 223, 0.712);
+  background-color: rgba(226, 223, 223, 0.712);
 }
 
 /* .form-select option{
@@ -1544,12 +1557,13 @@ option{
   background: #bf5279 !important;
 } */
 
-select{
+select {
   background-color: #f5f5f5 !important;
   border-radius: 0px !important;
   /* max-width: ; */
 }
-option{
+
+option {
   /* font-size: 17px !important; */
 }
 
@@ -1604,7 +1618,7 @@ textarea:focus {
   vertical-align: middle;
   width: 31%;
   background-color: #ffffff;
-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
   display: inline-block;
   padding: 0px 30px 40px;
@@ -2020,8 +2034,9 @@ box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 .text-danger strong {
   color: #9f181c;
 }
-.invoice-dropdown{
-padding: 12px;
+
+.invoice-dropdown {
+  padding: 12px;
 }
 
 .invoice-dropdown li {
@@ -2131,14 +2146,20 @@ padding: 12px;
 
 /* select plans---------------> */
 .dropdown-item.custom-bg {
-  background-color: #f00; /* Change this to the desired background color */
-  color: #fff; /* Change this to the desired text color */
+  background-color: #f00;
+  /* Change this to the desired background color */
+  color: #fff;
+  /* Change this to the desired text color */
 }
-.select_subscription .bg-white{
-    /* box-shadow: rgba(88, 87, 87, 0.3) 0px 19px 38px, rgba(96, 95, 95, 0.22) 0px 15px 12px; */
-    /* border-radius:6px; */box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-}          
+.select_subscription .bg-white {
+  /* box-shadow: rgba(88, 87, 87, 0.3) 0px 19px 38px, rgba(96, 95, 95, 0.22) 0px 15px 12px; */
+  /* border-radius:6px; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
 .card-selected {
-        border: 2px solid blue; /* You can customize the border style */
-    }  
+  border: 2px solid blue;
+  /* You can customize the border style */
+}

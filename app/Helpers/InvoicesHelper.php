@@ -46,7 +46,7 @@ class InvoicesHelper
             'phone' => $user->phone,
             'software' => $user->software,
             'planInfo' => $user->business_Category,
-            'paid_amount' => $user->amount,
+            'amount' => $user->amount,
             'paymentStatus' => $user->paymentStatus,
             'invoice_date' => Carbon::now('Asia/Kolkata')->format('Y-m-d'),
             'due_date' => $expiryDate,
@@ -76,7 +76,7 @@ class InvoicesHelper
             'due_date' => $invoice->due_date,
             'software' => $invoice->software,
             'planInfo' => $invoice->planInfo,
-            'paid_amount' => $invoice->paid_amount,
+            'paid_amount' => $invoice->amount,
             'paymentStatus' => $invoice->paymentStatus,
             'payment_method' => $req->payment_method, // Replace with actual payment method
             'holder_name' => $req->holderName,

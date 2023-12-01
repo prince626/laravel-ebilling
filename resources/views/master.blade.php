@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
 </head>
 

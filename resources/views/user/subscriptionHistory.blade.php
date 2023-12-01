@@ -31,10 +31,10 @@
                         {{-- <th scope="col">Subscription Type</th> --}}
                         <th scope="col">Subscription Status</th>
                         {{-- <th scope="col">Business Category</th> --}}
-                        <th scope="col">Plan Info</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Expiry Date</th>
+                        {{-- <th scope="col">Plan Info</th> --}}
+                        {{-- <th scope="col">Duration</th> --}}
+                        <th scope="col">Active Time</th>
+                        {{-- <th scope="col">Expiry Date</th> --}}
                         <th scope="col">Amount</th>
                         <th scope="col">Payment Status</th>
 
@@ -44,18 +44,24 @@
                     @foreach ($subscription as $sub)
                     <tr>
                         {{-- <td>{{ $sub->user_id }}</td> --}}
-                        <td>{{ $sub->subs_id }}</td>
+                        <td><strong>#{{ $sub->subs_id }}</strong></td>
                         <td>{{ $sub->email }}</td>
                         {{-- <td>{{ $sub->phone }}</td> --}}
                         <td>{{ $sub->software }}</td>
                         {{-- <td>{{ $sub->subscriptionType }}</td> --}}
-                        <td>{{ $sub->subscriptionStatus }}</td>
+                        <td>@if ($sub->subscriptionStatus === 'active')
+                            <p class="text-light bg-success text-center" style="padding:4px;
+                        border-radius:8px;font-weight:bold;">Active</p>
+                            @else
+                            <p class="text-white bg-danger text-center" style="
+                        padding:4px;border-radius:8px;font-weight:bold;">{{$sub->subscriptionStatus}}</p>
+                            @endif</td>
                         {{-- <td>{{ $sub->business_Category }}</td> --}}
-                        <td>{{ $sub->planInfo }}</td>
-                        <td>{{ $sub->duration }} {{ $sub->durationType }}</td>
-                        <td>{{ $sub->startDate }}</td>
-                        <td>{{ $sub->expiryDate }}</td>
-                        <td>{{ $sub->amount }}</td>
+                        {{-- <td>{{ $sub->planInfo }}</td> --}}
+                        {{-- <td>{{ $sub->duration }} {{ $sub->durationType }}</td> --}}
+                        <td><strong>{{ $sub->startDate }}</strong> To <strong>{{ $sub->expiryDate }}</strong></td>
+                        {{-- <td>{{ $sub->expiryDate }}</td> --}}
+                        <td><strong>₹{{ $sub->amount }}</strong></td>
 
                         <td class="text-center">
                             @if ($sub->paymentStatus === 'paid')

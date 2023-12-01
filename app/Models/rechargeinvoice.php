@@ -19,7 +19,7 @@ class rechargeinvoice extends Model
         'phone',
         'software',
         'planInfo',
-        'paid_amount',
+        'amount',
         'paymentStatus',
         'invoice_date',
         'due_date'

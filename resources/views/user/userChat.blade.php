@@ -60,11 +60,11 @@
                             @csrf
 
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 3" style="width: 40px; height: 100%;">
-                            <input type="text" required name="message" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Type message">
-                            <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
-                            <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
+                            <input type="text" required name="message" class="form-control mx-2" id="exampleFormControlInput1" placeholder="Type message">
+                            {{-- <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
+                            <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a> --}}
                        
-                            <button class="ms-3 text-muted" type="submit" style="background: none;border:none;"><i class="fas fa-paper-plane"></i></button>
+                            <button class=" text-muted fs-4" type="submit" style="background: none;border:none;"><i class="fas fa-paper-plane text-primary"></i></button>
                                  {{-- <a class="ms-3" type="submit"><i class="fas fa-paper-plane"></i></a> --}}
                             <div class="col-md-12 text-center" style="display: none;">
                                 <div class="loading">Loading</div>
