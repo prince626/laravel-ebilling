@@ -203,6 +203,7 @@ class updateSubscription extends Controller
             $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
             $updateexpiryDate = Carbon::parse($subscription->expiryDate);
             $updateduration = $updateexpiryDate->diffInDays($now);
+            
             if ($now > $updateexpiryDate) {
                 $expiryDate->addDays(0);
             } else {
