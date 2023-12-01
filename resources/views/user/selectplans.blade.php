@@ -161,6 +161,7 @@
                 <p class="">Choose from a variety of secure options to complete your transaction with confidence</p>
             </div>
             <div class="col-md-4 ">
+                
                 <button type="button" class="btn btn-warning float-end text-light" data-bs-toggle="modal" data-bs-target="#paymentModal3">
                     Pay Later
                 </button>

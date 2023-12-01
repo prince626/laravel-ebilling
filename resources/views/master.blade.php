@@ -474,7 +474,7 @@
     </aside><!-- End Sidebar-->
 
     <div class="toast__container" style="">
-        <div class="toast__cell">
+        <div class="toast__cell" style="">
             @foreach ($messageCount as $message)
             {{-- <div class="toast toast--green"> --}}
             <div class="toast  @if($message->type == 'success') toast--green add-margin @elseif($message->type == 'info') toast--blue add-margin @elseif($message->type == 'alert') toast--red add-margin @elseif($message->type == 'warning') toast--yellow add-margin @endif">

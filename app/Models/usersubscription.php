@@ -21,7 +21,7 @@ class usersubscription extends Model
         'planInfo',
         'software',
         'subscriptionStatus',
-        'Duration',
+        'duration',
         'durationType',
         'kit',
         'amount',

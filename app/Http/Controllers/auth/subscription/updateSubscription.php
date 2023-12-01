@@ -29,9 +29,6 @@ use Illuminate\Support\Facades\Validator;
 
 class updateSubscription extends Controller
 {
-
-
-    // user update Subscription-------------------------->
     public function update_Subscription(Request $req, $id)
     {
         try {
@@ -58,7 +55,6 @@ class updateSubscription extends Controller
             }
             $ret->trace .= 'Integrity_check, ';
 
-            $expiryDate = null;
             $duration = planvalidities::where('planId', $req->duration)->first();
             $plan = planpricing::where('validityId', $req->plan)->first();
             $addons = planaddons::where('id', $req->addons)->first();
@@ -170,7 +166,7 @@ class updateSubscription extends Controller
                     'business_Category' => $businessCategory->name,
                     'subscriptionStatus' => 'inactive',
                     'planInfo' => $plan->name,
-                    'Duration' => $userDuration,
+                    'duration' => $userDuration,
                     'startDate' => $now,
                     'expiryDate' => $expiryDate->format('Y-m-d'),
                     'durationType' => $userDurationType,
@@ -199,18 +195,20 @@ class updateSubscription extends Controller
                     return $response;
                 }
             }
-            if (
-                $subscription->duration != $duration->duration ||
-                $subscription->durationType != $duration->durationType
-            ) {
-                $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
-                $updateexpiryDate = Carbon::parse($subscription->expiryDate);
-                $updateduration = $updateexpiryDate->diffInDays($now);
-                $expiryDate->addDays($updateduration)->format('Y-m-d');
-                $expiryDate = $expiryDate->format('Y-m-d');
-            }
-            $now = Carbon::now('Asia/Kolkata')->format('Y-m-d');
 
+            // if (
+            //     $subscription->duration !== $duration->duration &&
+            //     $subscription->durationType !== $duration->durationType
+            // ) {
+            $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
+            $updateexpiryDate = Carbon::parse($subscription->expiryDate);
+            $updateduration = $updateexpiryDate->diffInDays($now);
+            if ($now > $updateexpiryDate) {
+                $expiryDate->addDays(0);
+            } else {
+                $expiryDate->addDays($updateduration);
+            }
+            $expiryDate = $expiryDate->format('Y-m-d');
             $subsHistory = SubscriptionHelper::update_subscriptionHistory($req, $plan, $subscription, $addons, $userDuration, $expiryDate, $userDurationType, $businessCategory->name, $amount);
 
             if ($subsHistory) {
@@ -241,8 +239,7 @@ class updateSubscription extends Controller
                 if ($createInvoice) {
                     $ret->trace .= 'receipt_created, ';
                     InvoicesHelper::autoAction_log($subsHistory);
-                    // InvoicesHelper::billing($createInvoice);
-                    // $ret->trace .= 'created_bill, ';
+                    $ret->trace .= 'created_bill, ';
                 }
                 $response = UpdateHelper::notification($req, 'isUser', $subsHistory, 'Your subscription has been completed', 'success');
                 $ret->trace .= 'Database_inserted, ';

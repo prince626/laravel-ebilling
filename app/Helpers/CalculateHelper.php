@@ -18,7 +18,7 @@ class CalculateHelper
     public static function calculateExpiryDate($user)
     {
         $expiryDate = null;
-        $userDuration = (int)$user->Duration;
+        $userDuration = (int)$user->duration;
         $userDurationType = $user->durationType;
         if ($userDuration === 1) {
             if ($userDurationType === 'Month') {

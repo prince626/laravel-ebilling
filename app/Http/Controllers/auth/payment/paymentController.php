@@ -55,23 +55,7 @@ class paymentController extends Controller
             if (!$subscription && $subscriptionHistory) {
                 return SendResponse::jsonError($ret, 'Integrity_error', 'subscription_id');
             }
-            $userDuration = (int)$subscription->Duration;
-            $userDurationType = $subscription->durationType;
-            $startDate = Carbon::parse($subscription->startDate);
-            $expiryDate = null;
-            if ($userDuration === 1) {
-                if ($userDurationType === 'Month') {
-                    $expiryDate = $startDate->addMonth();
-                } elseif ($userDurationType === 'Year') {
-                    $expiryDate = $startDate->addYear();
-                }
-            } elseif ($userDuration === 3) {
-                if ($userDurationType === 'Month') {
-                    $expiryDate = $startDate->addMonths(3);
-                } elseif ($userDurationType === 'Year') {
-                    $expiryDate = $startDate->addYears(3);
-                }
-            }
+            $expiryDate = CalculateHelper::calculateExpiryDate($subscription);
             $subscription->paymentStatus = 'paid';
             $subscription->expiryDate = $expiryDate->format('Y-m-d');
             $subscription->save();
@@ -80,8 +64,8 @@ class paymentController extends Controller
             $subscriptionHistory->paymentStatus = 'paid';
             $subscriptionHistory->save();
             if ($subscription && $subscriptionHistory) {
-                $expiryDate = CalculateHelper::calculateExpiryDate($subscription);
-                $invoice->due_date = $expiryDate->format('Y-m-d');
+            $expiryDate = CalculateHelper::calculateExpiryDate($subscription);
+            $invoice->due_date = $expiryDate->format('Y-m-d');
                 $invoice->paymentStatus = 'paid';
                 $invoice->save();
                 $invoiceHistory->due_date = $expiryDate->format('Y-m-d');
@@ -118,57 +102,59 @@ class paymentController extends Controller
             return ApiHelpers::serverError($e);
         }
     }
-    public function updatePayment(Request $req, $id)
-    {
-        try {
-            $ret = ApiHelpers::ret();
-            $subscription = usersubscription::where('subs_id', $id)->first();
-            $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
-            $createSubscription = usersubscription::create([
-                'user_id' => $req->user_id,
-                'subs_id' => $req->subs_id,
-                'email' => $req->email,
-                'phone' => $req->phone,
-                'software' => $req->software,
-                'subscriptionType' => $req->subscriptionType,
-                'business_Category' => $req->business_Category,
-                'subscriptionStatus' => 'inactive',
-                'planInfo' => $req->planInfo,
-                'Duration' => $req->Duration,
-                'startDate' => $now,
-                'expiryDate' => $req->expiryDate,
-                'durationType' => $req->durationType,
-                'amount' => $req->amount,
-                'accept' => $req->accept,
-                'paymentStatus' => 'paid',
-                'kit' => HashHelper::createCustomToken(),
-            ]);
-            if ($createSubscription) {
-                $subsHistory = subscriptionhistory::create([
-                    'user_id' => $createSubscription->user_id,
-                    'subs_id' => $createSubscription->subs_id,
-                    'email' => $createSubscription->email,
-                    'phone' => $createSubscription->phone,
-                    'software' => $createSubscription->software,
-                    'subscriptionType' => $createSubscription->subscriptionType,
-                    'subscriptionStatus' => 'inactive',
-                    'business_Category' => $createSubscription->business_Category,
-                    'planInfo' => $createSubscription->planInfo,
-                    'paymentStatus' => $createSubscription->paymentStatus,
-                    'duration' => $createSubscription->Duration,
-                    'startDate' => $now,
-                    'expiryDate' => $createSubscription->expiryDate,
-                    'durationType' => $createSubscription->durationType,
-                    'amount' => $createSubscription->amount,
-                ]);
-                $subscription->delete();
-                $ret->trace .= 'Database_inserted, ';
-                $response = UpdateHelper::notification($req, 'isUser', $subsHistory, 'Your subscription has been completed', 'success');
-                $response = redirect('api/user/subscription');
-                return $response;
-            }
-        } catch (\Exception $e) {
-            return ApiHelpers::serverError($e);
-        }
-    }
+
+    // update Payment------------------->
+    // public function updatePayment(Request $req, $id)
+    // {
+    //     try {
+    //         $ret = ApiHelpers::ret();
+    //         $subscription = usersubscription::where('subs_id', $id)->first();
+    //         $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
+    //         $createSubscription = usersubscription::create([
+    //             'user_id' => $req->user_id,
+    //             'subs_id' => $req->subs_id,
+    //             'email' => $req->email,
+    //             'phone' => $req->phone,
+    //             'software' => $req->software,
+    //             'subscriptionType' => $req->subscriptionType,
+    //             'business_Category' => $req->business_Category,
+    //             'subscriptionStatus' => 'inactive',
+    //             'planInfo' => $req->planInfo,
+    //             'Duration' => $req->Duration,
+    //             'startDate' => $now,
+    //             'expiryDate' => $req->expiryDate,
+    //             'durationType' => $req->durationType,
+    //             'amount' => $req->amount,
+    //             'accept' => $req->accept,
+    //             'paymentStatus' => 'paid',
+    //             'kit' => HashHelper::createCustomToken(),
+    //         ]);
+    //         if ($createSubscription) {
+    //             $subsHistory = subscriptionhistory::create([
+    //                 'user_id' => $createSubscription->user_id,
+    //                 'subs_id' => $createSubscription->subs_id,
+    //                 'email' => $createSubscription->email,
+    //                 'phone' => $createSubscription->phone,
+    //                 'software' => $createSubscription->software,
+    //                 'subscriptionType' => $createSubscription->subscriptionType,
+    //                 'subscriptionStatus' => 'inactive',
+    //                 'business_Category' => $createSubscription->business_Category,
+    //                 'planInfo' => $createSubscription->planInfo,
+    //                 'paymentStatus' => $createSubscription->paymentStatus,
+    //                 'duration' => $createSubscription->Duration,
+    //                 'startDate' => $now,
+    //                 'expiryDate' => $createSubscription->expiryDate,
+    //                 'durationType' => $createSubscription->durationType,
+    //                 'amount' => $createSubscription->amount,
+    //             ]);
+    //             $subscription->delete();
+    //             $ret->trace .= 'Database_inserted, ';
+    //             $response = UpdateHelper::notification($req, 'isUser', $subsHistory, 'Your subscription has been completed', 'success');
+    //             $response = redirect('api/user/subscription');
+    //             return $response;
+    //         }
+    //     } catch (\Exception $e) {
+    //         return ApiHelpers::serverError($e);
+    //     }
+    // }
 }
