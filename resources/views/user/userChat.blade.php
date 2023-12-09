@@ -27,11 +27,10 @@
                         <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative;height: 50vh; overflow-y: auto;">
                             @if(isset($messages) && count($messages) > 0)
                             @foreach($messages as $message)
-
-                            <div class="d-flex flex-row m-2 {{ $message->type==="Admin" ? 'justify-content-start' :' justify-content-end'}}">
+                            <div class="d-flex flex-row m-2 {{ $message->type=="Admin" ? 'justify-content-start' :' justify-content-end'}}">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 1" style="width: 35px; height: 100%;">
                                 <div>
-                                    <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color:{{ $message->type === 'Admin' ? '#f5f6f7' : '#0d6efd' }}">{{ $message->message }}</p>
+                                    <p class="small p-1 {{ $message->type=="Admin" ? 'text-dark' :' text-light'}} ms-3 mb-1 rounded-3 text-center" style="background-color:{{ $message->type === 'Admin' ? '#f5f6f7' : '#0d6efd' }}">{{ $message->message }}</p>
                                     <p class="ms-4" style="font-size: 12px;margin-top:-6px;">
                                         @php
                                         // Use a valid timestamp format (Y-m-d H:i:s) for Carbon::parse
@@ -42,9 +41,9 @@
                                         @if ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
                                         {{ $createdAt->format('Y-m-d H:i:s') }} {{-- Display the full date and time --}}
                                         @elseif ($now->diffInMinutes($createdAt) >= 60) {{-- Check if the message is older than an hour --}}
-                                        {{ $now->diffInHours($createdAt) }} hours ago {{-- Display hours --}}
+                                        {{ $now->diffInHours($createdAt) }} hrs ago {{-- Display hours --}}
                                         @elseif ($now->diffInMinutes($createdAt) >= 1)
-                                        {{ $now->diffInMinutes($createdAt) }} minutes ago
+                                        {{ $now->diffInMinutes($createdAt) }} min ago
                                         @else
                                         now
                                         @endif
@@ -63,9 +62,9 @@
                             <input type="text" required name="message" class="form-control mx-2" id="exampleFormControlInput1" placeholder="Type message">
                             {{-- <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
                             <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a> --}}
-                       
+
                             <button class=" text-muted fs-4" type="submit" style="background: none;border:none;"><i class="fas fa-paper-plane text-primary"></i></button>
-                                 {{-- <a class="ms-3" type="submit"><i class="fas fa-paper-plane"></i></a> --}}
+                            {{-- <a class="ms-3" type="submit"><i class="fas fa-paper-plane"></i></a> --}}
                             <div class="col-md-12 text-center" style="display: none;">
                                 <div class="loading">Loading</div>
                                 <div class="error-message"></div>
@@ -125,5 +124,7 @@
     </div>
 
     </div> --}}
+
+    
 </main>
 @endsection

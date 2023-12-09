@@ -80,7 +80,7 @@
             // window.location.href = 'http://localhost:8000/api/user/get_tickets'; 
           }
         } else {
-          throw new Error(data ? data.status + ' ' + data.data : 'Form submission failed and no error message returned from: ' + action);
+          throw new Error(data ?  data.data : 'Form submission failed and no error message returned from: ' + action);
         }
       })
       .catch((error) => {

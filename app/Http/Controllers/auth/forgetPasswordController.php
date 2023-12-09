@@ -74,7 +74,7 @@ class forgetPasswordController extends Controller
                 $ret->trace .= 'password_changed, ';
                 $response = UpdateHelper::notification($req, 'isUser', $user, "User password has been changed successfully", 'success');
                 // $response = view('auth.verifyforget')->with('user', $user);
-                $response = LoginHelper::log_action($req, $user, true, 'password_changed');
+                $response = LoginHelper::log_action($req, $user, true, 'password_changed', 'Password Updated');
 
                 $response = SendResponse::SendResponse($ret, 'Success', SendResponse::jsonUserData($user));
                 $message = 'Your password has been changed successfully';
@@ -82,7 +82,9 @@ class forgetPasswordController extends Controller
                 // $response = redirect('api/user/get/profile?message=' . urlencode($message));
                 return $response;
             } else {
-                return SendResponse::jsonError($ret, 'password_error', 'Old password Not match');
+                $response = LoginHelper::log_action($req, $user, true, 'password_changed', 'Wrong Password');
+                $response = SendResponse::jsonError($ret, 'password_error', 'Current password Not match');
+                return $response;
             }
             // if ($plainPassword == $req->password) {
             //     return SendResponse::jsonError($ret, 'Integrity_error', 'current password and old password are same try different password');
@@ -131,7 +133,7 @@ class forgetPasswordController extends Controller
             }
             $ret->trace .= 'user_otps_sent, ';
             // $createLog = LoginHelper::log_action($req, $user, true, 'forget_password');
-            $response = LoginHelper::log_action($req, $user, true, 'otp_sent');
+            $response = LoginHelper::log_action($req, $user, true, 'change_password', 'Otp Sent');
 
             $response = SendResponse::SendResponse($ret, 'success', $user);
             // $response = view('auth.verifyforget')->with('user', $user);
@@ -183,13 +185,13 @@ class forgetPasswordController extends Controller
                     'password' => HashHelper::hashWithSalt($req->password, $salt),
                 ]);
                 $ret->trace .= 'password_updated, ';
-                LoginHelper::log_action($req, $user, true, 'password_changed');
+                LoginHelper::log_action($req, $user, true, 'password_changed', 'Password Updated');
                 UpdateHelper::notification($req, 'isUser', $user, 'your password has been successfully updated', 'success');
                 $response = SendResponse::SendResponse($ret, 'success', SendResponse::jsonUserData($user));
                 // $response = view('auth.login');
                 return $response;
             } else {
-                LoginHelper::log_action($req, $user, false, 'otp_Not_valid');
+                LoginHelper::log_action($req, $user, false, 'password_changed', 'Otp Not Valid');
                 return SendResponse::jsonError($ret, 'Integrity_error', 'Otp Not Valid');
             }
         } catch (\Exception $e) {

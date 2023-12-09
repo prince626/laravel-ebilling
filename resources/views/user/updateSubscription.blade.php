@@ -5,12 +5,17 @@
     @if($software && $categories && $pricings && $validities && $subscription &&$addons )
 
     <div class="container-fluid">
-        <h1 class="text-center">Update Plan What suits you best ?</h1>
-        <p class="text-center">There different plan for users pick the right on for you.</p>
-
+        <div class="bg-warning  py-4 text-light" style="span:not(:last-child) {
+            margin-right: 10px;">
+            <h3 class="text-center">Update Plan What suits you best ?</h3>
+            <p class="text-center">Unlock the full potential of our software with a simple payment. Begin your journey today and enjoy enchanced features and endless possibilities.</p>
+            <div class="text-center"><span class="me-2"><i class="bi bi-house-fill"></i></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
+        </div>
+       
         <form action='/api/user/update_subs/{{ $subscription->subs_id }}' method="POST" class="php-email-form">
             @csrf
             <div class="container-fluid m-auto justify-content-center select_subscription">
+                
                 {{-- <div class="bg-white mx-1 p-3">
                     <h4 class="font-bold">Select Software</h4>
                     <select class=" form-select" name="software" required aria-label="Default select example">
@@ -21,9 +26,9 @@
                         @endforeach
                     </select>
                 </div> --}}
-                <div class="bg-white row mt-4 mx-1 bg-light p-3">
+                <div class="bg-white row mt-4  bg-light p-3">
                     <div class="col-md-4">
-                        <h4>Select Businesss Category</h4>
+                        <h5>Select Businesss Category</h5>
                         <select class=" form-select" id="category" name="businessCategory" required aria-label="Default select example" required>
                             <option name="businessCategory" value="">SELECT</option>
                             @foreach ($categories as $category)
@@ -47,7 +52,7 @@
                     </select>
                 </div> --}}
                 <div class="col-md-4">
-                    <h4>Select Your Plan</h4>
+                    <h5>Select Your Plan</h5>
                     <select class="form-select" id="plan" name="plan" style="" required aria-label="Default select example" required>
                         <option value="null">SELECT</option>
                     </select>
@@ -65,16 +70,16 @@
     </div> --}}
     <div class="col-md-4">
         <div class="row">
-            <h4>Duration</h4>
+            <h5>Duration</h5>
             <select class="form-select" id="duration" name="duration" required aria-label="Default select example" required>
                 <option value="null">SELECT</option>
             </select>
         </div>
     </div>
     </div>
-    <div class="row mt-4 bg-white  mx-1 bg-light p-3">
+    <div class="row mt-4 bg-white  bg-light p-3">
         <div class="col-md-2">
-            <h4 id="categoryId">Addons</h4>
+            <h5 id="categoryId">Addons</h5>
         </div>
         {{-- <div class="col-md-11">
                     <select class="form-select" name="addons" aria-label="Default select example" required>
@@ -90,34 +95,34 @@
             </select>
         </div>
         <div class="col-md-3 text-end">
-            <p class="">See Some Addons  </p>
+            <p id="seeSomeAddons" class=" text-warning" style="cursor: pointer;text-decoration: underline;">See Some Addons <i class="bi bi-plus text-light bg-warning px-1 m-1"></i> </p>
         </div>
 
     </div>
-    <div class="chooseplan bg-white mt-4 mx-1 mb-3  p-3">
+    <div class="row chooseplan bg-white bg-light my-3   p-3">
         <div class=" beforeplans" style="display: none;" >
-            <h4 class="text-bold">Selected Plan</h4>
+            <h5 class="text-bold">Selected Plan</h5>
                 <p>Enjoy plan with the following features and benefits</p>
             <div class="row">
-            <div class="col-md-10">
-                <p class=""><span id="description1" class="m-2"></span ><span id="description2" class="m-2"></span><span id="description3" class="m-2"></span><span id="description4" class="m-2"></span></p>
-            </div>
-            <div class="col-md-2">
-                <p class="btn btn-warning text-end float-end" id="planAmount"></p>
-            </div>
-            <hr>
+                <div class="col-md-10">
+                    <p class="" style="font-size: 16px;"><span id="description1" class="m-2"></span ><span id="description2" class="m-2"></span><span id="description3" class="m-2"></span><span id="description4" class="m-2"></span></p>
+                </div>
+                <div class="col-md-2">
+                    <p class="btn btn-warning text-light text-end float-end" id="planAmount"></p>
+                </div>
+                <hr>
 
-        </div>
+            </div>
         </div>
         <div class="afteraddons" style="display: none;" >
-            <h4>Selected Addons</h4>
-            <p>Addons : <strong id="addonsName"></strong></p>
-            <div class="row">
+            <h5>Selected Addons</h5>
+            <p style="font-size: 16px;">Addons : <span id="addonsName">Not Selected</span></p>
+            <div class="row align-items-center">
                 <div class="col-md-10">
-            <p class=""><span id="addonsdescription1" class="m-2"></span ><span id="addonsdescription2" class="m-2"></span></p>
-            </div>
+                    <p class="" style="font-size: 16px;"><span id="addonsdescription1" class="ms-2"></span ><span id="addonsdescription2" class="ms-2"></span></p>
+                </div>
                 <div class="col-md-2">
-                    < class="btn btn-warning text-end float-end" id="addonsAmount"></p>
+                    <p class="btn btn-warning text-light text-end float-end" id="addonsAmount">Not Selected</p>
                 </div>
             </div>
             <hr>
@@ -125,12 +130,12 @@
         </div>
         <div class="afterselectedAmount" style="" >
             {{-- <h4>Selected Payment</h4> --}}
-            <strong>Total :-</strong>
+            <h5>Total :-</h5>
             <div class="row ms-1 mt-3" >
                 <div class="form-check  col-md-9 ">
                     <input class="form-check-input" required name="accept" required type="checkbox" value="accept" id="flexCheckDefault" required>
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Accept terms and Condition
+                    <label class="form-check-label" for="flexCheckDefault" style="font-size: 14px;">
+                        I Agree with the terms and Condition
                     </label>
                 </div>
                 <div class="col-md-3">
@@ -139,25 +144,24 @@
             </div> 
 
         </div>
-        
-    </div>
+        </div>
     <input type="hidden" name="paymentStatus" id="paymentStatusField">
     {{-- <input type="hidden" name="paymentStatus" value="pending" id="paymentStatusField"> --}}
 
 
    
-    <div class="bg-white p-3 mx-1 mt-5" style="" >
+    <div class="row bg-white  py-3 ps-3 mt-2" style="" >
         {{-- <h4>Selected Payment</h4> --}}
-        <strong>Payment Methods :</strong>
+        <h5>Payment Methods :</h5>
         <div class="row">
             <div class="col-md-9 mt-2">
-                <p class="">Choose from a variety of secure options to complete your transaction with confidence</p>
+                <p class="" style="font-size: 16px;">Choose from a variety of secure options to complete your transaction with confidence</p>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-warning text-end float-end text-light" id="showChooseMethod">Pay Now</button>
+            <div class="col-md-3 text-end">
+                <button class="btn btn-warning text-end justify-content-end text-light" id="showChooseMethod">Select Method</button>
             </div>
         </div> 
-    <div class=" chooseMethod" style="display: none;">
+        <div class=" chooseMethod" style="display: none;">
         <hr>
 
         <div class="row">
@@ -199,33 +203,33 @@
                         <div class="card px-4">
                             <p class="h2 py-3">Payment Details</p>
                             <div class="box" >
-                            <p class="h6 py-3" id="showselected">Selected Amount : <span id="selectedAmount"></span></p>
-                            <p class="h6 py-3" id="showrefund">Refund Amount : <span id="refundAmount"></span></p>
-                            <p class="h6 py-3" id="showtotal">Total Amount : <span id="totalAmount"></span></p>
+                            <p class="" id="showselected">Selected Amount : <span>₹</span><span id="selectedAmount"></span></p>
+                            <p class="" id="showrefund">Refund Amount : <span>₹</span><span id="refundAmount"></span></p>
+                            <p class="" id="showtotal">Total Amount : <span>₹</span><span id="totalAmount"></span></p>
                             </div>
                             <div class="row gx-3">
                                 <div class="col-12">
                                     <div class="d-flex flex-column">
                                         <p class="text mb-1">Person Name</p>
-                                        <input class="form-control mb-3" name="holderName" type="text" placeholder="Name" value="">
+                                        <input class="form-control mb-3" name="holderName" type="text" placeholder="Name" value="" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="d-flex flex-column">    
                                         <p class="text mb-1">Card Number</p>
-                                        <input class="form-control mb-3" name="card_number" type="number" maxlength="16" placeholder="1234 5678 435678">
+                                        <input class="form-control mb-3" name="card_number" type="number" maxlength="16" placeholder="1234 5678 435678" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="d-flex flex-column">
                                         <p class="text mb-1">Expiry</p>
-                                        <input type="date" class="form-control mb-3" name="cardExpiryDate" type="text" placeholder="MM/YYYY">
+                                        <input type="date" class="form-control mb-3" name="cardExpiryDate" type="text" placeholder="MM/YYYY" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="d-flex flex-column">
                                         <p class="text mb-1">CVV/CVC</p>
-                                        <input class="form-control mb-3 pt-2 " name="cvvcvc" type="password" placeholder="***">
+                                        <input class="form-control mb-3 pt-2 " name="cvvcvc" type="password" placeholder="***" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -350,6 +354,7 @@
         const TotalAmount = document.getElementById('totalAmount');
         const showrefund = document.getElementById('showrefund');
         const showtotal = document.getElementById('showtotal');
+        const paymentStatusButton = document.getElementById('paymentStatus');
 
         // Event listener for the "Pay Now" button
         payNowButtons.forEach(function (button) {
@@ -363,8 +368,10 @@
             console.log('Refund Amount:', refundAmountValue);
 
             if (refundAmountValue > 0) {
-                console.log('Total', selectedAmountValue - refundAmountValue);
-                TotalAmount.textContent = selectedAmountValue - refundAmountValue;
+                const newTotalAmount = selectedAmountValue - refundAmountValue;
+                console.log('Total', newTotalAmount);
+                TotalAmount.textContent = newTotalAmount;
+                paymentStatusButton.textContent = 'Pay INR ' + newTotalAmount + ' ' + ' ' + '→';;
             } else {
                 // showtotal.style.display = 'none';
             }
@@ -439,7 +446,16 @@
                 chooseMethod.style.display = chooseMethod.style.display === "none" ? "block" : "none";
             });
         });
+        document.addEventListener("DOMContentLoaded", function() {
+            var seeSomeAddons = document.getElementById("seeSomeAddons");
+            var afteraddons = document.querySelector(".afteraddons");
+            seeSomeAddons.addEventListener("click", function() {
+                event.preventDefault();
+                afteraddons.style.display = afteraddons.style.display === "none" ? "block" : "none";
+            });
+        });
     </script>
+        
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const categorySelect = document.getElementById('category');
@@ -507,7 +523,7 @@
                             const option = document.createElement('option');
                             option.value = price.planId;
                             option.setAttribute('data-price', price.amount);
-                            option.textContent = price.duration + price.durationType;
+                            option.textContent = price.duration + ' ' + price.durationType;
 
                             duration.appendChild(option);
                         }
@@ -524,7 +540,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const duration = document.getElementById('duration');
             const addons = document.getElementById('addons');
-
             if (duration && addons) {
                 duration.addEventListener('change', function() {
                     const selectedCategoryId = duration.value;
@@ -542,6 +557,8 @@
                             option.textContent = price.name;
 
                             addons.appendChild(option);
+                           
+
                         }
                     });
                 });
@@ -588,8 +605,8 @@
                         addonsAmount.textContent ='INR' +' ' + selectedPrice;
                         selectedAddonPriceDisplay.textContent = 'INR ' + ' ' + selectedPrice;
                         addonPriceSelected = parseFloat(selectedPrice);
+                        // afteraddons.style.display = 'block';
                         console.log('datasdjbkj')
-                        afteraddons.style.display = 'block';
                     } else {
                         selectedAddonPriceDisplay.textContent = '';
                         addonPriceSelected = false;
@@ -597,6 +614,7 @@
 
                     updateTotalPrice();
                 });
+               
             }
 
             if (planSelect) {
@@ -630,7 +648,7 @@
                     paymentStatusButton.textContent = 'Pay INR ' + totalPrice + ' ' + ' ' + '→';
                     afterselectedAmounted.textContent = 'Total Price :' + 'INR ' + totalPrice ;
                     afterselectedAmount.style.display='block';
-
+                   
                 }
             }
         });

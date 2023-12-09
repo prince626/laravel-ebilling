@@ -16,7 +16,15 @@
     </div>
     @else
     <style></style>
-    <h1>My Invoices</h1>
+    <div class="pagetitle">
+        <h1>My Invoices</h1>
+        <nav>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="cursor: pointer;">Invoices</li>
+            </ol>
+        </nav>
+    </div>
 
     <section class="section dashboard">
         <div class="row">
@@ -139,7 +147,7 @@
                     <tr>
                         <th scope="col">Invoice Number</th>
                         {{-- <th scope="col">User ID</th> --}}
-                        <th scope="col">Subscription ID</th>
+                        {{-- <th scope="col">Subscription ID</th> --}}
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         {{-- <th scope="col">Invoice Date</th> --}}
@@ -154,37 +162,35 @@
                 <tbody>
                     @foreach ($invoices as $invoice)
                     <tr>
-                        <td><strong>#{{ $invoice->invoice_number }}</strong></td>
+                        <td class="align-middle"><strong>#{{ $invoice->invoice_number }}</strong></td>
                         {{-- <td>#{{ $invoice->user_id }}</td> --}}
-                        <td>#{{ $invoice->subs_id }}</td>
-                        <td>{{ $invoice->email }}</td>
-                        <td>{{ $invoice->phone }}</td>
+                        {{-- <td>#{{ $invoice->subs_id }}</td> --}}
+                        <td class="align-middle">{{ $invoice->email }}</td>
+                        <td class="align-middle">{{ $invoice->phone }}</td>
 
                         {{-- <td>{{ $invoice->invoice_date }}</td> --}}
-                        <td>{{ $invoice->software }}</td>
-                        <td><strong>₹{{ $invoice->amount }}</strong></td>
-                        <td class="text-center">
+                        <td class="align-middle">{{ $invoice->software }}</td>
+                        <td class="align-middle"><strong>₹{{ $invoice->amount }}</strong></td>
+                        <td class="align-middle">
                             @if ($invoice->paymentStatus === 'paid')
-                            <p class="text-light bg-success text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Paid</p>
+                            <span class="text-light bg-success " style="
+                        padding:4px 12px;border-radius:8px;;">Paid</span>
                             @elseif($invoice->paymentStatus === 'pending')
-                            <p class="text-light bg-danger text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Unpaid</p>
+                            <span class="text-light bg-danger " style="
+                        padding:4px 8px;border-radius:8px;">Unpaid</span>
                             @else
                             <strong class="text-danger">{{$invoice->paymentStatus}}</button>
                                 @endif
                         </td>
-                        <td>{{ $invoice->due_date }}</td>
+                        <td class="align-middle">{{ $invoice->due_date }}</td>
                         {{-- <td><i class="fa-solid fa-trash-can text-danger m-1" data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" style="cursor: pointer;font-size:25px;"></i>
                         </td> --}}
-                        <td>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
-                                <ul class="invoice-dropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}"><i class="bi bi-eye-slash text-primary"></i><a class="dropdown-item" href="#">Open</a></li>
-                                    <li data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}"><i class="bi bi-trash text-danger"></i><a class="dropdown-item" href="#">Delete</a></li>
-                                    <li onclick="downloadInvoiceData({{json_encode($invoice)}})"><i class="bi bi-cloud-arrow-down-fill text-primary"></i><a class="dropdown-item" href="#">Download</a></li>
-                                </ul>
+                        <td class="align-middle">
+                            <div class="d-flex "  style="width: 130px;justify-content: space-evenly;">
+                                    <span class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}" class=""><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                    <span data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" class=""><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                    <span onclick="downloadInvoiceData({{json_encode($invoice)}})" class=""><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                               
                             </div>
                         </td>
 
@@ -288,7 +294,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="col-md-9">Software {{$invoice->software}} for {{$invoice->planInfo}}</td>
-                                            <td class="col-md-3"><i class="fa fa-inr"></i> {{$invoice->paid_amount}}</td>
+                                            <td class="col-md-3"><i class="fa fa-inr"></i> {{$invoice->amount}}</td>
                                         </tr>
                                         <tr>
 
@@ -296,7 +302,7 @@
                                                 <h2><strong>Total: </strong></h2>
                                             </td>
                                             <td class="text-left text-danger">
-                                                <h2><strong><i class="fa fa-inr"></i> {{$invoice->paid_amount}}</strong></h2>
+                                                <h2><strong><i class="fa fa-inr"></i> {{$invoice->amount}}</strong></h2>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -206,6 +206,7 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
     Route::get("/read/{sno}", [getNotificationController::class, 'readNotification']);
     Route::get("/alert/read/{sno}", [getNotificationController::class, 'readAlert']);
     Route::get("/read_all/{userId}", [getNotificationController::class, 'readAllNotification']);
+    Route::get("/activity", [getNotificationController::class, 'Activity']);
 
 
     Route::post('/send_message/{id}', [createTicketController::class, 'sendMessage']);

@@ -3,8 +3,15 @@
 @section('content')
 
 <main id="main" class="main mb-5">
-    <h1>Subscription Details</h1>
-
+    <div class="pagetitle">
+        <h1>My Subscriptions</h1>
+        <nav>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="cursor: pointer;">Subscriptions</li>
+            </ol>
+        </nav>
+    </div>
     <section class="section dashboard">
         <div class="row">
 
@@ -122,7 +129,7 @@
 
 
         <div class="table-responsive">
-            <table class="table table-bordered table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         {{-- <th scope="col">User ID</th> --}}
@@ -138,7 +145,7 @@
                     <th scope="col">Duration Type</th> --}}
                         {{-- <th scope="col">Start Date</th> --}}
                         <th scope="col">Expiry Date</th>
-                        <th scope="col">Activate</th>
+                        {{-- <th scope="col">Activate</th> --}}
                         <th scope="col">Amount</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Action</th>
@@ -147,20 +154,20 @@
                 </thead>
                 <tbody>
                     @foreach ($subscription as $sub)
-                    <tr>
+                    <tr class="align-middle">
                         {{-- <td>{{ $sub->user_id }}</td> --}}
-                        <td><strong>#{{ $sub->subs_id }}</strong></td>
-                        <td>{{ $sub->email }}</td>
-                        <td>{{ $sub->phone }}</td>
-                        <td>{{ $sub->software }}</td>
+                        <td class="align-middle"><strong>#{{ $sub->subs_id }}</strong></td>
+                        <td class="align-middle">{{ $sub->email }}</td>
+                        <td class="align-middle">{{ $sub->phone }}</td>
+                        <td class="align-middle">{{ $sub->software }}</td>
                         {{-- <td>{{ $sub->subscriptionType }}</td> --}}
-                        <td>
+                        <td class="align-middle">
                             @if ($sub->subscriptionStatus === 'active')
-                            <p class="text-light bg-success text-center" style="padding:4px;
-                        border-radius:8px;font-weight:bold;">Active</p>
+                            <span class="text-light bg-success text-center" style="padding:4px 12px;
+                        border-radius:8px;">Active</span>
                             @else
-                            <p class="text-white bg-danger text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">{{$sub->subscriptionStatus}}</p>
+                            <span class="text-white bg-danger text-center" style="
+                        padding:4px 8px;border-radius:8px;">{{$sub->subscriptionStatus}}</span>
                             @endif
                             {{-- {{ $sub->subscriptionStatus }} --}}
                         </td>
@@ -169,26 +176,26 @@
                         {{-- <td>{{ $sub->Duration }}</td>
                         <td>{{ $sub->durationType }}</td> --}}
                         {{-- <td>{{ $sub->startDate }}</td> --}}
-                        <td><strong>{{ $sub->expiryDate }}</strong></td>
-                        <td>@if ($sub->activationStatus)
+                        <td class="align-middle"><strong>{{ $sub->expiryDate }}</strong></td>
+                        {{-- <td>@if ($sub->activationStatus)
                             <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
-                                <i class="fas fa-toggle-on" style="color: green;font-size:25px;"></i>
-                            </a>
-                            @else
-                            <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
-                                <i class="fas fa-toggle-off" style="color:gray;font-size:25px;"></i>
-                            </a>
-                            @endif
-                        </td>
-                        <td><strong>₹{{ $sub->amount }}</strong></td>
+                        <i class="fas fa-toggle-on" style="color: green;font-size:25px;"></i>
+                        </a>
+                        @else
+                        <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
+                            <i class="fas fa-toggle-off" style="color:gray;font-size:25px;"></i>
+                        </a>
+                        @endif
+                        </td> --}}
+                        <td class="align-middle"><strong>₹{{ $sub->amount }}</strong></td>
 
-                        <td class="text-center">
+                        <td class="text-center align-middle">
                             @if ($sub->paymentStatus === 'paid')
-                            <p class="text-light bg-success text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Paid</p>
+                            <span class="text-light bg-success text-center" style="
+                        padding:4px 12px;border-radius:8px;">Paid</span>
                             @else
-                            <p class="text-light text-center bg-danger" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Unpaid</p>
+                            <span class="text-light text-center bg-danger" style="
+                        padding:4px 8px;border-radius:8px;">Unpaid</span>
                             @endif
                         </td>
 
@@ -207,22 +214,24 @@
 
 
                         {{-- <td><a href="/user_update_plan/{{$sub->subs_id}}"><button class="btn btn-primary">Update Plan</button></a></td> --}}
-                        <td style="align-items: center;">
+                        <td style="align-items: center;" class="justify-content-center align-middle">
                             @if ($sub->paymentStatus === 'paid')
-                            {{-- <button class="btn btn-{{ $sub->activationStatus ? 'danger' : 'success' }}"> --}}
-                            <div class="filter mt-1">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
-                                <ul class="invoice-dropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class=""><i class="fa-regular fa-pen-to-square text-primary"></i><a class="dropdown-item" href="/api/user/update_view_subs/{{$sub->subs_id}}">Update</a></li>
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal{{ $sub->subs_id }}"><i class="fa-solid fa-trash-can text-danger"></i><a class="dropdown-item" href="#delete">Cancel</a></li>
-                                </ul>
+                            <div class="d-flex " style="width: 130px;justify-content:space-evenly;">
+                                <span> @if ($sub->activationStatus)
+                                    <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
+                                        <i class="fas fa-toggle-on" style="color: green;font-size:25px;"></i>
+                                    </a>    
+                                    @else
+                                    <a href="/api/user/user-edit-key/{{$sub->subs_id}}" id="" class="m-1 activateAction">
+                                        <i class="fas fa-toggle-off" style="color:gray;font-size:25px;"></i>
+                                    </a>
+                                    @endif
+                                </span>
+                                <span><a class="dropdown-item " href="/api/user/update_view_subs/{{$sub->subs_id}}"><i class="fa-regular fa-pen-to-square text-primary fs-4"></i></a></span>
+                                <span style="cursor: pointer;"><i class="fa-solid fa-trash-can text-danger fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $sub->subs_id }}"></i></span>
                             </div>
-                            {{-- </button> --}}
-                            {{-- /api/user/user_update_plan/{{$sub->subs_id}} --}}
-                            {{-- <a href="/api/user/update_view_subs/{{$sub->subs_id}}" class="m-1 "> <i class="fa-regular fa-pen-to-square" style="font-size:25px;"></i></a>
-                            <i class="fa-solid fa-trash-can text-danger m-1" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $sub->subs_id }}" style="cursor: pointer;font-size:25px;"></i> --}}
                             @else
-                            <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $sub->subs_id }}">
+                            <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $sub->subs_id }}" style="width: 130px;">
                                 Pay Now
                             </button>
                         </td>
@@ -240,7 +249,7 @@
                     <form action="/api/user/cancel_subs/{{ $sub->subs_id }}" method="POST" class="php-email-form">
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Cancel my paid subscription</h5>
+                            <h4 class="modal-title" id="exampleModalLabel">Cancel my paid subscription</h4>
                             {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button> --}}
@@ -261,8 +270,8 @@
                                 </div>
 
                             </div>
-                                <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Keep Plan</button>
-                                <button type="submit" class="btn btn-danger">Cancel Subscription</button>
+                            <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Keep Plan</button>
+                            <button type="submit" class="btn btn-danger">Cancel Subscription</button>
                         </footer>
                     </form>
                 </div>

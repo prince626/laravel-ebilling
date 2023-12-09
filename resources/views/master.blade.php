@@ -201,9 +201,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/api/user/profile">
-                            <i class="bi bi-gear text-dark"></i>
-                            <span class="text-dark">Account Settings</span>
+                        <a class="dropdown-item d-flex align-items-center" href="/api/user/activity">
+                            <i class="bi bi-activity text-dark"></i>
+                            <span class="text-dark">My Activity</span>
                         </a>
                     </li>
                     <li>
@@ -475,20 +475,20 @@
     </aside><!-- End Sidebar-->
 
     <div class="toast__container" style="">
-        <div class="toast__cell" style="">
+        <div class="toast__cell">
             @foreach ($messageCount as $message)
             {{-- <div class="toast toast--green"> --}}
-            <div class="toast  @if($message->type == 'success') toast--green add-margin @elseif($message->type == 'info') toast--blue add-margin @elseif($message->type == 'alert') toast--red add-margin @elseif($message->type == 'warning') toast--yellow add-margin @endif">
+            <div class="toast  @if($message->type == 'success') toast--green add-margin @elseif($message->type == 'info') toast--blue add-margin @elseif($message->type == 'alert') toast--red add-margin @elseif($message->type == 'warning') toast--yellow add-margin @endif"  >
                 <div class="toast__icon">
                     <i class="bi @if($message->type == 'success') bi-check-lg  @elseif($message->type == 'info') bi-info  @elseif($message->type == 'alert') bi-exclamation-circle @elseif($message->type == 'warning') bi-exclamation @endif  text-light" style="font-size: px;"></i>
                 </div>
-                <div class="row" style="align-items: center;height: 80px;">
-                    <div class="toast__content col-md-10">
+                <div class="" style="align-items: center;height: 80px;display:flex;justify-content: space-between;">
+                    <div class="toast__content " style="">
                         <p class="toast__type">@if($message->type == 'success') Success @elseif($message->type == 'info') Info @elseif($message->type == 'alert') Alert @elseif($message->type == 'warning') Warning @endif</p>
                         <p class="toast__message">{{ Illuminate\Support\Str::limit($message->message, 45) }}</p>
                         <div class="notiError text-danger"></div>
                     </div>
-                    <div class="toast__close p-2 col-md-1">
+                    <div class="toast__close">
                         <a href="/api/user/read/{{$message->sno}}" class="activateAction"> <i class="bi bi-x" style="font-size: 50px"></i></a>
                     </div>
                 </div>

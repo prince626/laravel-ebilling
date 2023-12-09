@@ -13,7 +13,15 @@
     @if($cancelSubs==null)
     <h1>User has no cancel Subscription</h1>
     @else
-    <h1>Canceled Subscription Details</h1>
+    <div class="pagetitle">
+        <h1>Canceled Subscriptions</h1>
+        <nav>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="cursor: pointer;">Canceled Subscriptions</li>
+            </ol>
+        </nav>
+    </div>
     <section class="section dashboard">
         <div class="row">
 

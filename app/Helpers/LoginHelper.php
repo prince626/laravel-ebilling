@@ -18,11 +18,12 @@ class LoginHelper
 {
 
 
-    public static function log_action($req, $user, $status, $actionType)
+    public static function log_action($req, $user, $status, $actionType,$actionPerformed)
     {
         return logaction::create([
             'user_id' => $user->user_id,
             'action_type' => $actionType,
+            'action_performed' => $actionPerformed,
             'ip_address' => $req->ip(),
             'user_agent' => $req->header('User-Agent'),
             'status' =>  $status,

@@ -52,13 +52,13 @@ class loginController extends Controller
 
                 $cookie = Cookie::make('token', $createToken, $cookieExpiration);
                 // $cookie = Cookie::make('token', $createToken, $cookieExpiration, null, null, true, true);
-                $response = LoginHelper::log_action($req, $user, true, 'login_success');
+                $response = LoginHelper::log_action($req, $user, true, 'user_login', 'login Success');
                 $response = response('hello cookie')->withCookie($cookie);
                 $response = SendResponse::SendResponse($ret, 'success', 'login_success')->withCookie($cookie);
                 // $response = redirect("api/user/get/profile")->withCookie($cookie);
                 return $response;
             } else {
-                LoginHelper::log_action($req, $user, false, 'password Not match');
+                LoginHelper::log_action($req, $user, false, 'User login', 'Wrong Password');
                 return SendResponse::jsonError($ret, 'Integrity_error', 'password Not valid');
             }
         } catch (\Exception $e) {
@@ -154,23 +154,23 @@ class loginController extends Controller
             ->latest('created_at')
             ->first();
         $activities = [
-             $logAction,
+            $logAction,
             $passwordUpdated,
-           $receiptRead
+            $receiptRead
         ];
 
         $response  = request()->cookie('token');
         // $response = auth()->id();
         // Send the response to the client
         // dd($logction);
-        return [ 'activities' => $activities];
+        return ['activities' => $activities];
     }
     function read_receipt(Request $req, $id)
     {
         try {
             $ret = ApiHelpers::ret();
             $user = User::where(['user_id' => $id])->first();
-            $response = LoginHelper::log_action($req, $user, true, 'receipt_read');
+            $response = LoginHelper::log_action($req, $user, true, 'receipt_read','Receipt Read');
             $ret->trace .= 'receipt_read, ';
 
             $response = SendResponse::SendResponse($ret, 'success', 'receipt_read');
@@ -194,7 +194,7 @@ class loginController extends Controller
             }
 
             $cookie = Cookie::forget('token');
-            $createLog = LoginHelper::log_action($req, $user, true, 'user_logged_out');
+            $createLog = LoginHelper::log_action($req, $user, true, 'user_logged_out','User logout' );
             if ($createLog) {
                 $ret->trace .= 'user_logged_out, ';
             }

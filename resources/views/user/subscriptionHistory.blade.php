@@ -17,8 +17,15 @@
 
         </div>
         @else
-        <h1>Subscription History</h1>
-
+        <div class="pagetitle">
+            <h1>My Subscriptions History</h1>
+            <nav>
+                <ol class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active" style="cursor: pointer;">Subscriptions History</li>
+                </ol>
+            </nav>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -43,37 +50,37 @@
                 <tbody>
                     @foreach ($subscription as $sub)
                     <tr>
-                        {{-- <td>{{ $sub->user_id }}</td> --}}
-                        <td><strong>#{{ $sub->subs_id }}</strong></td>
-                        <td>{{ $sub->email }}</td>
-                        {{-- <td>{{ $sub->phone }}</td> --}}
-                        <td>{{ $sub->software }}</td>
-                        {{-- <td>{{ $sub->subscriptionType }}</td> --}}
-                        <td>@if ($sub->subscriptionStatus === 'active')
-                            <p class="text-light bg-success text-center" style="padding:4px;
-                        border-radius:8px;font-weight:bold;">Active</p>
+                        {{-- <td class="align-middle">{{ $sub->user_id }}</td> --}}
+                        <td class="align-middle"><strong>#{{ $sub->subs_id }}</strong></td>
+                        <td class="align-middle">{{ $sub->email }}</td>
+                        {{-- <td class="align-middle">{{ $sub->phone }}</td> --}}
+                        <td class="align-middle">{{ $sub->software }}</td>
+                        {{-- <td class="align-middle">{{ $sub->subscriptionType }}</td> --}}
+                        <td class="align-middle text-center">@if ($sub->subscriptionStatus === 'active')
+                            <span class="text-light bg-success text-center" style="padding:4px 12px;
+                        border-radius:8px;">Active</span>
                             @else
-                            <p class="text-white bg-danger text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">{{$sub->subscriptionStatus}}</p>
+                            <span class="text-white bg-danger text-center" style="
+                        padding:4px 8px;border-radius:8px;">{{$sub->subscriptionStatus}}</span>
                             @endif</td>
-                        {{-- <td>{{ $sub->business_Category }}</td> --}}
-                        {{-- <td>{{ $sub->planInfo }}</td> --}}
-                        {{-- <td>{{ $sub->duration }} {{ $sub->durationType }}</td> --}}
-                        <td><strong>{{ $sub->startDate }}</strong> To <strong>{{ $sub->expiryDate }}</strong></td>
-                        {{-- <td>{{ $sub->expiryDate }}</td> --}}
-                        <td><strong>₹{{ $sub->amount }}</strong></td>
+                        {{-- <td class="align-middle">{{ $sub->business_Category }}</td> --}}
+                        {{-- <td class="align-middle">{{ $sub->planInfo }}</td> --}}
+                        {{-- <td class="align-middle">{{ $sub->duration }} {{ $sub->durationType }}</td> --}}
+                        <td class="align-middle"><strong>{{ $sub->startDate }}</strong> To <strong>{{ $sub->expiryDate }}</strong></td>
+                        {{-- <td class="align-middle">{{ $sub->expiryDate }}</td> --}}
+                        <td class="align-middle"><strong>₹{{ $sub->amount }}</strong></td>
 
-                        <td class="text-center">
+                        <td class="align-middle text-center" class="">
                             @if ($sub->paymentStatus === 'paid')
-                            <p class="text-light bg-success text-center w-100" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Paid</p>
+                            <span class="text-light bg-success text-center " style="
+                        padding:4px 12px;border-radius:8px;">Paid</span>
                             @else
-                            <p class="text-light bg-danger text-center" style="
-                        padding:4px;border-radius:8px;font-weight:bold;">Unpaid</p>
+                            <span class="text-light bg-danger text-center" style="
+                        padding:4px 8px;border-radius:8px;">Unpaid</span>
                             @endif
                         </td>
 
-                        {{-- <td>{{ $sub->amount }}</td> --}}
+                        {{-- <td class="align-middle">{{ $sub->amount }}</td> --}}
                     </tr>
                     @endforeach
                 </tbody>

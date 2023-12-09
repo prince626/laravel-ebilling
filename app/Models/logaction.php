@@ -14,6 +14,7 @@ class logaction extends Model
     protected $fillable = [
         'user_id',
         'action_type',
+        'action_performed',
         'ip_address',
         'user_agent',
         'status',

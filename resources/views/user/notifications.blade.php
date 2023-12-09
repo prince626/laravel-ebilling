@@ -43,7 +43,9 @@
                                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">All</button>
                                         </li>
                                         <div class="float-end ms-auto">
-                                            <a href="/api/user/read_all/{{$user?$user->user_id:''}}" class="activateAction"><p class="p-2 text-light bg-primary ">Marked All</p></a>
+                                            <a href="/api/user/read_all/{{$user?$user->user_id:''}}" class="activateAction">
+                                                <p class="p-2 text-light bg-primary " style="border-radius:2px;">Marked All</p>
+                                            </a>
                                         </div>
                                         {{-- <li class="nav-item">
                                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
@@ -62,7 +64,7 @@
 
                                                     <h5 class="card-title">Datatables</h5>
 
-                                                    <table class="table dataTable table-striped " id="dataTable" width="100%" cellspacing="0">
+                                                    <table class="table dataTable  " id="dataTable" width="100%" cellspacing="0">
                                                         <thead>
                                                             <tr>
                                                                 <th>UserId</th>
@@ -87,35 +89,39 @@
                                                             @foreach ($messages as $message)
                                                             <tr class="" style="color: {{ $message->type === 'alert' ? 'red' : 'inherit' }}; background-color: {{ $message->type === 'alert' ? 'red' : 'inherit' }};">
 
-                                                                <td><strong>#{{ $message->user_id }}</strong></td>
-                                                                <td>{{ $message->email }}  </td>
-                                                                <td>{{ $message->message }}</td>
-                                                                <td>@if ($message->type === 'success')
-                                                                    <p class=" text-light bg-success text-center" style="border-radius:8px
-                                                                            ;padding:4px;font-weight:bold;">Success</p>
+                                                                <td class="align-middle"><strong>#{{ $message->user_id }}</strong></td>
+                                                                <td class="align-middle"> <span>{{ $message->email }}</span> </td>
+                                                                <td class="align-middle" style="width: 350px;"><span>{{ $message->message }}</span></td>
+                                                                <td class="align-middle">@if ($message->type === 'success')
+                                                                    <span class=" text-light bg-success text-center" style="border-radius:8px
+                                                                            ;padding:4px;">Success</span>
                                                                     @elseif ($message->type === 'alert')
-                                                                    <p class="text-light bg-danger text-center" style="
-                                                                            padding:4px;border-radius:8px;font-weight:bold;">Alert</p>
+                                                                    <span class="text-light bg-danger text-center" style="
+                                                                            padding:4px;border-radius:8px;">Alert</span>
                                                                     @elseif ($message->type === 'warning')
-                                                                    <p class=" text-center text-light bg-warning" style="
-                                                                            padding:4px;border-radius:8px;font-weight:bold;">warning</p>
+                                                                    <span class=" text-center text-light bg-warning" style="
+                                                                            padding:4px;border-radius:8px;">warning</span>
                                                                     @endif</td>
-                                                                <td><a href="/api/user/read/{{$message->sno}}" class="activateAction"> <p class=" text-center text-light bg-primary" style="
-                                                                    padding:4px;border-radius:8px;font-weight:bold;">Mark As Read</p></a></td>
-                                                                <td>
+                                                                <td class="align-middle"><a href="/api/user/read/{{$message->sno}}" class="activateAction">
+                                                                        <span class=" text-center text-light bg-primary" style="width: 130px;
+                                                                    padding:4px;border-radius:8px;">Mark As Read</span>
+                                                                    </a></td>
+                                                                <td class="align-middle">
                                                                     @php
                                                                     // Use a valid timestamp format (Y-m-d H:i:s) for Carbon::parse
                                                                     $createdAt = Carbon\Carbon::parse($message->created_at, 'Asia/Kolkata');
                                                                     $now = Carbon\Carbon::now('Asia/Kolkata');
                                                                     @endphp
-                                                                    @if ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
-                                                                    {{ $createdAt->format('Y-m-d H:i:s') }} {{-- Display the full date and time --}}
+                                                                    @if ($now->diffInWeeks($createdAt) >= 1) {{-- 1440 minutes = 24 hours --}}
+                                                                    {{ $now->diffInWeeks($createdAt) }} week ago
+                                                                    @elseif ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
+                                                                    {{ $now->diffInDays($createdAt) }} day ago{{-- Display the full date and time --}}
                                                                     @elseif ($now->diffInMinutes($createdAt) >= 60) {{-- Check if the message is older than an hour --}}
-                                                                    {{ $now->diffInHours($createdAt) }} Hours Ago {{-- Display hours --}}
+                                                                    {{ $now->diffInHours($createdAt) }} hrs ago {{-- Display hours --}}
                                                                     @elseif ($now->diffInMinutes($createdAt) >= 1)
-                                                                    {{ $now->diffInMinutes($createdAt) }} Minutes Ago
+                                                                    {{ $now->diffInMinutes($createdAt) }} min ago
                                                                     @else
-                                                                    Just now
+                                                                    Now
                                                                     @endif
                                                                 </td>
 
@@ -137,79 +143,86 @@
 
                                                 <h5 class="card-title">Datatables</h5>
 
-                                                    <table class="table dataTable table-striped" id="dataTable" width="100%" cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>UserId</th>
-                                                                <th>Email</th>
-                                                                <th>Message</th>
-                                                                <th>Type</th>
-                                                                <th>Mark</th>
-                                                                <th>Time</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>userId</th>
-                                                                <th>Email</th>
-                                                                <th>Message</th>
-                                                                <th>Type</th>
-                                                                <th>Mark</th>
-                                                                <th>Time</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                        <tbody>
-                                                            @foreach ($allMessages as $message)
-                                                            <tr class="" style="color: {{ $message->type === 'alert' ? 'red' : 'inherit' }}; background-color: {{ $message->type === 'alert' ? 'red' : 'inherit' }};">
+                                                <table class="table dataTable " id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>UserId</th>
+                                                            <th>Email</th>
+                                                            <th>Message</th>
+                                                            <th>Type</th>
+                                                            <th>Mark</th>
+                                                            <th>Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>userId</th>
+                                                            <th>Email</th>
+                                                            <th>Message</th>
+                                                            <th>Type</th>
+                                                            <th>Mark</th>
+                                                            <th>Time</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        @foreach ($allMessages as $message)
+                                                        <tr class="datatable-row align-middle" style="color: {{ $message->type === 'alert' ? 'red' : 'inherit' }}; background-color: {{ $message->type === 'alert' ? 'red' : 'inherit' }};">
 
-                                                                <td><strong>#{{ $message->user_id }}</strong></td>
-                                                                <td>{{ $message->email }} </td>
-                                                                <td>{{ $message->message }}</td>
-                                                                <td>@if ($message->type === 'success')
-                                                                    <p class=" text-light bg-success text-center" style="border-radius:8px
-                                                                            ;padding:4px;font-weight:bold;">Success</p>
-                                                                    @elseif ($message->type === 'alert')
-                                                                    <p class="text-light bg-danger text-center" style="
-                                                                            padding:4px;border-radius:8px;font-weight:bold;">Alert</p>
-                                                                    @elseif ($message->type === 'warning')
-                                                                    <p class=" text-center text-light bg-warning" style="
-                                                                            padding:4px;border-radius:8px;font-weight:bold;">warning</p>
-                                                                    @endif</td>
-                                                                <td>
-                                                                    @if($message->status=='read')
-                                                                    <p class=" text-center text-light bg-secondary" style="
-                                                                    padding:4px;border-radius:8px;font-weight:bold;">Mark As Read</p>
-                                                                    @else
-                                                                    <a href="/api/user/read/{{$message->sno}}" class="activateAction"> <p class=" text-center text-light bg-primary" style="
-                                                                        padding:4px;border-radius:8px;font-weight:bold;">Mark As Read</p></a>
-                                                                    @endif
+                                                            <td class=" align-middle"><strong>#{{ $message->user_id }}</strong></td>
+                                                            <td class="align-middle"> <span>{{ $message->email }}</span> </td>
+                                                            <td class="align-middle" style="width: 350px;">
+                                                                <span style="width: 350px;">{{ $message->message }}</span>
+                                                            </td>
+                                                            <td class="align-middle">@if ($message->type === 'success')
+                                                                <span class=" text-light bg-success text-center" style="border-radius:8px
+                                                                            ;padding:4px 8px;">Success</span>
+                                                                @elseif ($message->type === 'alert')
+                                                                <span class="text-light bg-danger text-center" style="
+                                                                            padding:4px 8px;border-radius:8px;">Alert</span>
+                                                                @elseif ($message->type === 'warning')
+                                                                <span class=" text-center text-light bg-warning" style="
+                                                                            padding:4px 8px;border-radius:8px;">warning</span>
+                                                                @endif</td>
+                                                            <td class="align-middle">
+                                                                @if($message->status=='read')
+                                                                <span class=" text-center text-light bg-secondary" style="width: 130px;
+                                                                    padding:4px 8px;border-radius:8px;display: inline-block;">Mark As Read</span>
+                                                                @else
+                                                                <a href="/api/user/read/{{$message->sno}}" class="activateAction">
+                                                                    <span class=" text-center text-light bg-primary" style="width: 130px;
+                                                                        padding:4px 8px;border-radius:8px;display: inline-block;">Mark As Read</span>
+                                                                </a>
+                                                                @endif
 
-                                                                </td>
+                                                            </td>
 
-                                                                <td>
+                                                            <td class="align-middle">
+                                                                <span style="width: 100px;">
                                                                     @php
                                                                     // Use a valid timestamp format (Y-m-d H:i:s) for Carbon::parse
                                                                     $createdAt = Carbon\Carbon::parse($message->created_at, 'Asia/Kolkata');
                                                                     $now = Carbon\Carbon::now('Asia/Kolkata');
                                                                     @endphp
-
-                                                                    @if ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
-                                                                    {{ $createdAt->format('Y-m-d H:i:s') }} {{-- Display the full date and time --}}
+                                                                    @if ($now->diffInWeeks($createdAt) >= 1) {{-- 1440 minutes = 24 hours --}}
+                                                                    {{ $now->diffInWeeks($createdAt) }} week ago
+                                                                    @elseif ($now->diffInMinutes($createdAt) >= 1440) {{-- 1440 minutes = 24 hours --}}
+                                                                    {{ $now->diffInDays($createdAt) }} day ago{{-- Display the full date and time --}}
                                                                     @elseif ($now->diffInMinutes($createdAt) >= 60) {{-- Check if the message is older than an hour --}}
-                                                                    {{ $now->diffInHours($createdAt) }} Hours Ago {{-- Display hours --}}
+                                                                    {{ $now->diffInHours($createdAt) }} hrs ago {{-- Display hours --}}
                                                                     @elseif ($now->diffInMinutes($createdAt) >= 1)
-                                                                    {{ $now->diffInMinutes($createdAt) }} Minutes Ago
+                                                                    {{ $now->diffInMinutes($createdAt) }} min ago
                                                                     @else
-                                                                    Just now
+                                                                    Now
                                                                     @endif
-                                                                </td>
+                                                                </span>
+                                                            </td>
 
 
-                                                            </tr>
-                                                            @endforeach
+                                                        </tr>
+                                                        @endforeach
 
-                                                        </tbody>
-                                                    </table>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

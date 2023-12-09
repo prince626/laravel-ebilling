@@ -6,9 +6,8 @@
         <h1>Profile</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active">Profile</li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="cursor: pointer;">Profile</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -21,8 +20,8 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         {{-- <img src=" {{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle"> --}}
-                        <i class="bi bi-person-circle" style="font-size:50px"></i>
-                        <h2>{{ ucwords($user->name) }}</h2>
+                        <i class="bi bi-person-circle" style="font-size:100px"></i>
+                        <h2 class="mb-2">{{ ucwords($user->name) }}</h2>
                         <h3>{{ ucwords($user->email) }}</h3>
                         <div class="social-links mt-2">
                             {{-- <a class="twitter" data-bs-target="#profile-edit"><i class="bi bi-pencil-square"></i>
@@ -48,6 +47,7 @@
 
                 <div class="card">
                     <div class="card-body pt-3">
+                        
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
 
@@ -58,7 +58,7 @@
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                             </li>
-
+                            
                             {{-- <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
                             </li> --}}
@@ -309,7 +309,7 @@
                                             <span class="dynamic-message">Your message has been sent. Thank you!</span>
                                         </div>
                                         <div class="m-1">
-                                            <button type="submit" class="btn btn-primary m-2">Change Password</button>
+                                            <button type="submit" class="btn btn-primary m-2">Update Password</button>
                                             <a href="/forget_password"><button type="button" class="btn btn-primary m-1">Forget Password</button></a>
                                         </div>
                                     </div>

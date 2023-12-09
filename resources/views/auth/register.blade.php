@@ -110,7 +110,7 @@
                         <label for="exampleInputPassword1" class="form-label">phone</label>
                         <input type="text" name="phone" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <a href="/login">Already have an Account</a>
+                    <a href="/login" style="text-decoration: none;">Already have an Account</a>
                     <br>
                     <div class="col-md-12 text-center">
                         <div class="loading">Loading</div>

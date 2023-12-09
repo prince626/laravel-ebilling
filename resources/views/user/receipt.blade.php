@@ -123,7 +123,15 @@
 
         </div>
         @else
-        <h1>My Receipt</h1>
+        <div class="pagetitle">
+            <h1>My Receipt</h1>
+            <nav>
+                <ol class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active" style="cursor: pointer;">My Receipt</li>
+                </ol>
+            </nav>
+        </div>
 
         <div class="table-responsive mt-3">
             <table class="table table-bordered">
@@ -140,7 +148,7 @@
                         <th scope="col">Paid Amount</th>
                         <th scope="col">PaymentStatus</th>
                         <th scope="col">Payment Method</th>
-                        <th scope="col">View</th>
+                        <th scope="col">Action</th>
                         {{-- <th scope="col">Transaction Id</th> --}}
                         {{-- <th scope="col">Payment Date</th> --}}
 
@@ -149,34 +157,31 @@
                 <tbody>
                     @foreach ($invoiceReceipt as $receipt)
                     <tr>
-                        <td><strong>#{{ $receipt->receipt_no }}</strong></td>
+                        <td class="align-middle"><strong>#{{ $receipt->receipt_no }}</strong></td>
                         {{-- <td>{{ $receipt->user_id }}</td> --}}
                         {{-- <td>{{ $receipt->subs_id }}</td> --}}
                         {{-- <td>{{ $receipt->email }}</td> --}}
-                        <td>{{ $receipt->phone }}</td>
-                        <td>{{ $receipt->invoice_date }}</td>
-                        <td>{{ $receipt->due_date }}</td>
+                        <td class="align-middle">{{ $receipt->phone }}</td>
+                        <td class="align-middle">{{ $receipt->invoice_date }}</td>
+                        <td class="align-middle">{{ $receipt->due_date }}</td>
                         {{-- <td>{{ $receipt->planInfo }}</td> --}}
-                        <td><strong>₹{{ $receipt->paid_amount }}</strong></td>
-                        <td class="text-center">
+                        <td class="align-middle"><strong>₹{{ $receipt->paid_amount }}</strong></td>
+                        <td class="text-center align-middle">
                             @if ($receipt->paymentStatus === 'paid')
-                            <p class="text-light bg-success text-center" style="
-                            padding:4px;border-radius:8px;font-weight:bold;">Paid</p>
+                            <span class="text-light bg-success text-center" style="
+                            padding:4px 12px;border-radius:8px;">Paid</span>
                             @else
-                            <p class="text-light bg-danger text-center" style="
-                            padding:4px;border-radius:8px;font-weight:bold;">Unpaid</p>
+                            <span class="text-light bg-danger text-center" style="
+                            padding:4px 8px;border-radius:8px;">Unpaid</span>
                                 @endif
                         </td>
-                        <td>{{ $receipt->payment_method }}</td>
-                        <td>
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical"></i></a>
-                                <ul class="invoice-dropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary"></i><a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt dropdown-item">Open</a></li>
-                                    <li data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger"></i><a class="dropdown-item" href="#">Delete</a></li>
-                                    <li onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary"></i><a class="dropdown-item" href="#">Download</a></li>
+                        <td class="align-middle">{{ $receipt->payment_method }}</td>
+                        <td class="align-middle">
+                            <div class="d-flex "  style="width: 130px;justify-content: space-evenly;">
+                                <a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt "><span class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i></span></a>
+                                    <span data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                    <span onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
 
-                                </ul>
                             </div>
                             
                         </td>

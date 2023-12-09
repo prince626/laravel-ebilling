@@ -41,24 +41,11 @@ class AppServiceProvider extends ServiceProvider
             $subscription =  usersubscription::where('user_id', auth()->id())->get();
             $rechargeinvoices = rechargeinvoice::where('user_id', auth()->id())->get();
             $passwordUpdated = LogAction::where('user_id', auth()->id())
-                ->where('action_type', 'password_changed')
-                ->latest('created_at')
-                ->first();
+            ->latest('created_at') 
+            ->take(9) 
+            ->get();
 
-            $receiptRead = LogAction::where('user_id', auth()->id())
-                ->where('action_type', 'receipt_read') // corrected the action_type
-                ->latest('created_at')
-                ->first();
-
-            $logAction = LogAction::where('user_id', auth()->id())
-                ->where('action_type', 'login_success')
-                ->latest('created_at')
-                ->first();
-            $activities = [
-                $logAction,
-                $passwordUpdated,
-                $receiptRead
-            ];
+          
             $notifications = notification::where('user_id', $user->user_id)->get()->reverse();
             if ($notifications) {
                 $thirtyDaysAgo = Carbon::now()->subDays(30);;
@@ -83,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
 
             $ret->trace .= 'Integrity_Check, ';
             $response = SendResponse::SendResponse($ret, 'Success', $unreadData);
-            $view->with(['messageCount' => $unreadData, 'user' => $user, 'user_subscription' => $subscription, 'user_invoices' => $rechargeinvoices, 'activities' => $activities]);
+            $view->with(['messageCount' => $unreadData, 'user' => $user, 'user_subscription' => $subscription, 'user_invoices' => $rechargeinvoices, 'activities' => $passwordUpdated]);
         });
         // View::composer('*', function ($view) {
         //     $ret = ApiHelpers::ret();

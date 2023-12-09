@@ -27,8 +27,10 @@ class activateSubscription extends Controller
             $user->activationStatus = !$user->activationStatus; // Toggle the 'activate' status
             $user->subscriptionStatus = ($user->subscriptionStatus === 'inactive' || $user->subscriptionStatus === null) ? 'active' : 'inactive';
             $user->save(); // Save the changes
+
             $subsHis->subscriptionStatus = $user->subscriptionStatus;
             $subsHis->save();
+            
             // if ($user->activationStatus) {
 
             //     $findAction = activateaction::where('subs_id', $user->subs_id)

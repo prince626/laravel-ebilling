@@ -100,7 +100,7 @@
                     <div class="mb-3">
                         <input class="form-check-input" type="checkbox" value="" id="remember" required>
                         <label class="form-check-label" for="remember">Remember Me</label>
-                        <a href="/forget_password" class="float-end">Forgot Password</a>
+                        <a href="/forget_password" class="float-end" style="text-decoration: none;">Forgot Password?</a>
                     </div>
                     <div class="col-md-12 text-center">
                         <div class="loading">Loading</div>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mx-auto w-100">Login</button>
-                    <p class="text-center">Not yet account, <a href="/register">Signup</a></p>
+                    <p class="text-center mt-2">Not yet account, <a href="/register" style="text-decoration: none;">Signup</a></p>
 
                 </form>
             </div>

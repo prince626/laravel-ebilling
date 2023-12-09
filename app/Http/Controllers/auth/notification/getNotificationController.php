@@ -5,6 +5,7 @@ namespace App\Http\Controllers\auth\notification;
 use App\Http\Controllers\Controller;
 use App\Helpers\ApiHelpers;
 use App\Helpers\SendResponse;
+use App\Models\logaction;
 use App\Models\notification;
 use App\Models\User;
 use Carbon\Carbon;
@@ -43,7 +44,7 @@ class getNotificationController extends Controller
                 $ret->trace .= 'get_data, ';
 
                 $response = SendResponse::SendResponse($ret, 'Success', $unreadData);
-                $response = view('user.notifications')->with(['messages' => $unreadData, 'user' => $user,'allMessages'=>$notifications]);
+                $response = view('user.notifications')->with(['messages' => $unreadData, 'user' => $user, 'allMessages' => $notifications]);
                 return $response;
             }
         } catch (\Exception $e) {
@@ -112,6 +113,24 @@ class getNotificationController extends Controller
 
             // Redirect the user to the notifications page
             // return redirect('/api/user/notifications');
+            return $response;
+        }
+    }
+    function Activity(Request $req)
+    {
+        $ret = ApiHelpers::ret();
+
+        // Find all notifications for the specified user
+        $activity = logaction::where('user_id', auth()->id())->get();
+
+        if ($activity->isEmpty()) {
+            return SendResponse::jsonError($ret, 'Integrity_error', 'user not found');
+        } else {
+            $ret->trace .= 'Integrity_Check, ';
+            $response = SendResponse::SendResponse($ret, 'Success', $activity);
+
+            // Redirect the user to the notifications page
+            $response = view('user.activity')->with(['activity' => $activity]);
             return $response;
         }
     }

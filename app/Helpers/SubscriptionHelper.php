@@ -84,7 +84,7 @@ class SubscriptionHelper
             'software' => $req->software,
             'subscriptionType' => $req->addons && $addons ? $addons->name : null,
             'business_Category' => $businessCategory->name,
-            'subscriptionStatus' => 'inactive',
+            'subscriptionStatus' => $req->paymentStatus === 'pending'?'active':'inactive',
             'planInfo' => $plan->name,
             'duration' => $userDuration,
             'startDate' => $now->format('Y-m-d'),

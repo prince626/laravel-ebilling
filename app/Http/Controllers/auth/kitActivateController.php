@@ -34,7 +34,7 @@ class kitActivateController extends Controller
 
             $user = usersubscription::where('kit', $req->kit)->first();
             if (!$user) {
-                return SendResponse::jsonError($ret, 'Integrity_error', 'Kit');
+                return SendResponse::jsonError($ret, 'Integrity_error', 'Kit_not_valid');
             }
             $ret->trace .= 'Integrity_check, ';
             $now = Carbon::now('Asia/Kolkata');
