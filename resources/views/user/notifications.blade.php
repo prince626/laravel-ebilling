@@ -4,16 +4,15 @@
 <main id="main" class="main">
 
 
-    <h1>Notifications Details</h1>
+    {{-- <h1>Notifications Details</h1> --}}
     <div class=" pe-5 " style=" width:100%; text-align: end;">
     </div>
     <div class="pagetitle">
-        <h1>Data Tables</h1>
+        <h1>Notifications Details</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">User</a></li>
-                <li class="breadcrumb-item">Notification</li>
-                <li class="breadcrumb-item active">Data</li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item">Notifications</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

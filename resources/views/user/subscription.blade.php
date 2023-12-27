@@ -27,8 +27,8 @@
                                 <h5 class="card-title">Total <span>| Subscriptions</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-receipt"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center bg-primary justify-content-center">
+                                        <i class="bi bi-receipt text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ count($subscription) }}</h6>
@@ -49,8 +49,8 @@
                                 <h5 class="card-title">Paid <span>| Subscriptions</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart" style="color: green;"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center bg-success justify-content-center">
+                                        <i class="bi bi-cart text-light" ></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $subscription->where('paymentStatus', 'paid')->count() }}</h6>
@@ -70,8 +70,8 @@
                                 <h5 class="card-title"> Unpaid<span>| Subscriptions </span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-journal" style="color: red;"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center bg-danger justify-content-center">
+                                        <i class="bi bi-journal text-light" ></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $subscription->where('paymentStatus', 'pending')->count() }}</h6>
@@ -91,8 +91,8 @@
                                 <h5 class="card-title">Activate <span>| Subscriptions</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-journal-bookmark-fill" style="color:green;"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center bg-success justify-content-center" style="">
+                                        <i class="bi bi-journal-bookmark-fill text-light" ></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $subscription->where('activationStatus', true)->count() }}</h6>

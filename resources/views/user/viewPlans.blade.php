@@ -26,7 +26,7 @@
             <div class="text-center"><span class="me-2"><a href="/api/user/dashboard"><i class="bi bi-house-fill text-light"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Pricing Plan</span></div>
 
         </div>
-        <ul class="pricingTable-firstTable mt-5 ">
+        {{-- <ul class="pricingTable-firstTable mt-5 ">
             <li class="pricingTable-firstTable_table py-3 mt-1">
                 <h2 class="pricingTable-firstTable_table__header ">Single Store</h2>
                 <p>Best for Startups</p>
@@ -101,7 +101,116 @@
                 </ul>
                 <a href="/api/user/plans/selectplans"><button class="btn btn-warning  text-light">Get Started Now</button></a>
             </li>
-        </ul>
+        </ul> --}}
+        <section class="pricing py-5">
+            <div class="container">
+                <div class="row text-center">
+                    <!-- Free Tier -->
+                    <div class="col-lg-4">
+                        <div class="card mb-5 mb-lg-0 pb-3 pricing-card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center fs-2">Single Store</h5>
+                                <p>Best for Startups</p>
+                                <strike class="text-muted fs-5 fw-semibold">INR <span class="singleStoreOffPrice ">799</span></strike>
+                                <h6 class="card-price text-center"><span class="text-warning fw-bold">INR </span><span
+                                        class="text-warning singleStorePrice">699</span><span class="text-muted">/</span><span
+                                        class="period singleStoreValidity text-muted text-center fs-6">month</span></h6>
+                                <hr>
+                                <div class="col-md-12 mb-3 text-center">
+                                    <select id="singleStoreplan" class="form-select m-auto text-center" style="width: 85%;">
+                                        @php
+                                        $singleplans= $pricings->where('id','1');
+                                        @endphp
+                                        @foreach ($singleplans as $plan)
+                                        <option value="{{ $plan->validityId }}"> {{ $plan->name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+    
+                                <ul class="fa-ul m-auto">
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>1 Biller / Location</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Users / Devices</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                </ul>
+                                <div class="d-grid">
+                                    <a href="/api/user/plans/selectplans"><button
+                                            class="btn btn-warning text-light">Get Started Now</button></a>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Plus Tier -->
+                    <div class="col-lg-4">
+                        <div class="card mb-5 mb-lg-0 pb-3 pricing-card">
+                            <div class="card-body ">
+                                <h5 class="card-title  text-center fs-2">Multi Store</h5>
+                                <p>Most Popular Choice</p>
+                                <strike class="text-muted fs-5 fw-semibold">INR <span class="multiStoreOffPrice">1199</span></strike>
+                                <h6 class="card-price text-center"><span class="text-warning fw-bold">INR </span><span class="text-warning multiStorePrice"> 1099</span><span class="text-muted">/</span><span class="period multiStoreValidity text-muted fs-6">month</span></h6>
+                                <hr>
+                                <div class="col-md-12 mb-3">
+                                    <select id="multiStoreplan" class="form-select m-auto text-center" style="width: 85%;">
+                                        @php
+                                        $singleplans= $pricings->where('id','2');
+                                        @endphp
+                                        @foreach ($singleplans as $plan)
+                                        <option value="{{ $plan->validityId }}"> {{ $plan->name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <ul class="fa-ul m-auto">
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Biller / Location</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Users / Devices</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                </ul>
+                                <div class="d-grid">
+                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Get Started Now</button></a>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pro Tier -->
+                    <div class="col-lg-4">
+                        <div class="card mb-5 mb-lg-0 pb-3 pricing-card">
+                            <div class="card-body ">
+                                <h5 class="card-title text-center fs-2">Chain Store</h5>
+                                <p>For the whole team</p>
+                                <strike class="text-muted fs-5 fw-semibold">INR <span class="chainStoreOffPrice">2099</span></strike>
+                                <h6 class="card-price text-center"><span class="text-warning fw-bold">INR </span><span class="text-warning chainStorePrice">1999</span><span class="text-muted">/</span><span class="period chainStoreValidity text-muted fs-6">month</span></h6>
+                                <hr>
+                                <div class="col-md-12 mb-3">
+                                    <select id="chainStoreplan" class="form-select m-auto text-center" style="width: 85%;">
+                                        @php
+                                        $singleplans= $pricings->where('id','3');
+                                        @endphp
+                                        @foreach ($singleplans as $plan)
+                                        <option value="{{ $plan->validityId }}"> {{ $plan->name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <ul class="fa-ul text-center m-auto">
+                                    <li class=""><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Biller / Location</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Unlimited Users / Devices</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                </ul>
+                                <div class="d-grid">
+                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Get Started Now</button></a>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     @else
     <div class="container">

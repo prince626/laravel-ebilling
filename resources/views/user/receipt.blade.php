@@ -110,123 +110,118 @@
     </style>
     @if(!$invoiceReceipt || count($invoiceReceipt) === 0)
 
-    <div class="container-fluid">
-        <div class="container">
+    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>302</h1>
+        <h2>User Has no Receipt</h2>
+        {{-- <a class="btn" href="index.html">Back to home</a> --}}
+        <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
 
-            <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-                <h1>302</h1>
-                <h2>User Has no Receipt</h2>
-                {{-- <a class="btn" href="index.html">Back to home</a> --}}
-                <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
+    </section>
 
-            </section>
-
-        </div>
-        @else
-        <div class="pagetitle">
-            <h1>My Receipt</h1>
-            <nav>
-                <ol class="breadcrumb">
-                   <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item active" style="cursor: pointer;">My Receipt</li>
-                </ol>
-            </nav>
-        </div>
-
-        <div class="table-responsive mt-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Receipt No</th>
-                        {{-- <th scope="col">User ID</th> --}}
-                        {{-- <th scope="col">Subscription ID</th> --}}
-                        {{-- <th scope="col">Email</th> --}}
-                        <th scope="col">Phone</th>
-                        <th scope="col">Invoice Date</th>
-                        <th scope="col">Due Date</th>
-                        {{-- <th scope="col">Plan Info</th> --}}
-                        <th scope="col">Paid Amount</th>
-                        <th scope="col">PaymentStatus</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col">Action</th>
-                        {{-- <th scope="col">Transaction Id</th> --}}
-                        {{-- <th scope="col">Payment Date</th> --}}
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($invoiceReceipt as $receipt)
-                    <tr>
-                        <td class="align-middle"><strong>#{{ $receipt->receipt_no }}</strong></td>
-                        {{-- <td>{{ $receipt->user_id }}</td> --}}
-                        {{-- <td>{{ $receipt->subs_id }}</td> --}}
-                        {{-- <td>{{ $receipt->email }}</td> --}}
-                        <td class="align-middle">{{ $receipt->phone }}</td>
-                        <td class="align-middle">{{ $receipt->invoice_date }}</td>
-                        <td class="align-middle">{{ $receipt->due_date }}</td>
-                        {{-- <td>{{ $receipt->planInfo }}</td> --}}
-                        <td class="align-middle"><strong>₹{{ $receipt->paid_amount }}</strong></td>
-                        <td class="text-center align-middle">
-                            @if ($receipt->paymentStatus === 'paid')
-                            <span class="text-light bg-success text-center" style="
-                            padding:4px 12px;border-radius:8px;">Paid</span>
-                            @else
-                            <span class="text-light bg-danger text-center" style="
-                            padding:4px 8px;border-radius:8px;">Unpaid</span>
-                                @endif
-                        </td>
-                        <td class="align-middle">{{ $receipt->payment_method }}</td>
-                        <td class="align-middle">
-                            <div class="d-flex "  style="width: 130px;justify-content: space-evenly;">
-                                <a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt "><span class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i></span></a>
-                                    <span data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                                    <span onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-
-                            </div>
-                            
-                        </td>
-                        {{-- <td>{{ $receipt->payment_id }}</td> --}}
-                        {{-- <td>{{ $receipt->payment_date }}</td> --}}
-
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
+    @else
+    <div class="pagetitle ">
+        <h1>My Receipt</h1>
+        <nav class="pt-1">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="cursor: pointer;">My Receipt</li>
+            </ol>
+        </nav>
     </div>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Receipt No</th>
+                    {{-- <th scope="col">User ID</th> --}}
+                    {{-- <th scope="col">Subscription ID</th> --}}
+                    {{-- <th scope="col">Email</th> --}}
+                    <th scope="col">Phone</th>
+                    <th scope="col">Invoice Date</th>
+                    <th scope="col">Due Date</th>
+                    {{-- <th scope="col">Plan Info</th> --}}
+                    <th scope="col">Paid Amount</th>
+                    <th scope="col">PaymentStatus</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Action</th>
+                    {{-- <th scope="col">Transaction Id</th> --}}
+                    {{-- <th scope="col">Payment Date</th> --}}
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($invoiceReceipt as $receipt)
+                <tr>
+                    <td class="align-middle"><strong>#{{ $receipt->receipt_no }}</strong></td>
+                    {{-- <td>{{ $receipt->user_id }}</td> --}}
+                    {{-- <td>{{ $receipt->subs_id }}</td> --}}
+                    {{-- <td>{{ $receipt->email }}</td> --}}
+                    <td class="align-middle">{{ $receipt->phone }}</td>
+                    <td class="align-middle">{{ $receipt->invoice_date }}</td>
+                    <td class="align-middle">{{ $receipt->due_date }}</td>
+                    {{-- <td>{{ $receipt->planInfo }}</td> --}}
+                    <td class="align-middle"><strong>₹{{ $receipt->paid_amount }}</strong></td>
+                    <td class="text-center align-middle">
+                        @if ($receipt->paymentStatus === 'paid')
+                        <span class="text-light bg-success text-center" style="
+                            padding:4px 12px;border-radius:8px;">Paid</span>
+                        @else
+                        <span class="text-light bg-danger text-center" style="
+                            padding:4px 8px;border-radius:8px;">Unpaid</span>
+                        @endif
+                    </td>
+                    <td class="align-middle">{{ $receipt->payment_method }}</td>
+                    <td class="align-middle">
+                        <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
+                            <a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt "><span class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i></span></a>
+                            <span data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                            <span onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+
+                        </div>
+
+                    </td>
+                    {{-- <td>{{ $receipt->payment_id }}</td> --}}
+                    {{-- <td>{{ $receipt->payment_date }}</td> --}}
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
     @foreach ($invoiceReceipt as $receipt)
-        <div class="php-email-form modal fade" id="receiptModal{{ $receipt->receipt_no }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="/api/user/delete_receipt/{{ $receipt->receipt_no }}" method="POST" class="php-email-form">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete receipt</h5>
+    <div class="php-email-form modal fade" id="receiptModal{{ $receipt->receipt_no }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/api/user/delete_receipt/{{ $receipt->receipt_no }}" method="POST" class="php-email-form">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete receipt</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center fw-bold">Are you sure want to delete your receipt "receipt-{{ $receipt->receipt_no }}" </p>
+                        <div class="form-group">
                         </div>
-                        <div class="modal-body">
-                            <p class="text-center fw-bold">Are you sure want to delete your receipt "receipt-{{ $receipt->receipt_no }}" </p>
-                            <div class="form-group">
+                    </div>
+                    <footer class="modal-footer">
+                        <div class="col-md-12 text-center">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">
+                                <span class="dynamic-message"></span>
                             </div>
+
                         </div>
-                        <footer class="modal-footer">
-                            <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">
-                                    <span class="dynamic-message"></span>
-                                </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Yes</button>
 
-                            </div>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            <button type="submit" class="btn btn-danger">Yes</button>
-
-                        </footer>
-                    </form>
-                </div>
+                    </footer>
+                </form>
             </div>
         </div>
-        @endforeach
+    </div>
+    @endforeach
     @foreach ($invoiceReceipt as $receipt)
     <div class="modal fade" id="exampleModal{{ $receipt->receipt_no }}" tabindex="-1" data-bs-backdrop="false">
 
@@ -325,7 +320,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     @endforeach
 

@@ -3,24 +3,21 @@
 @section('content')
 <main id="main" class="main">
     @if(!$invoices || count($invoices) === 0)
-    <div class="container">
 
-        <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-            <h1>302</h1>
-            <h2>User Has no Invoices</h2>
-            {{-- <a class="btn" href="index.html">Back to home</a> --}}
-            <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
+    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>302</h1>
+        <h2>User Has no Invoices</h2>
+        {{-- <a class="btn" href="index.html">Back to home</a> --}}
+        <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
 
-        </section>
+    </section>
 
-    </div>
     @else
-    <style></style>
     <div class="pagetitle">
         <h1>My Invoices</h1>
-        <nav>
+        <nav class="pt-1">
             <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
                 <li class="breadcrumb-item active" style="cursor: pointer;">Invoices</li>
             </ol>
         </nav>
@@ -41,8 +38,8 @@
                                 <h5 class="card-title">Total <span>| Invoices</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-receipt"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-primary">
+                                        <i class="bi bi-receipt text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ count($invoices) }}</h6>
@@ -63,8 +60,8 @@
                                 <h5 class="card-title">Paid <span>| Invoices</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart" style="color: green;"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-success">
+                                        <i class="bi bi-cart text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $invoices->where('paymentStatus', 'paid')->count() }}</h6>
@@ -84,8 +81,8 @@
                                 <h5 class="card-title"> Unpaid<span>| Invoices </span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-journal" style="color: red;"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-danger">
+                                        <i class="bi bi-journal text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $invoices->where('paymentStatus', 'pending')->count() }}</h6>
@@ -106,8 +103,8 @@
                                 <h5 class="card-title"> Total<span>| Pending Amount </span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-rupee text-danger"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-danger">
+                                        <i class="bi bi-currency-rupee text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>₹{{ $invoices->where('paymentStatus', 'pending')->sum('amount') }}</h6>
@@ -186,11 +183,11 @@
                         {{-- <td><i class="fa-solid fa-trash-can text-danger m-1" data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" style="cursor: pointer;font-size:25px;"></i>
                         </td> --}}
                         <td class="align-middle">
-                            <div class="d-flex "  style="width: 130px;justify-content: space-evenly;">
-                                    <span class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}" class=""><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                                    <span data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" class=""><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                                    <span onclick="downloadInvoiceData({{json_encode($invoice)}})" class=""><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                               
+                            <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
+                                <span class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}" class=""><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                <span data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" class=""><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                <span onclick="downloadInvoiceData({{json_encode($invoice)}})" class=""><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+
                             </div>
                         </td>
 

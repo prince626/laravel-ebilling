@@ -66,18 +66,18 @@
             padding: 12px 15px;
         }
 
-        .php-email-form button[type=submit] {
+        /* .php-email-form button[type=submit] {
             background: #4154f1;
             border: 0;
             padding: 10px 30px;
             color: #fff;
             transition: 0.4s;
             border-radius: 4px;
-        }
+        } */
 
-        .php-email-form button[type=submit]:hover {
+        /* .php-email-form button[type=submit]:hover {
             background: #5969f3;
-        }
+        } */
 
     </style>
 </head>
@@ -85,10 +85,51 @@
     <div class="container-fluid pt-5">
         <div class="row justify-content-center">
             <div class="col-sm-4  ">
-                @if ($signup===true)
+
+                <div class="container-fluid">
+                    <h1 class="pb-4">customer Page</h1>
+                    <form action="{{$user && $user->token ? '/api/edit/signup':'/api/register'}}" method="POST" id="userForm" class="php-email-form">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Name</label>
+                            <input type="text" name="name" value='{{ $user? $user->name:''}}' class="form-control" id="Name" aria-describedby="emailHelp" {{ $user && $user->token ? 'readonly' : '' }}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Bussiness Name</label>
+                            <input type="text" name="companyName" value='{{ $user?$user->companyName :''}}' class="form-control" id="BussinessName" aria-describedby="emailHelp" {{ $user && $user->token ? 'readonly' : '' }}>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Category Name</label>
+                            <input type="text" name="category" value='{{ $user?$user->category :''}}' class="form-control" id="category" aria-describedby="emailHelp" {{ $user && $user->token ? 'readonly' : '' }}>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" name="email" value='{{ $user?$user->email:'' }}' class="form-control" id="email" aria-describedby="emailHelp" {{ $user && $user->token ? 'readonly' : '' }}>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">phone</label>
+                            <input type="text" name="phone" value='{{ $user?$user->phone:'' }}' class="form-control" id="exampleInputPassword1" {{ $user && $user->token ? 'readonly' : '' }}>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">
+                                <span class="dynamic-message">Your message has been sent. Thank you!</span>
+                            </div>
+
+                            <button type="{{$user && $user->token?'button' :'submit'}}" class="btn btn-primary " onclick="{{$user && $user->token?'toggleEdit()' :''}}">{{$user && $user->token?'Edit User':'Signup User '}}</button>
+                            <button type="submit" class="btn btn-primary" style="display: none;">Save Changes</button>
+
+                        </div>
+                    </form>
+                </div>
+
                 <div class="container-fluid mt-5">
                     <h1>Verify User</h1>
-                    <form action="/api/verify/{{$user->token}}" method="POST" class="php-email-form">
+                    <form action="/api/verify/{{$user?$user->token:''}}" method="POST" class="php-email-form">
                         @csrf
 
                         <div class="mb-3">
@@ -99,9 +140,15 @@
                             <label for="cpassword" class="form-label">Confirm Password</label>
                             <input type="password" name="cpassword" class="form-control" id="cpassword" aria-describedby="emailHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Mobile Otp</label>
-                            <input type="text" name="mobileOtp" class="form-control" id="mobileOtp" aria-describedby="emailHelp">
+                        <div class="row">
+                            <div class="mb-3 col-lg-8" style="">
+                                <label for="exampleInputEmail1" class="form-label">Mobile Otp</label>
+                                <input type="text" name="mobileOtp" class="form-control" id="mobileOtp" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 px-0 col-lg-4" style="padding-top:30px; ">
+                                <div class="btn bg-warning text-light fw-bold {{$user && $user->token?'':'disabled'}}" style="width: 150px" onclick="{{$user && $user->token?'resendOtp()':'disabled'}}">Resend Otp</div>
+                            </div>
+
                         </div>
 
                         <div class="mb-3">
@@ -123,53 +170,10 @@
                                 <span class="dynamic-message">Your message has been sent. Thank you!</span>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Verify User</button>
+                            <button type="submit" class="btn btn-primary {{$user && $user->token?'':'disabled'}}">Verify User</button>
                         </div>
                     </form>
                 </div>
-                @else
-                <div class="container-fluid">
-                    <strong>{{$expired ? 'user expired ' :''}}</strong>
-                    <h1 class="pb-4">customer Page</h1>
-
-                    <form action="{{$expired ? '/api/edit/signup':'/api/register'}}" method="POST" class="php-email-form">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" name="name" value='{{ $user? $user->name:''}}' class="form-control" id="Name" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Bussiness Name</label>
-                            <input type="text" name="companyName" value='{{ $user?$user->companyName :''}}' class="form-control" id="BussinessName" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Category Name</label>
-                            <input type="text" name="category" value='{{ $user?$user->category :''}}' class="form-control" id="category" aria-describedby="emailHelp">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" value='{{ $user?$user->email:'' }}' class="form-control" id="email" aria-describedby="emailHelp">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">phone</label>
-                            <input type="text" name="phone" value='{{ $user?$user->phone:'' }}' class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">
-                                <span class="dynamic-message">Your message has been sent. Thank you!</span>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Signup User</button>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
-                    </form>
-                </div>
-
                 {{-- <div class="container mt-5">
                     <h1>Verify User</h1>
                     <form action="/verify/{{$user->token}}" method="POST">
@@ -274,10 +278,41 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div> --}}
-    @endif
     </div>
     </div>
     </div>
+    <script>
+        function resendOtp() {
+            var form = document.getElementById('userForm');
+            form.submit();
+        }
+
+        function toggleEdit() {
+
+            var form = document.getElementById('userForm');
+            var editButton = form.querySelector('.btn-primary');
+            var saveButton = form.querySelector('[type="submit"]');
+            var editableFields = form.querySelectorAll('input[readonly]');
+
+            if (editableFields.length > 0) {
+                // Enable editing
+                editableFields.forEach(function(field) {
+                    field.removeAttribute('readonly');
+                });
+                editButton.textContent = 'Cancel Edit';
+                saveButton.style.display = 'inline-block';
+            } else {
+                // Cancel editing
+                form.reset(); // Reset the form
+                form.querySelectorAll('input').forEach(function(field) {
+                    field.setAttribute('readonly', 'true');
+                });
+                editButton.textContent = 'Edit User';
+                saveButton.style.display = 'none';
+            }
+        }
+
+    </script>
     <script>
         (function() {
             "use strict";
@@ -287,7 +322,6 @@
             forms.forEach(function(e) {
                 e.addEventListener('submit', function(event) {
                     event.preventDefault();
-
                     let thisForm = this;
 
                     let action = thisForm.getAttribute('action');

@@ -233,7 +233,7 @@
                         </div>
                         @endforeach
                         {{-- <button class="btn  text-center mt-1">View All Activity</button> --}}
-                        <a href="/api/user/activity"><button type="button" class="btn btn-outline-secondary mt-3"  style="width:100%;">View All Activity</button></a>
+                        <a href="/api/user/activity"><button type="button" class="btn btn-outline-secondary mt-3 text-dark"  style="width:100%;">View All Activity</button></a>
 
                         @endif
 

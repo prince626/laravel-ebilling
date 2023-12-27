@@ -40,7 +40,7 @@ class signupController extends Controller
                 $cookie = Cookie::make('token', $token, $cookieExpiration);
                 $ret->trace .= 'Database_inserted,';
                 $response = SendResponse::SendResponse($ret, 'success', $token)->withCookie($cookie);;
-                // $response->withCookie($cookie);
+                $response->withCookie($cookie);
                 // $response = redirect('/api/getfirstdata')->withCookie($cookie);
                 return $response;
             }

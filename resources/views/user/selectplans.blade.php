@@ -16,13 +16,13 @@
             margin-right: 10px;">
             <h4 class="text-center">Seamless Transactions, Elevated Experiences: Your Software, Your Way</h4>
             <p class="text-center">Unlock the full potential of our software with a simple payment. Begin your journey today and enjoy enchanced features and endless possibilities.</p>
-            <div class="text-center"><span class="me-2"><i class="bi bi-house-fill"></i></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
+            <div class="text-center"><span class="me-2 "><a href="/api/user/dashboard" class="text-light"><i class="bi bi-house-fill"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
         </div>
 
         <form action='/api/user/subs/{{ $user->token }}' method="POST" class="php-email-form mt-4">
             @csrf
             <div class=" justify-content-center select_subscription">
-                <div class="bg-white p-3">
+                <div class="bg-white p-3 mx-1">
                     <h5 class="font-bold">Select Software</h5>
                     <select class=" form-select" name="software" required aria-label="Default select example" id="softwareSelect">
                         <option value="">Select</option>
@@ -750,6 +750,10 @@
                     } else {
                         selectedAddonPriceDisplay.textContent = '';
                         addonPriceSelected = false;
+                        addonsName.textContent = 'Not Selected';
+                        description1.innerHTML = '';
+                        description2.innerHTML='';
+
                     }
 
                     updateTotalPrice();

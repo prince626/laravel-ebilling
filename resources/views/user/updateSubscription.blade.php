@@ -9,7 +9,7 @@
             margin-right: 10px;">
             <h3 class="text-center">Update Plan What suits you best ?</h3>
             <p class="text-center">Unlock the full potential of our software with a simple payment. Begin your journey today and enjoy enchanced features and endless possibilities.</p>
-            <div class="text-center"><span class="me-2"><i class="bi bi-house-fill"></i></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
+            <div class="text-center"><span class="me-2"><a href="/api/user/dashboard"><i class="bi bi-house-fill text-light"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
         </div>
        
         <form action='/api/user/update_subs/{{ $subscription->subs_id }}' method="POST" class="php-email-form">
@@ -610,6 +610,9 @@
                     } else {
                         selectedAddonPriceDisplay.textContent = '';
                         addonPriceSelected = false;
+                        addonsName.textContent = 'Not Selected';
+                        description1.innerHTML = '';
+                        description2.innerHTML='';
                     }
 
                     updateTotalPrice();

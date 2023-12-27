@@ -20,7 +20,9 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         {{-- <img src=" {{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle"> --}}
-                        <i class="bi bi-person-circle" style="font-size:100px"></i>
+                        <img src="{{ asset('assets/img/logo.png') }}" class="img-fluid mt-5 mb-1 rounded-circle" style="width: 80px;" alt="">
+
+                        {{-- <i class="bi bi-person-circle" style="font-size:100px"></i> --}}
                         <h2 class="mb-2">{{ ucwords($user->name) }}</h2>
                         <h3>{{ ucwords($user->email) }}</h3>
                         <div class="social-links mt-2">

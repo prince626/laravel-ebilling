@@ -37,8 +37,8 @@
                                 <h5 class="card-title">Total <span>|Canceled Subscriptions</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-receipt"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center bg-primary justify-content-center">
+                                        <i class="bi bi-receipt text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ count($cancelSubs) }}</h6>
@@ -57,8 +57,8 @@
                                 <h5 class="card-title"> Refund<span>| Process Subscriptions </span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-journal text-warning" ></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-warning">
+                                        <i class="bi bi-journal text-light" ></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $cancelSubs->where('refundStatus', 'Processing')->count() }}</h6>
@@ -78,8 +78,8 @@
                                 <h5 class="card-title">Refund <span>| Pending Amount</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-rupee text-danger"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-danger">
+                                        <i class="bi bi-currency-rupee text-light"></i>
                                     </div>
                                     <div class="ps-3">
                                         <h6>₹{{ $cancelSubs->where('refundStatus', 'Processing')->sum('refundAmount') }}</h6>
@@ -99,8 +99,8 @@
                                 <h5 class="card-title">Total <span>| Refunded Amount</span></h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-rupee text-success"></i>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-success">
+                                        <i class="bi bi-currency-rupee text-light"></i>
 
                                     </div>
                                     <div class="ps-3">

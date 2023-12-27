@@ -37,7 +37,7 @@ class getInvoiceController extends Controller
                 $response = SendResponse::SendResponse($ret, 'Success', $rechargeinvoices);
                 $ret->trace .= 'get_data, ';
 
-                $response = view('user.recharge')->with('invoices', $rechargeinvoices);
+                $response = view('user.invoice')->with('invoices', $rechargeinvoices);
                 return $response;
             }
         } catch (\Exception $e) {

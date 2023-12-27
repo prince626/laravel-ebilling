@@ -22,8 +22,6 @@
                         <th scope="col">Software</th>
                         <th scope="col">Plan</th>
                         <th scope="col">Total Amount</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
