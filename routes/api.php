@@ -73,13 +73,21 @@ Route::middleware(['rate_limit'])->group(function () {
     Route::get('/create/{token}', [loginController::class, 'create']);
 
 
+
+    // getfirst data and verfy user and edit signup details-------------------->
+
     Route::get('/getfirstdata', [FirstDataController::class, 'get_firstdata']);
     Route::post('/verify/{token}', [verifyController::class, 'verify']);
     Route::post('/edit/signup', [signupController::class, 'edit_signup']);
 
 
+    // user login------------>
+
     Route::post('/login', [loginController::class, 'login']);
-    Route::post('/verify_login', [loginController::class, 'verify_login']);
+
+
+    // user forget password----------->
+
     Route::post('/forget_password', [forgetPasswordController::class, 'forget_password']);
     Route::post('/verify_forget', [forgetPasswordController::class, 'verify_forget']);
 
@@ -87,7 +95,6 @@ Route::middleware(['rate_limit'])->group(function () {
 
     Route::get('/customer', [FirstDataController::class, 'get_firstdata']);
     Route::get('/plans', [planController::class, 'all_plans']);
-
     Route::post('/register', [signupController::class, 'signUp']);
     // Route::post('/verify', [verifyController::class, 'verify']);
 });
@@ -96,6 +103,8 @@ Route::post('/contact', [contactController::class, 'contact']);
 
 
 Route::middleware(['auth:api'])->prefix('user')->group(function () {
+
+
     Route::get('/get', [loginController::class, 'get']);
 
     Route::get('/contact', function () {
@@ -107,17 +116,14 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
     Route::get('/profile', function () {
         return view('user.profile');
     });
-    // Route::get('/view/plans', function () {
-    //     return view('user.viewPlans');
-    // });
-    Route::get('/get_data', [loginController::class, 'get']);
-    Route::get('/notifications', [getNotificationController::class, 'get_notifications']);
-    // Route::get('/get_alert', [getDataController::class, 'get_alert']);
-    // Route::get('/profile', [getDataController::class, 'get_data']);
-    // Route::get('/edit/profile/{name}', [getDataController::class, 'get_data']);
 
 
 
+
+
+
+
+    // subscription Api------------------>
 
     Route::get('/subscription', [getSubscription::class, 'get_user_subscriptions']);
 
@@ -125,68 +131,56 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
 
     Route::get('subs_history', [getSubscription::class, 'get_subscriptionHistory']);
 
-    Route::get('/cancel_subs', [getSubscription::class, 'cancel_subscription']);
 
+
+    // receipt and invoice api-------------->
 
     Route::get('/receipt', [receiptController::class, 'get_receipts']);
-
     Route::get('/read_receipt/{id}', [receiptController::class, 'read_receipt']);
-
     Route::get('/recharge_invoices', [getInvoiceController::class, 'getRecharge_invoices']);
 
-    Route::get('bill/history', [getInvoiceController::class, 'get_billHistory']);
 
 
 
+    // get tickets and user chat
     Route::get('/ticket', [getTicketController::class, 'getTicket_data']);
-
-    // Route::get('/user_chat', [getTicketController::class, 'userChat']);
-
     Route::get('/get_tickets', [getTicketController::class, 'getTickets']);
-
     Route::get('/userChat/{id}', [getTicketController::class, 'userChat']);
 
-    // Route::get('/latest/messages', [ticketController::class, 'get_LatestMessage']);
 
 
 
 
-    Route::get('/adminChat/{id}', [adminController::class, 'adminChat']);
 
-    Route::get('/users_messages', [adminController::class, 'userTickets']);
-
+    // user logout update forget password------------------->
 
     Route::get('/logout', [loginController::class, 'logout']);
-    // Route::get('/get/profile/{id}', [getDataController::class, 'getProfile_data']);
     Route::post('/update/{id}', [updateController::class, 'user_update']);
-
-
     Route::post('/change_password', [forgetPasswordController::class, 'change_password']);
     Route::get('/forget_page/{name}', [forgetPasswordController::class, 'forgetData']);
 
 
-    Route::post('/create_plan', [planController::class, 'create_plan']);
-
-    Route::get('/plans/{name}', [planController::class, 'all_plans']);
-
+    // create subscription and cancel subs api's-------------->
 
     Route::post('/subs/{token}', [createSubscription::class, 'subscription']);
     Route::post('/cancel_subs/{id}', [cancelSubs::class, 'cancelSubscription']);
+
+
+    // get subs and cancel subs ------------->
     Route::get('/get_subscriptions/{id}', [getSubscription::class, 'get_subscriptions']);
+    Route::get('/cancel_subs', [getSubscription::class, 'cancel_subscription']);
 
-    Route::get('/get_cancel_subscription/{id}', [getSubscription::class, 'cancel_subscription']);
 
+
+    // update subscription---------------->
     Route::get('/update_sub/{id}', [getSubscription::class, 'all_plans']);
-
     Route::get('update_view_subs/{id}', [getSubscription::class, 'view_updateSubscription']);
-
     Route::post('update_subs/{id}', [updateSubscription::class, 'update_Subscription']);
 
 
 
-
+    // subscription active deactivate and key-------------->
     Route::post('/activate', [kitActivateController::class, 'activate_kit']);
-
     Route::get('/user-edit-key/{id}', [activateSubscription::class, 'edit_activation']);
 
 
@@ -202,26 +196,32 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
 
 
 
+    // notictions api's----------------->
 
-
+    Route::get('/notifications', [getNotificationController::class, 'get_notifications']);
     Route::get("/read/{sno}", [getNotificationController::class, 'readNotification']);
     Route::get("/alert/read/{sno}", [getNotificationController::class, 'readAlert']);
     Route::get("/read_all/{userId}", [getNotificationController::class, 'readAllNotification']);
+
     Route::get("/activity", [getNotificationController::class, 'Activity']);
 
 
+    // tickets and user send message------------->
+
     Route::post('/send_message/{id}', [createTicketController::class, 'sendMessage']);
-
     Route::get('ticket/action/{id}', [ticketActionController::class, 'ticketAction']);
-
     Route::post('send/message/{id}', [createTicketController::class, 'userSendMessage']);
 
-    // Route::post('send/message/{id}', [ticketController::class, 'userSendMessage']);
 
+
+    // payment and subscription update------------>
 
     Route::post('payment/{id}', [paymentController::class, 'payment']);
     Route::post('/subs_update/{id}', [paymentController::class, 'updatePayment']);
 });
+
+
+
 
 // userSendMessage
 

@@ -201,7 +201,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Delete Invoice</h5>
                         </div>
                         <div class="modal-body">
-                            <p class="text-center fw-bold">Are you sure want to delete your Invoice "INV-{{ $invoice->invoice_number }}" </p>
+                            <p class="text-center fw-bold">Are you sure want to delete your Invoice "INV-{{ $invoice->invoice_number }}" ? </p>
                             <div class="form-group">
                             </div>
                         </div>
@@ -215,7 +215,7 @@
 
                             </div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            <button type="submit" class="btn btn-danger">Yes</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
 
                         </footer>
                     </form>
