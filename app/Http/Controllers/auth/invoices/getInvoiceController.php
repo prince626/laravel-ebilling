@@ -46,23 +46,7 @@ class getInvoiceController extends Controller
     }
 
 // get user receipts--------------------------->
-    function get_receipts(Request $req)
-    {
-        try {
-            $ret = ApiHelpers::ret();
-            $receipt = invoicereceipts::where('user_id', auth()->id())->get();
-            if (!$receipt) {
-                return SendResponse::jsonError($ret, 'Integrity_error', 'not_found_receipt');
-            } else {
-                $ret->trace .= 'Integrity_Check, ';
-                $response = SendResponse::SendResponse($ret, 'Success', $receipt);
-                $response = view('user.receipt')->with('invoiceReceipt', $receipt);
-                return $response;
-            }
-        } catch (\Exception $e) {
-            return ApiHelpers::serverError($e);
-        }
-    }
+  
 
     // get bill history----------------------->
     function get_billHistory(Request $req)

@@ -12,6 +12,7 @@ use App\Http\Controllers\auth\forgetPasswordController;
 use App\Http\Controllers\auth\getDataController;
 use App\Http\Controllers\auth\invoices\cancelInvoiceControler;
 use App\Http\Controllers\auth\invoices\getInvoiceController;
+use App\Http\Controllers\auth\invoices\receiptController;
 use App\Http\Controllers\auth\kitActivateController;
 use App\Http\Controllers\auth\loginController;
 use App\Http\Controllers\auth\notification\getNotificationController;
@@ -127,9 +128,9 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
     Route::get('/cancel_subs', [getSubscription::class, 'cancel_subscription']);
 
 
-    Route::get('/receipt', [getInvoiceController::class, 'get_receipts']);
+    Route::get('/receipt', [receiptController::class, 'get_receipts']);
 
-    Route::get('/read_receipt/{id}', [loginController::class, 'read_receipt']);
+    Route::get('/read_receipt/{id}', [receiptController::class, 'read_receipt']);
 
     Route::get('/recharge_invoices', [getInvoiceController::class, 'getRecharge_invoices']);
 
@@ -156,7 +157,7 @@ Route::middleware(['auth:api'])->prefix('user')->group(function () {
 
 
     Route::get('/logout', [loginController::class, 'logout']);
-    Route::get('/get/profile/{id}', [getDataController::class, 'getProfile_data']);
+    // Route::get('/get/profile/{id}', [getDataController::class, 'getProfile_data']);
     Route::post('/update/{id}', [updateController::class, 'user_update']);
 
 

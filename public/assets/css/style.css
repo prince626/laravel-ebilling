@@ -23,30 +23,6 @@ body {
   color: #444444;
 }
 
-/* datatables */
-label {
-  text-transform: capitalize;
-}
-
-.dataTables_info {
-  font-size: 14px;
-}
-
-select[name="dataTable_length"] {
-  /* border-radius: 40px !important; */
-  border: none !important;
-  margin: 2px;
-}
-
-.paginate_button {
-  padding: 0px !important;
-  margin: 4px;
-}
-
-.dataTables_filter input[type="search"] {
-  /* border-radius: 20px !important; */
-  outline: none;
-}
 
 a {
   color: #4154f1;
@@ -152,8 +128,9 @@ h6 {
 }
 
 .dropdown-menu .dropdown-footer a {
-  color: #444444;
+  color: blue !important;
   text-decoration: underline;
+
 }
 
 .dropdown-menu .dropdown-footer a:hover {
@@ -263,7 +240,7 @@ h6 {
 }
 
 .card-title {
-  padding: 20px 0 15px 0;
+  padding: 10px 0px 8px 0px;
   font-size: 18px;
   font-weight: 500;
   color: #012970;
@@ -299,6 +276,18 @@ h6 {
 .btn-close:focus {
   outline: 0;
   box-shadow: none;
+}
+
+.activity-btn {
+  background-color: rgb(126, 125, 125);
+  color: white !important;
+  font-weight: 600;
+}
+
+.activity-btn:hover {
+  /* background-color: gray; */
+  border: 1px solid blue;
+  color: black !important;
 }
 
 /* Accordion */
@@ -393,6 +382,9 @@ h6 {
     width: 231px;
   }
 }
+
+
+
 
 .logo img {
   max-height: 26px;
@@ -646,13 +638,19 @@ h6 {
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   /* background-color: #fff; */
-  background-color: #1E1F26;
+  background-color: #1E1E2D;
 }
 
 .sidebar li a {
-  color: white !important;
-  background-color: #1E1F26 !important;
+  color: #9899ac !important;
+  background-color: #1E1E2D !important;
 }
+
+.sidebar li a:hover {
+  color: white !important;
+  background-color: #1A1A27 !important;
+}
+
 
 @media (max-width: 1199px) {
   .sidebar {
@@ -999,6 +997,18 @@ h6 {
   max-width: 60px;
 }
 
+
+
+
+.mark-as-read {
+  background-color: #187DE4;
+}
+
+.mark-as-read:hover {
+  background-color: #0D6EFD;
+}
+
+
 /*--------------------------------------------------------------
 # Icons list page
 --------------------------------------------------------------*/
@@ -1190,6 +1200,7 @@ h6 {
 
 .php-email-form textarea {
   padding: 12px 15px;
+  border: 1.3px solid black;
 }
 
 /* .php-email-form button[type=submit] {
@@ -1205,6 +1216,9 @@ h6 {
   /* background: transparent;
   color: blue;
   border: 1px solid blue; */
+}
+.php-email-form button{
+  border-radius: 0px !important;
 }
 
 @keyframes animate-loading {
@@ -1609,6 +1623,7 @@ textarea:focus {
   background-color: rgba(226, 223, 223, 0.712);
 
 }
+
 section.pricing {
   /* background: #007bff;
   background: linear-gradient(to right, #0062E6, #33AEFF); */
@@ -1632,9 +1647,12 @@ section.pricing {
   font-weight: bold;
   color: #353535 !important;
 }
-.card-body select{
+
+.card-body select {
   font-size: 14px !important;
 }
+
+
 .pricing .card-price {
   font-size: 3rem;
   margin: 0;
@@ -1652,14 +1670,17 @@ section.pricing {
 .pricing .text-muted {
   opacity: 0.7;
 }
-.pricing-card{
+
+.pricing-card {
   transition: all 0.3s ease;
 
 }
+
 .pricing-card:hover {
   transform: scale(1.08);
 
 }
+
 /* .pricing .btn {
   font-size: 80%;
   border-radius: 5rem;
@@ -1674,13 +1695,13 @@ section.pricing {
 
 @media (min-width: 992px) {
   .pricing .card:hover {
-      margin-top: -.25rem;
-      margin-bottom: .25rem;
-      box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
   }
 
   .pricing .card:hover .btn {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -2293,6 +2314,32 @@ section.pricing {
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
+}
+
+
+@media (max-width: 500px) {
+  .select_subscription h5 {
+    font-size: 14px;
+  
+  }
+  .form-select{
+    font-size: 13px;
+  }
+  .select_subscription .col-md-4{
+    padding-top: 15px;
+  }
+  .select-page-title h4{
+    font-size: 14px;
+  }
+  .page-title-breadcrumbs{
+    font-size: 14px;
+  }
+  .card-body li{
+    font-size: 10px;
+  }
+  .php-email-form{
+    font-size: 15px;
+  }
 }
 
 .select_subscription h5 {

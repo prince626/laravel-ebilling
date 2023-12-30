@@ -3,11 +3,11 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Profile</h1>
-        <nav>
+        <h1>My Profile</h1>
+        <nav class="pt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" style="cursor: pointer;">Profile</li>
+                <li class="breadcrumb-item active"><a href="/api/user/dashboard" class="active">Dashboard</a></li>
+                <li class="breadcrumb-item ">Profile</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -281,27 +281,27 @@
                                     <div class="row mb-3" style="display: none">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Email address</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="email" class="form-control" required value={{ $user->email }} id="currentPassword">
+                                            <input name="email" class="form-control" required value={{ $user->email }} id="">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="currentPassword" type="password" required class="form-control" id="currentPassword">
+                                            <input name="currentPassword" type="password" required autocomplete="current-password" class="form-control" id="current-password">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="password" type="password" required class="form-control" id="newPassword">
+                                            <input name="password" type="password" required class="form-control" autocomplete="new-password" id="new-password">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="comfirm_password" type="password" required class="form-control" id="renewPassword">
+                                            <input name="comfirm_password" type="password" required autocomplete="comfirm-password" class="form-control" id="renew-password">
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">

@@ -134,9 +134,9 @@ class SubscriptionHelper
             'paymentStatus' => $req->paymentStatus,
             'duration' => $userDuration,
             'startDate' => $now,
-            'expiryDate' => $expiryDate,
+            'expiryDate' => $expiryDate->format('Y-m-d'),
             'durationType' => $userDurationType,
-            'amount' => $amount,
+            'amount' => intval($amount),
         ]);
         return $subsHistory;
     }

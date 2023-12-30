@@ -67,7 +67,7 @@ class activateSubscription extends Controller
             $ret->trace .= 'Database_inserted, ';
             $response = SendResponse::SendResponse($ret, "User Subscription has been " . ($user->activationStatus ? 'Activated' : 'Deactivated'), $user);
             // $response = redirect('api/user/subscription?message=' . urlencode($message));
-            // $response = redirect('api/user/subscription');
+            $response = redirect('api/user/subscription');
             return $response;
         } catch (\Exception $e) {
             return ApiHelpers::serverError($e);

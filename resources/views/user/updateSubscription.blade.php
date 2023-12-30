@@ -5,11 +5,11 @@
     @if($software && $categories && $pricings && $validities && $subscription &&$addons )
 
     <div class="container-fluid">
-        <div class="bg-warning  py-4 text-light" style="span:not(:last-child) {
+        <div class="bg-warning  py-4 text-light select-page-title" style="span:not(:last-child) {
             margin-right: 10px;">
-            <h3 class="text-center">Update Plan What suits you best ?</h3>
+            <h4 class="text-center">Update Plan What suits you best ?</h4>
             <p class="text-center">Unlock the full potential of our software with a simple payment. Begin your journey today and enjoy enchanced features and endless possibilities.</p>
-            <div class="text-center"><span class="me-2"><a href="/api/user/dashboard"><i class="bi bi-house-fill text-light"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
+            <div class="text-center page-title-breadcrumbs"><span class="me-2"><a href="/api/user/dashboard"><i class="bi bi-house-fill text-light"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
         </div>
        
         <form action='/api/user/update_subs/{{ $subscription->subs_id }}' method="POST" class="php-email-form">
@@ -69,15 +69,13 @@
             </div>
     </div> --}}
     <div class="col-md-4">
-        <div class="row">
             <h5>Duration</h5>
             <select class="form-select" id="duration" name="duration" required aria-label="Default select example" required>
                 <option value="null">SELECT</option>
             </select>
-        </div>
     </div>
     </div>
-    <div class="row mt-4 bg-white  bg-light p-3">
+    <div class="row mt-4 bg-white  bg-light  p-3" style="align-items: center;">
         <div class="col-md-2">
             <h5 id="categoryId">Addons</h5>
         </div>
@@ -89,20 +87,20 @@
         @endforeach
         </select>
         </div> --}}
-        <div class="col-md-7 ps-4">
+        <div class="col-md-7 ">
             <select class="form-select" id="addons" name="addons" aria-label="Default select example" required>
                 <option value="null">SELECT</option>
             </select>
         </div>
-        <div class="col-md-3 text-end">
-            <p id="seeSomeAddons" class=" text-warning" style="cursor: pointer;text-decoration: underline;">See Some Addons <i class="bi bi-plus text-light bg-warning px-1 m-1"></i> </p>
+        <div class="col-md-3 text-end pt-3">
+            <p id="seeSomeAddons" class=" text-warning" style="cursor: pointer;text-decoration: underline;font-size: 14px;">See Some Addons <i class="bi bi-plus text-light bg-warning px-1 m-1 rounded"></i> </p>
         </div>
 
     </div>
     <div class="row chooseplan bg-white bg-light my-3   p-3">
         <div class=" beforeplans" style="display: none;" >
             <h5 class="text-bold">Selected Plan</h5>
-                <p>Enjoy plan with the following features and benefits</p>
+                <p style="font-size: 14px;">Enjoy plan with the following features and benefits</p>
             <div class="row">
                 <div class="col-md-10">
                     <p class="" style="font-size: 16px;"><span id="description1" class="m-2"></span ><span id="description2" class="m-2"></span><span id="description3" class="m-2"></span><span id="description4" class="m-2"></span></p>
@@ -116,13 +114,13 @@
         </div>
         <div class="afteraddons" style="display: none;" >
             <h5>Selected Addons</h5>
-            <p style="font-size: 16px;">Addons : <span id="addonsName">Not Selected</span></p>
+            <p style="font-size: 14px;">Addons : <span id="addonsName">Not Selected</span></p>
             <div class="row align-items-center">
                 <div class="col-md-10">
                     <p class="" style="font-size: 16px;"><span id="addonsdescription1" class="ms-2"></span ><span id="addonsdescription2" class="ms-2"></span></p>
                 </div>
                 <div class="col-md-2">
-                    <p class="btn btn-warning text-light text-end float-end" id="addonsAmount">Not Selected</p>
+                    <p class="btn btn-warning text-light float-end text-center" id="addonsAmount">Not Selected</p>
                 </div>
             </div>
             <hr>
@@ -133,7 +131,7 @@
             <h5>Total :-</h5>
             <div class="row ms-1 mt-3" >
                 <div class="form-check  col-md-9 ">
-                    <input class="form-check-input" required name="accept" required type="checkbox" value="accept" id="flexCheckDefault" required>
+                    <input class="form-check-input" required name="accept" required type="checkbox" value="accept" id="flexCheckDefault" required style="font-size: 14px;">
                     <label class="form-check-label" for="flexCheckDefault" style="font-size: 14px;">
                         I Agree with the terms and Condition
                     </label>
@@ -709,6 +707,9 @@
     });
 </script> --}}
 <script>
+   
+
+
     document.addEventListener('DOMContentLoaded', function() {
         const categorySelect = document.getElementById('category');
         const planSelect = document.getElementById('plan');
@@ -757,31 +758,50 @@
             // showrefund.style.display = 'block';
             //     showtotal.style.display = 'block';
             // console.log('Refund Amount:', refundAmount);
-            const subscriptionAmount = @json($subscription->amount);
-const subscriptionExpiryDate = @json($subscription->expiryDate);
-const subscriptionStartDate = @json($subscription->startDate);
+            // const subscriptionAmount = @json($subscription->amount);
+            // const subscriptionExpiryDate = @json($subscription->expiryDate);
+            // const subscriptionStartDate = @json($subscription->startDate);
 
-const now = new Date();
-const startDate = new Date(subscriptionStartDate);
-const expiryDate = new Date(subscriptionExpiryDate);
+            // const now = new Date();
+            // const startDate = new Date(subscriptionStartDate);
+            // const expiryDate = new Date(subscriptionExpiryDate);
+            // const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
 
-const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+            // const remainingDays = Math.ceil((expiryDate - now) / oneDay);
+            // const numberOfDays = Math.ceil((startDate-now ) / oneDay);
 
-const remainingDays = Math.ceil((expiryDate - now) / oneDay);
-const numberOfDays = Math.ceil((startDate-now ) / oneDay);
+            // // Ensure that remainingDays and numberOfDays are not negative
+            // const validRemainingDays = Math.max(remainingDays, 0);
+            // const validNumberOfDays = Math.max(numberOfDays, 0);
 
-// Ensure that remainingDays and numberOfDays are not negative
-const validRemainingDays = Math.max(remainingDays, 0);
-const validNumberOfDays = Math.max(numberOfDays, 0);
+            // const costPerDay = subscriptionAmount / validRemainingDays;
+            // const refundAmount = Math.abs(subscriptionAmount - validNumberOfDays * costPerDay);
 
-const costPerDay = subscriptionAmount / validRemainingDays;
-const refundAmount = Math.abs(subscriptionAmount - validNumberOfDays * costPerDay);
+            
+            @php
+                $now = \Carbon\Carbon::now('Asia/Kolkata')->format('Y-m-d');
+                $startDate = \Carbon\Carbon::parse($subscription->startDate);
+                $checkExpiryDate = \Carbon\Carbon::parse($subscription->expiryDate);
 
-getrefundAmount.textContent = refundAmount.toFixed(0);
-showrefund.style.display = 'block';
-showtotal.style.display = 'block';
+                $numberOfDays = $startDate->diffInDays($now);
+                $duration = $checkExpiryDate->diffInDays($now);
 
-console.log('Refund Amount:', refundAmount);
+                if ($numberOfDays >= $duration) {
+                    $refundAmount = 0; // No refund if a full month has passed
+                } else {
+                    $costPerDay = $subscription->amount / $duration; // Assuming 30 days in a month
+                    $refundAmount = abs(($numberOfDays * $costPerDay) - $subscription->amount);
+                }
+                $discountAmount =  $refundAmount;
+            @endphp
+
+            const discountAmount = {{ $discountAmount }};
+            getrefundAmount.textContent = discountAmount.toFixed(0);
+            showrefund.style.display = 'block';
+            showtotal.style.display = 'block';
+
+            console.log('RefudiscountAmountt:', discountAmount);
+            // console.log('Refund date:', now);
 
         }
         // Function to reset actions when the category matches

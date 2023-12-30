@@ -60,11 +60,11 @@ class AppServiceProvider extends ServiceProvider
                 $unreadData = collect($notifications)->filter(function ($item) {
                     return $item['status'] === 'unread';
                 })->all();
-                $unreadData = collect($unreadData)->filter(function ($item) {
-                    $createdAt =  Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at, 'Asia/Kolkata');
-                    $timeDifference = $createdAt->diffInMinutes(Carbon::now('Asia/Kolkata'));
-                    return $timeDifference < 20;
-                })->all();
+                // $unreadData = collect($unreadData)->filter(function ($item) {
+                //     $createdAt =  Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at, 'Asia/Kolkata');
+                //     $timeDifference = $createdAt->diffInMinutes(Carbon::now('Asia/Kolkata'));
+                //     return $timeDifference < 20;
+                // })->all();
             }
             $ret->trace .= 'get_data, ';
 

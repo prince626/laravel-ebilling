@@ -108,231 +108,231 @@
         }
 
     </style>
-    @if(!$invoiceReceipt || count($invoiceReceipt) === 0)
 
-    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-        <h1>302</h1>
-        <h2>User Has no Receipt</h2>
-        {{-- <a class="btn" href="index.html">Back to home</a> --}}
-        <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
-
-    </section>
-
-    @else
     <div class="pagetitle ">
         <h1>My Receipt</h1>
         <nav class="pt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" style="cursor: pointer;">My Receipt</li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard" class="active">Dashboard</a></li>
+                <li class="breadcrumb-item " >My Receipt</li>
             </ol>
         </nav>
     </div>
+    <div class="card">
+        <div class="card-header" style="border: none">
+            <div class="card-title">
+                <h5 class="card-label text-dark fw-medium"> Receipt List
+                    <span class="d-block text-muted pt-2 font-size-sm"> You can View and download Subscription Receipt Here</span></h5>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table id="example" class="table nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">Receipt No</th>
+                            {{-- <th scope="col">User ID</th> --}}
+                            {{-- <th scope="col">Subscription ID</th> --}}
+                            {{-- <th scope="col">Email</th> --}}
+                            <th scope="col">Phone</th>
+                            <th scope="col">Invoice Date</th>
+                            <th scope="col">Due Date</th>
+                            {{-- <th scope="col">Plan Info</th> --}}
+                            <th scope="col">Paid Amount</th>
+                            <th scope="col">PaymentStatus</th>
+                            <th scope="col">Payment Method</th>
+                            <th scope="col">Action</th>
+                            {{-- <th scope="col">Transaction Id</th> --}}
+                            {{-- <th scope="col">Payment Date</th> --}}
 
-    <div class="table-responsive mt-3">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Receipt No</th>
-                    {{-- <th scope="col">User ID</th> --}}
-                    {{-- <th scope="col">Subscription ID</th> --}}
-                    {{-- <th scope="col">Email</th> --}}
-                    <th scope="col">Phone</th>
-                    <th scope="col">Invoice Date</th>
-                    <th scope="col">Due Date</th>
-                    {{-- <th scope="col">Plan Info</th> --}}
-                    <th scope="col">Paid Amount</th>
-                    <th scope="col">PaymentStatus</th>
-                    <th scope="col">Payment Method</th>
-                    <th scope="col">Action</th>
-                    {{-- <th scope="col">Transaction Id</th> --}}
-                    {{-- <th scope="col">Payment Date</th> --}}
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($invoiceReceipt as $receipt)
-                <tr>
-                    <td class="align-middle"><strong>#{{ $receipt->receipt_no }}</strong></td>
-                    {{-- <td>{{ $receipt->user_id }}</td> --}}
-                    {{-- <td>{{ $receipt->subs_id }}</td> --}}
-                    {{-- <td>{{ $receipt->email }}</td> --}}
-                    <td class="align-middle">{{ $receipt->phone }}</td>
-                    <td class="align-middle">{{ $receipt->invoice_date }}</td>
-                    <td class="align-middle">{{ $receipt->due_date }}</td>
-                    {{-- <td>{{ $receipt->planInfo }}</td> --}}
-                    <td class="align-middle"><strong>₹{{ $receipt->paid_amount }}</strong></td>
-                    <td class="text-center align-middle">
-                        @if ($receipt->paymentStatus === 'paid')
-                        <span class="text-light bg-success text-center" style="
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($invoiceReceipt as $receipt)
+                        <tr>
+                            <td class="align-middle"><strong>#{{ $receipt->receipt_no }}</strong></td>
+                            {{-- <td>{{ $receipt->user_id }}</td> --}}
+                            {{-- <td>{{ $receipt->subs_id }}</td> --}}
+                            {{-- <td>{{ $receipt->email }}</td> --}}
+                            <td class="align-middle">{{ $receipt->phone }}</td>
+                            <td class="align-middle">{{ $receipt->invoice_date }}</td>
+                            <td class="align-middle">{{ $receipt->due_date }}</td>
+                            {{-- <td>{{ $receipt->planInfo }}</td> --}}
+                            <td class="align-middle"><strong>₹{{ $receipt->paid_amount }}</strong></td>
+                            <td class=" align-middle">
+                                @if ($receipt->paymentStatus === 'paid')
+                                <span class="text-light bg-success text-center" style="
                             padding:4px 12px;border-radius:8px;">Paid</span>
-                        @else
-                        <span class="text-light bg-danger text-center" style="
+                                @else
+                                <span class="text-light bg-danger text-center" style="
                             padding:4px 8px;border-radius:8px;">Unpaid</span>
-                        @endif
-                    </td>
-                    <td class="align-middle">{{ $receipt->payment_method }}</td>
-                    <td class="align-middle">
-                        <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
-                            <a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt "><span class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i></span></a>
-                            <span data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                            <span onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">{{ $receipt->payment_method }}</td>
+                            <td class="align-middle">
+                                <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
+                                    <a href="/api/user/read_receipt/{{$receipt->user_id}}" class="readReceipt "><span class="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $receipt->receipt_no }}"><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i></span></a>
+                                    <span data-bs-toggle="modal" data-bs-target="#receiptModal{{ $receipt->receipt_no }}"><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                    <span onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
 
-                        </div>
+                                </div>
 
-                    </td>
-                    {{-- <td>{{ $receipt->payment_id }}</td> --}}
-                    {{-- <td>{{ $receipt->payment_date }}</td> --}}
+                            </td>
+                            {{-- <td>{{ $receipt->payment_id }}</td> --}}
+                            {{-- <td>{{ $receipt->payment_date }}</td> --}}
 
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    @foreach ($invoiceReceipt as $receipt)
-    <div class="php-email-form modal fade" id="receiptModal{{ $receipt->receipt_no }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="/api/user/delete_receipt/{{ $receipt->receipt_no }}" method="POST" class="php-email-form">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete receipt</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p class="text-center fw-bold">Are you sure want to delete your receipt "receipt-{{ $receipt->receipt_no }}" </p>
-                        <div class="form-group">
-                        </div>
-                    </div>
-                    <footer class="modal-footer">
-                        <div class="col-md-12 text-center">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">
-                                <span class="dynamic-message"></span>
-                            </div>
-
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-danger">Yes</button>
-
-                    </footer>
-                </form>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    @endforeach
-    @foreach ($invoiceReceipt as $receipt)
-    <div class="modal fade" id="exampleModal{{ $receipt->receipt_no }}" tabindex="-1" data-bs-backdrop="false">
-
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background: none !important;
-            border: none;">
-                <div class="container-fluid">
-                    {{-- <div class="row"> --}}
-                    <div class="col-md-12 col-xl-12 col-md-6  receipt-main">
-                        <div class="row mb-3">
-                            <div class="col-md-6 text-left">
-                                <h3>My Receipt</h3>
+            @if (isset($invoiceReceipt) && count($invoiceReceipt) > 0)
+            @foreach ($invoiceReceipt as $receipt)
+            <div class="php-email-form modal fade" id="receiptModal{{ $receipt->receipt_no }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="/api/user/delete_receipt/{{ $receipt->receipt_no }}" method="POST" class="php-email-form">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Receipt</h5>
                             </div>
-                            <div class="col-md-6 text-right  text-end">
-                                <button type="button" class="btn-close btn bg-danger" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 12px;"></button>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6 text-left ">
-                                <div class="receipt-right">
-                                    <h5>Customer Details </h5>
-                                    <p><b>Mobile :</b> {{$receipt->phone}}</p>
-                                    <p><b>Email :</b> {{$receipt->email}}</p>
-                                    {{-- <p><b>Address :</b> New York, USA</p> --}}
+                            <div class="modal-body">
+                                <p class="text-center fw-bold">Are you sure want to delete your receipt "receipt-{{ $receipt->receipt_no }}" ?</p>
+                                <div class="form-group">
                                 </div>
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 text-right receipt-header my-5">
-                                <div class="text-end receipt-right">
-                                    <h5>Company Name.</h5>
-                                    <p>+1 3649-6589 <i class="fa fa-phone"></i></p>
-                                    <p>company@gmail.com <i class="fa fa-envelope-o"></i></p>
-                                    <p>USA <i class="fa fa-location-arrow"></i></p>
-                                </div>
-                            </div>
-                        </div>
+                            <footer class="modal-footer">
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">
+                                        <span class="dynamic-message"></span>
+                                    </div>
 
-                        <div class="row">
-                            <div class="col-xs-8 col-sm-8 col-md-8 text-left receipt-header-mid">
-                                <div class="receipt-right">
-                                    <h5>Payment Details </h5>
-                                    <p><b>Holder Name :</b> {{$receipt->holder_name}}</p>
-                                    <p><b>Payment Method :</b> {{$receipt->payment_method}}</p>
-                                    <p><b>Payment Id :</b> ****{{ substr($receipt->payment_id, -4) }}</p>
-                                    {{-- <p><b>Address :</b> New York, USA</p> --}}
                                 </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 receipt-header-mid">
-                                <div class="receipt-left">
-                                    <h3>Receipt No #{{$receipt->receipt_no}}</h3>
-                                </div>
-                            </div>
-                        </div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger">Yes</button>
 
-                        <div>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="col-md-9">{{$receipt->software}}</td>
-                                        <td class="col-md-3"><i class="fa fa-inr"></i> {{$receipt->paid_amount}}</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td class="text-right">
-                                            <h2><strong>Total: </strong></h2>
-                                        </td>
-                                        <td class="text-left text-danger">
-                                            <h2><strong><i class="fa fa-inr"></i> {{$receipt->paid_amount}}</strong></h2>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-8 col-sm-8 col-md-8 text-left receipt-header-mid receipt-footer">
-                                <div class="receipt-right">
-                                    <p><b>Date :</b> {{$receipt->invoice_date}}</p>
-                                    {{-- <h5 style="color: rgb(140, 140, 140);">Thanks for shopping.!</h5> --}}
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 receipt-footer">
-                                <div class="receipt-left">
-                                    <strong>Devologix</strong>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <button class="btn bg-primary text-light m-2" onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-download mx-2 text-light"></i>Download Receipt</button> --}}
+                            </footer>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    @endforeach
+            @endforeach
+            @foreach ($invoiceReceipt as $receipt)
+            <div class="modal fade" id="exampleModal{{ $receipt->receipt_no }}" tabindex="-1" data-bs-backdrop="false">
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="background: none !important;
+            border: none;">
+                        <div class="container-fluid">
+                            {{-- <div class="row"> --}}
+                            <div class="col-md-12 col-xl-12 col-md-6  receipt-main">
+                                <div class="row mb-3">
+                                    <div class="col-md-6 text-left">
+                                        <h3>My Receipt</h3>
+                                    </div>
+                                    <div class="col-md-6 text-right  text-end">
+                                        <button type="button" class="btn-close btn bg-danger" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 12px;"></button>
 
-    <script>
-        function downloadReceiptData(sub) {
-            // Get data from the modal
-            // var receiptData = JSON.parse(sub);
-            // var receiptData = sub;
-            // console.log(receiptData)
-            var htmlContent = `
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 text-left ">
+                                        <div class="receipt-right">
+                                            <h5>Customer Details </h5>
+                                            <p><b>Mobile :</b> {{$receipt->phone}}</p>
+                                            <p><b>Email :</b> {{$receipt->email}}</p>
+                                            {{-- <p><b>Address :</b> New York, USA</p> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 text-right receipt-header my-5">
+                                        <div class="text-end receipt-right">
+                                            <h5>Company Name.</h5>
+                                            <p>+1 3649-6589 <i class="fa fa-phone"></i></p>
+                                            <p>company@gmail.com <i class="fa fa-envelope-o"></i></p>
+                                            <p>USA <i class="fa fa-location-arrow"></i></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-8 col-sm-8 col-md-8 text-left receipt-header-mid">
+                                        <div class="receipt-right">
+                                            <h5>Payment Details </h5>
+                                            <p><b>Holder Name :</b> {{$receipt->holder_name}}</p>
+                                            <p><b>Payment Method :</b> {{$receipt->payment_method}}</p>
+                                            <p><b>Payment Id :</b> ****{{ substr($receipt->payment_id, -4) }}</p>
+                                            {{-- <p><b>Address :</b> New York, USA</p> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 receipt-header-mid">
+                                        <div class="receipt-left">
+                                            <h3>Receipt No #{{$receipt->receipt_no}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-9">{{$receipt->software}}</td>
+                                                <td class="col-md-3"><i class="fa fa-inr"></i> {{$receipt->paid_amount}}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td class="text-right">
+                                                    <h2><strong>Total: </strong></h2>
+                                                </td>
+                                                <td class="text-left text-danger">
+                                                    <h2><strong><i class="fa fa-inr"></i> {{$receipt->paid_amount}}</strong></h2>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-8 col-sm-8 col-md-8 text-left receipt-header-mid receipt-footer">
+                                        <div class="receipt-right">
+                                            <p><b>Date :</b> {{$receipt->invoice_date}}</p>
+                                            {{-- <h5 style="color: rgb(140, 140, 140);">Thanks for shopping.!</h5> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 receipt-footer">
+                                        <div class="receipt-left">
+                                            <strong>Devologix</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <button class="btn bg-primary text-light m-2" onclick="downloadReceiptData({{json_encode($receipt)}})"><i class="bi bi-download mx-2 text-light"></i>Download Receipt</button> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+
+            <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+            <script>
+                function downloadReceiptData(sub) {
+                    // Get data from the modal
+                    // var receiptData = JSON.parse(sub);
+                    // var receiptData = sub;
+                    // console.log(receiptData)
+                    var htmlContent = `
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -532,74 +532,74 @@
                     </div> 
                 </body>
             </html>`
-            // var receiptData = {
-            //     receiptNo: '{{$receipt->receipt_no}}'
-            //     , phone: '{{$receipt->phone}}'
-            //     , email: '{{$receipt->email}}'
-            //     , companyName: 'Company Name'
-            //     , companyPhone: '+1 3649-6589'
-            //     , companyEmail: 'company@gmail.com'
-            //     , companyLocation: 'USA'
-            //     , holderName: '{{$receipt->holder_name}}'
-            //     , paymentMethod: '{{$receipt->payment_method}}'
-            //     , paymentId: '****' + '{{ substr($receipt->payment_id, -4) }}'
-            //     , softwareDescription: '{{$receipt->software}}'
-            //     , paidAmount: '{{$receipt->paid_amount}}'
-            //     , invoiceDate: '{{$receipt->invoice_date}}'
-            // , };
+                    // var receiptData = {
+                    //     receiptNo: '{{$receipt->receipt_no}}'
+                    //     , phone: '{{$receipt->phone}}'
+                    //     , email: '{{$receipt->email}}'
+                    //     , companyName: 'Company Name'
+                    //     , companyPhone: '+1 3649-6589'
+                    //     , companyEmail: 'company@gmail.com'
+                    //     , companyLocation: 'USA'
+                    //     , holderName: '{{$receipt->holder_name}}'
+                    //     , paymentMethod: '{{$receipt->payment_method}}'
+                    //     , paymentId: '****' + '{{ substr($receipt->payment_id, -4) }}'
+                    //     , softwareDescription: '{{$receipt->software}}'
+                    //     , paidAmount: '{{$receipt->paid_amount}}'
+                    //     , invoiceDate: '{{$receipt->invoice_date}}'
+                    // , };
 
-            // Convert data to JSON
-            var blob = new Blob([htmlContent], {
-                type: 'text/html'
-            });
-            var a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'receipt_data';
+                    // Convert data to JSON
+                    var blob = new Blob([htmlContent], {
+                        type: 'text/html'
+                    });
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = 'receipt_data';
 
-            // Append the link to the body and trigger the download
-            document.body.appendChild(a);
-            a.click();
+                    // Append the link to the body and trigger the download
+                    document.body.appendChild(a);
+                    a.click();
 
-            // Remove the link from the body
-            document.body.removeChild(a);
-        }
+                    // Remove the link from the body
+                    document.body.removeChild(a);
+                }
 
-    </script>
-    @endif
+            </script>
+            @endif
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var activateButtons = document.querySelectorAll('.readReceipt');
-            activateButtons.forEach(function(button) {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent the default behavior of the link
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var activateButtons = document.querySelectorAll('.readReceipt');
+                    activateButtons.forEach(function(button) {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault(); // Prevent the default behavior of the link
 
-                    fetch(this.href)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                // window.location.reload();
-                            } else {
-                                // Handle non-successful response
-                                showSnackbar(data.status, data.data);
-                            }
-                        })
-                        .catch(error => {
-                            showSnackbar('Fetch Error: ', error.message);
+                            fetch(this.href)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        // window.location.reload();
+                                    } else {
+                                        // Handle non-successful response
+                                        showSnackbar(data.status, data.data);
+                                    }
+                                })
+                                .catch(error => {
+                                    showSnackbar('Fetch Error: ', error.message);
+                                });
                         });
+                    });
+
+                    function showSnackbar(status, data) {
+                        var snackBar = document.getElementById("snackbar");
+                        snackBar.className = "show-bar";
+                        snackBar.textContent = status + data;
+                        setTimeout(function() {
+                            snackBar.className = snackBar.className.replace("show-bar", "");
+                        }, 5000);
+                    }
                 });
-            });
 
-            function showSnackbar(status, data) {
-                var snackBar = document.getElementById("snackbar");
-                snackBar.className = "show-bar";
-                snackBar.textContent = status + data;
-                setTimeout(function() {
-                    snackBar.className = snackBar.className.replace("show-bar", "");
-                }, 5000);
-            }
-        });
+            </script>
 
-    </script>
-
-    @endsection
+            @endsection

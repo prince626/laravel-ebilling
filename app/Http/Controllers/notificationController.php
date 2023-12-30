@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class notificationController extends Controller
 {
+
+    // read Notification--------------->
     function readNotification(Request $req, $sno)
     {
         $ret = ApiHelpers::ret();
@@ -21,10 +23,13 @@ class notificationController extends Controller
             $user->save();
             $ret->trace .= 'notification_updated, ';
             $response = SendResponse::SendResponse($ret, 'Success', $user);
-            // $response = redirect('api/user/notifications');
+            $response = redirect('api/user/notifications');
             return $response;
         }
     }
+
+    // read readAlert--------------->
+
     function readAlert(Request $req, $sno)
     {
         $ret = ApiHelpers::ret();
@@ -41,6 +46,9 @@ class notificationController extends Controller
             return $response;
         }
     }
+
+    // read All Notifications--------------->
+
     function readAllNotification(Request $req, $userId)
     {
         $ret = ApiHelpers::ret();

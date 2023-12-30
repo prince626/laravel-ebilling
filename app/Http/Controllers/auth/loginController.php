@@ -124,62 +124,6 @@ class loginController extends Controller
     //     }
     // }
 
-
-    function create(Request $req, $token)
-    {
-        $ret = ApiHelpers::ret();
-
-        $cookieExpiration = 30 * 24 * 60;
-        $cookie = Cookie::make('token', $token, $cookieExpiration);
-        $response = response('hello cookie')->withCookie($cookie);
-        // $response = redirect("/get/profile");
-        return $response;
-    }
-    function get(Request $req)
-    {
-        $ret = ApiHelpers::ret();
-
-        $passwordUpdated = LogAction::where('user_id', auth()->id())
-            ->where('action_type', 'password_changed')
-            ->latest('created_at')
-            ->first();
-
-        $receiptRead = LogAction::where('user_id', auth()->id())
-            ->where('action_type', 'receipt_read') // corrected the action_type
-            ->latest('created_at')
-            ->first();
-
-        $logAction = LogAction::where('user_id', auth()->id())
-            ->where('action_type', 'login_success')
-            ->latest('created_at')
-            ->first();
-        $activities = [
-            $logAction,
-            $passwordUpdated,
-            $receiptRead
-        ];
-
-        $response  = request()->cookie('token');
-        // $response = auth()->id();
-        // Send the response to the client
-        // dd($logction);
-        return ['activities' => $activities];
-    }
-    function read_receipt(Request $req, $id)
-    {
-        try {
-            $ret = ApiHelpers::ret();
-            $user = User::where(['user_id' => $id])->first();
-            $response = LoginHelper::log_action($req, $user, true, 'receipt_read','Receipt Read');
-            $ret->trace .= 'receipt_read, ';
-
-            $response = SendResponse::SendResponse($ret, 'success', 'receipt_read');
-            return $response;
-        } catch (\Exception $e) {
-            return ApiHelpers::serverError($e);
-        }
-    }
-
     // user logout function----------------------->
     public function logout(Request $req)
     {

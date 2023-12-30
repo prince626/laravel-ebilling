@@ -2,23 +2,13 @@
 
 @section('content')
 <main id="main" class="main">
-    @if(!$invoices || count($invoices) === 0)
-
-    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-        <h1>302</h1>
-        <h2>User Has no Invoices</h2>
-        {{-- <a class="btn" href="index.html">Back to home</a> --}}
-        <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
-
-    </section>
-
-    @else
+  
     <div class="pagetitle">
         <h1>My Invoices</h1>
         <nav class="pt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active" style="cursor: pointer;">Invoices</li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard" class="active">Dashboard</a></li>
+                <li class="breadcrumb-item " >Invoices</li>
             </ol>
         </nav>
     </div>
@@ -122,82 +112,85 @@
 
 
     <div class="container-fluid">
-        @if(!$invoices || count($invoices) === 0)
-        <div class="container">
+        
+       
+        <div class="card">
+            <div class="card-header" style="border: none">
+                <div class="card-title">
+                    <h5 class="card-label text-dark fw-medium"> Invoices List
+                        <span class="d-block text-muted pt-2 font-size-sm"> You can View and download Subscription Invoice Here</span></h5>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {{-- <table class="table datatable" id="dataTable" width="100%" cellspacing="0"> --}}
 
-            <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-                <h1>302</h1>
-                <h2>User Has no Invoices</h2>
-                {{-- <a class="btn" href="index.html">Back to home</a> --}}
-                <img src="{{asset('assets/img/not-found.svg')}}" class="img-fluid py-5" alt="Page Not Found">
+                        <table id="example" class="table nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">Invoice Number</th>
+                                {{-- <th scope="col">User ID</th> --}}
+                                {{-- <th scope="col">Subscription ID</th> --}}
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                {{-- <th scope="col">Invoice Date</th> --}}
+                                <th scope="col">Software</th>
+                                <th scope="col"> Amount</th>
+                                <th scope="col">PaymentStatus</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Action</th>
 
-            </section>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (isset($invoices) && count($invoices) > 0)
+                            @foreach ($invoices as $invoice)
+                            <tr>
+                                <td class="align-middle"><strong>#{{ $invoice->invoice_number }}</strong></td>
+                                {{-- <td>#{{ $invoice->user_id }}</td> --}}
+                                {{-- <td>#{{ $invoice->subs_id }}</td> --}}
+                                <td class="align-middle">{{ $invoice->email }}</td>
+                                <td class="align-middle">{{ $invoice->phone }}</td>
 
-        </div>
-        @else
-
-        <div class="table-responsive">
-            {{-- <table class="table datatable" id="dataTable" width="100%" cellspacing="0"> --}}
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Invoice Number</th>
-                        {{-- <th scope="col">User ID</th> --}}
-                        {{-- <th scope="col">Subscription ID</th> --}}
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        {{-- <th scope="col">Invoice Date</th> --}}
-                        <th scope="col">Software</th>
-                        <th scope="col"> Amount</th>
-                        <th scope="col">PaymentStatus</th>
-                        <th scope="col">Due Date</th>
-                        <th scope="col">Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($invoices as $invoice)
-                    <tr>
-                        <td class="align-middle"><strong>#{{ $invoice->invoice_number }}</strong></td>
-                        {{-- <td>#{{ $invoice->user_id }}</td> --}}
-                        {{-- <td>#{{ $invoice->subs_id }}</td> --}}
-                        <td class="align-middle">{{ $invoice->email }}</td>
-                        <td class="align-middle">{{ $invoice->phone }}</td>
-
-                        {{-- <td>{{ $invoice->invoice_date }}</td> --}}
-                        <td class="align-middle">{{ $invoice->software }}</td>
-                        <td class="align-middle"><strong>₹{{ $invoice->amount }}</strong></td>
-                        <td class="align-middle">
-                            @if ($invoice->paymentStatus === 'paid')
-                            <span class="text-light bg-success " style="
+                                {{-- <td>{{ $invoice->invoice_date }}</td> --}}
+                                <td class="align-middle">{{ $invoice->software }}</td>
+                                <td class="align-middle"><strong>₹{{ $invoice->amount }}</strong></td>
+                                <td class="align-middle">
+                                    @if ($invoice->paymentStatus === 'paid')
+                                    <span class="text-light bg-success " style="
                         padding:4px 12px;border-radius:8px;;">Paid</span>
-                            @elseif($invoice->paymentStatus === 'pending')
-                            <span class="text-light bg-danger " style="
+                                    @elseif($invoice->paymentStatus === 'pending')
+                                    <span class="text-light bg-danger " style="
                         padding:4px 8px;border-radius:8px;">Unpaid</span>
+                                    @else
+                                    <strong class="text-danger">{{$invoice->paymentStatus}}</button>
+                                        @endif
+                                </td>
+                                <td class="align-middle">{{ $invoice->due_date }}</td>
+                                {{-- <td><i class="fa-solid fa-trash-can text-danger m-1" data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" style="cursor: pointer;font-size:25px;"></i>
+                                </td> --}}
+                                <td class="align-middle">
+                                    <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
+                                        <span class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}" class=""><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                        <span data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" class=""><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+                                        <span onclick="downloadInvoiceData({{json_encode($invoice)}})" class=""><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+                            @endforeach
                             @else
-                            <strong class="text-danger">{{$invoice->paymentStatus}}</button>
-                                @endif
-                        </td>
-                        <td class="align-middle">{{ $invoice->due_date }}</td>
-                        {{-- <td><i class="fa-solid fa-trash-can text-danger m-1" data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" style="cursor: pointer;font-size:25px;"></i>
-                        </td> --}}
-                        <td class="align-middle">
-                            <div class="d-flex " style="width: 130px;justify-content: space-evenly;">
-                                <span class="" data-bs-toggle="modal" data-bs-target="#exampleView{{ $invoice->invoice_number }}" class=""><i class="bi bi-eye-slash text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                                <span data-bs-toggle="modal" data-bs-target="#invoiceModal{{ $invoice->invoice_number }}" class=""><i class="bi bi-trash text-danger fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-                                <span onclick="downloadInvoiceData({{json_encode($invoice)}})" class=""><i class="bi bi-cloud-arrow-down-fill text-primary fs-4" style="cursor: pointer;"></i><a class="dropdown-item" href="#"></a></span>
-
-                            </div>
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            <tr style="text-align: center;">
+                                <td colspan="8">Not Found</td>
+                            </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        @endif
-
+        @if (isset($invoices) && count($invoices) > 0)
         @foreach ($invoices as $invoice)
         <div class="php-email-form modal fade" id="invoiceModal{{ $invoice->invoice_number }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -674,6 +667,5 @@
 
     </script>
     @endif
-
 </main>
 @endsection

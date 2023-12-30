@@ -8,12 +8,18 @@
     <title>My Dashboard</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link href="https://fonts.gstatic.com" rel="preconnect"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"> --}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
 
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
@@ -35,11 +41,7 @@
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
+
 
                 <li class="nav-item dropdown">
 
@@ -62,9 +64,13 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        @php
+                        $counter = 0;
+                        @endphp
+
                         @foreach ($messageCount as $message)
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-{{ $message->type }}"></i>
+                        @if ($counter < 5) <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-@if($message->type == 'success')success @elseif($message->type == 'info')blue @elseif($message->type == 'alert')danger @elseif($message->type == 'warning')warning @endif"></i>
                             <div>
                                 <h4>{{ $message->email }}</h4>
                                 <p>{{ $message->message }}</p>
@@ -85,28 +91,34 @@
                                     Just now
                                     @endif</p>
                             </div>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        @endforeach
+                </li>
+                @php
+                $counter++;
+                @endphp
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                @else
+                @break
+                @endif
+                @endforeach
 
 
-                        <li class="dropdown-footer">
-                            <a href="/api/user/notifications">Show all notifications</a>
-                        </li>
-                        @else
-                        <li class="dropdown-header">
-                            You have no new notifications
-                            <a href="/api/user/notifications"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                <li class="dropdown-footer">
+                    <a href="/api/user/notifications" class="text-dark">Show all notifications</a>
+                </li>
+                @else
+                <li class="dropdown-header">
+                    You have no new notifications
+                    <a href="/api/user/notifications"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
 
-                        </li>
-                        @endif
-                    </ul><!-- End Notification Dropdown Items -->
+                </li>
+                @endif
+            </ul><!-- End Notification Dropdown Items -->
 
-                </li><!-- End Notification Nav -->
+            </li><!-- End Notification Nav -->
 
-                {{-- <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-chat-left-text"></i>
@@ -139,34 +151,34 @@
                         <li class="message-item">
                             <a href="#">
                                 <img src="{{asset('assets/img/messages-2.jpg')}}" alt="" class="rounded-circle">
-                <div>
-                    <h4>Anna Nelson</h4>
-                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                    <p>6 hrs. ago</p>
-                </div>
+            <div>
+                <h4>Anna Nelson</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>6 hrs. ago</p>
+            </div>
+            </a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+                <a href="#">
+                    <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                    <div>
+                        <h4>David Muldon</h4>
+                        <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                        <p>8 hrs. ago</p>
+                    </div>
                 </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
 
-                <li class="message-item">
-                    <a href="#">
-                        <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                        <div>
-                            <h4>David Muldon</h4>
-                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                            <p>8 hrs. ago</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-
-                <li class="dropdown-footer">
-                    <a href="#">Show all messages</a>
-                </li>
+            <li class="dropdown-footer">
+                <a href="#">Show all messages</a>
+            </li>
 
             </ul><!-- End Messages Dropdown Items -->
 
@@ -477,8 +489,10 @@
     <div class="toast__container" style="">
         <div class="toast__cell">
             @foreach ($messageCount as $message)
-            {{-- <div class="toast toast--green"> --}}
-            <div class="toast  @if($message->type == 'success') toast--green add-margin @elseif($message->type == 'info') toast--blue add-margin @elseif($message->type == 'alert') toast--red add-margin @elseif($message->type == 'warning') toast--yellow add-margin @endif"  >
+            @php
+            $createdAt = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $message->created_at, 'Asia/Kolkata');
+            $timeDifference = $createdAt->diffInMinutes(\Carbon\Carbon::now('Asia/Kolkata'));
+            $newMessage=$timeDifference < 20; @endphp @if ($newMessage) <div class="toast  @if($message->type == 'success') toast--green add-margin @elseif($message->type == 'info') toast--blue add-margin @elseif($message->type == 'alert') toast--red add-margin @elseif($message->type == 'warning') toast--yellow add-margin @endif">
                 <div class="toast__icon">
                     <i class="bi @if($message->type == 'success') bi-check-lg  @elseif($message->type == 'info') bi-info  @elseif($message->type == 'alert') bi-exclamation-circle @elseif($message->type == 'warning') bi-exclamation @endif  text-light" style="font-size: px;"></i>
                 </div>
@@ -489,15 +503,15 @@
                         <div class="notiError text-danger"></div>
                     </div>
                     <div class="toast__close">
-                        <a href="/api/user/read/{{$message->sno}}" class="activateAction"> <i class="bi bi-x" style="font-size: 50px"></i></a>
+                        <a href="/api/user/alert/read/{{$message->sno}}" class="activateAction"> <i class="bi bi-x" style="font-size: 50px"></i></a>
                     </div>
                 </div>
-
-
-            </div>
-            @endforeach
         </div>
-        <div id="snackbar"></div>
+        @endif
+
+        @endforeach
+    </div>
+    <div id="snackbar"></div>
 
     </div>
 
@@ -524,20 +538,57 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            new DataTable('#exampleTable', {
+                fixedHeader: true
+                , "stripe": false
+
+                , responsive: true
+            });
+            new DataTable('#example', {
+                fixedHeader: true
+                , "stripe": false
+
+                , responsive: true
+            });
+
+            $('.dataTables_empty').text('No Records Found');
+
+        });
+
+    </script>
+
     <!-- Include Select2 CSS -->
 
     <!-- Include jQuery -->
 
     <!-- Include Select2 JS -->
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.dataTable').DataTable();
         });
-       
-    </script>
 
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                // Your DataTables initialization options here
+            });
+
+            // Change the text content using jQuery
+            $('.dataTables_empty').text('No Records Found');
+        });
+
+    </script> --}}
+
+    <script>
+
+    </script>
 </body>
 
 </html>

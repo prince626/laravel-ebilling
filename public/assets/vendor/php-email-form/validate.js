@@ -80,7 +80,7 @@
             // window.location.href = 'http://localhost:8000/api/user/get_tickets'; 
           }
         } else {
-          throw new Error(data ?  data.data : 'Form submission failed and no error message returned from: ' + action);
+          throw new Error(data ? data.data : 'Form submission failed and no error message returned from: ' + action);
         }
       })
       .catch((error) => {
@@ -103,24 +103,23 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   var activateButtons = document.querySelectorAll('.activateAction');
-  activateButtons.forEach(function (button) {
-    button.addEventListener('click', function (event) {
+  activateButtons.forEach(async function (button) {
+    button.addEventListener('click', async function (event) {
       event.preventDefault(); // Prevent the default behavior of the link
+      try {
+        const response = await fetch(this.href);
+        const data = await response.json();
 
-      fetch(this.href)
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            window.location.reload();
-          } else {
-            // Handle non-successful response
-            showSnackbar(data.status, data.data);
-          }
-        })
-        .catch(error => {
-          showSnackbar('Fetch Error: ', error.message);
-          console.log(error.message)
-        });
+        if (data.success) {
+          window.location.reload();
+        } else {
+          // Handle non-successful response
+          showSnackbar(data.status, data.data);
+        }
+      } catch (error) {
+        showSnackbar('Fetch Error: ', error.message);
+        console.log(error.message);
+      }
     });
   });
 

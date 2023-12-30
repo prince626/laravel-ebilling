@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Cookie;
 
 class signupController extends Controller
 {
+    // User Signup--------------->
+    
     public function signUp(Request $req)
     {
         try {
@@ -48,6 +50,8 @@ class signupController extends Controller
             return ApiHelpers::serverError($e);
         }
     }
+
+    // edit singup data and resend Otp------------->
     function edit_signup(Request $req)
     {
         try {

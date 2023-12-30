@@ -12,17 +12,18 @@
     @if($software && $categories && $pricings && $validities && $user &&$addons )
 
     <div class="container-fluid ">
-        <div class="bg-warning  py-4 px-4 text-light" style="span:not(:last-child) {
+        <div class="bg-warning  py-4 px-4 text-light select-page-title" style="span:not(:last-child) {
             margin-right: 10px;">
             <h4 class="text-center">Seamless Transactions, Elevated Experiences: Your Software, Your Way</h4>
             <p class="text-center">Unlock the full potential of our software with a simple payment. Begin your journey today and enjoy enchanced features and endless possibilities.</p>
-            <div class="text-center"><span class="me-2 "><a href="/api/user/dashboard" class="text-light"><i class="bi bi-house-fill"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
+            <div class="text-center page-title-breadcrumbs"><span class="me-2 "><a href="/api/user/dashboard" class="text-light"><i class="bi bi-house-fill"></i></a></span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span class="me-2">Detail</span><span class="me-2"><i class="bi bi-chevron-double-right"></i></span><span>payment</span></div>
         </div>
 
         <form action='/api/user/subs/{{ $user->token }}' method="POST" class="php-email-form mt-4">
             @csrf
             <div class=" justify-content-center select_subscription">
                 <div class="bg-white p-3 mx-1">
+                    <div class="px-2">
                     <h5 class="font-bold">Select Software</h5>
                     <select class=" form-select" name="software" required aria-label="Default select example" id="softwareSelect">
                         <option value="">Select</option>
@@ -32,8 +33,9 @@
                         @endforeach
                     </select>
                 </div>
+                </div>
                 <div class="bg-white row mt-4 mx-1 bg-light p-3">
-                    <div class="col-md-4">
+                    <div class="col-md-4 pt-3">
                         <h5>Select Businesss Category</h5>
                         <select class=" form-select" id="category" name="businessCategory" required aria-label="Default select example" required>
                             <option name="businessCategory" value="">SELECT</option>
@@ -57,7 +59,7 @@
                     @endforeach
                     </select>
                 </div> --}}
-                <div class="col-md-4">
+                <div class="col-md-4 pt-3">
                     <h5 class="" >Select Your Plan</h5>
                     <select class="form-select" id="plan" name="plan" style="" required aria-label="Default select example" required>
                         <option value="null">SELECT</option>
@@ -74,7 +76,7 @@
                 </select>
             </div> --}}
             {{-- </div> --}}
-            <div class="col-md-4">
+            <div class="col-md-4 pt-3">
                 {{-- <div class="row"> --}}
                 <h5>Duration</h5>
                 <select class="form-select" id="duration" name="duration" required aria-label="Default select example" required>
@@ -83,7 +85,7 @@
                 {{-- </div> --}}
             </div>
     </div>
-    <div class="row mt-4 bg-white  mx-1 p-4" style="align-items: center">
+    <div class="row mt-4 bg-white  mx-1 p-3" style="align-items: center">
         <div class="col-md-2">
             <h5 id="categoryId">Addons</h5>
         </div>
@@ -100,21 +102,21 @@
                 <option class="custom" -bg value="null">SELECT</option>
             </select>
         </div>
-        <div class="col-md-3 text-end">
-            <p class="text-warning" id="seeSomeAddons" style="cursor:pointer;"><span class="text-warning" style="text-decoration: underline;">See Some Addons </span><i class="bi bi-plus text-light bg-warning m-1 px-1"></i> </p>
+        <div class="col-md-3 text-end pt-3">
+            <p class="text-warning" id="seeSomeAddons" style="cursor:pointer;"><span class="text-warning" style="text-decoration: underline;font-size: 14px;">See Some Addons </span><i class="bi bi-plus text-light bg-warning m-1 px-1 rounded"></i> </p>
         </div>
 
     </div>
     <div class="chooseplan bg-white mt-4  p-4">
         <div class=" afteraddons" style="display: none;">
             <h5>Selected Addons</h5>
-            <p style="font-size: 16px;">Addons : <span id="addonsName">Not Selected</span></p>
+            <p style="font-size: 14px;">Addons : <span id="addonsName">Not Selected</span></p>
             <div class="row">
                 <div class="col-md-10">
                     <p class="" style="font-size: 16px;"><span id="addonsdescription1" class="m-2"></span><span id="addonsdescription2" class="m-2"></span></p>
                 </div>
                 <div class="col-md-2">
-                    <p class="btn btn-warning text-end float-end text-light" id="addonsAmount">Not Selected</p>
+                    <p class="btn btn-warning text-end float-end text-light text-center" id="addonsAmount">Not Selected</p>
                 </div>
             </div>
             <hr>
@@ -122,7 +124,7 @@
         </div>
         <div class=" beforeplans" style="display: none;">
             <h5 class="text-bold">Selected Plan</h5>
-            <p>Enjoy plan with the following features and benefits</p>
+            <p style="font-size: 14px;">Enjoy plan with the following features and benefits</p>
             <div class="row">
                 <div class="col-md-10">
                     <p class="" style="font-size: 16px;"><span id="description1" class="m-2"></span><span id="description2" class="m-2"></span><span id="description3" class="m-2"></span><span id="description4" class="m-2"></span></p>
@@ -139,9 +141,9 @@
         <div class="afterselectedAmount" >
             {{-- <h4>Selected Payment</h4> --}}
             <h5>Total :-</h5>
-            <div class="row" style="align-items:center;">
+            <div class="d-flex" style="align-items:center;justify-content: space-between;">
                 <div class="col-md-9 mt-0">
-                    <p> <a href="#kitaction" class="text-warning fw-bold">Have A kit code ?</a></p>
+                    <p> <a href="#kitaction" class="text-warning fw-bold" style="font-size: medium;">Have A kit code ?</a></p>
                 </div>
                 <div class="col-md-3">
                     <p class="btn btn-warning text-light text-end float-end " id="selectedAmount">INR</p>
@@ -151,7 +153,7 @@
 
         </div>
         <div class="form-check  ">
-            <input class="form-check-input" name="accept" type="checkbox" value="accept" id="flexCheckDefault" required>
+            <input class="form-check-input" name="accept" type="checkbox" value="accept" id="flexCheckDefault" required style="font-size: 14px;">
             <label class="form-check-label" for="flexCheckDefault" style="font-size: 14px;">
                 I Agree with the terms and Condition
             </label>
@@ -167,12 +169,12 @@
             <div class="col-md-8 mt-2">
                 <p class="" style="font-size: 16px;">Choose from a variety of secure options to complete your transaction with confidence</p>
             </div>
-            <div class="col-md-4 ">
+            <div class="col-md-4 text-end" style="">
 
-                <button type="button" class="btn btn-warning float-end text-light" data-bs-toggle="modal" data-bs-target="#paymentModal3">
+                <button type="button" class="btn btn-warning mt-2 text-center text-light" data-bs-toggle="modal" data-bs-target="#paymentModal3">
                     Pay Later
                 </button>
-                <button class="btn btn-warning text-end me-2 float-end text-light" id="showChooseMethod">Choose Method</button>
+                <button class="btn btn-warning  mt-2 text-center  text-light" id="showChooseMethod">Choose Method</button>
             </div>
         </div>
         <div class=" chooseMethod" style="display: none;">
@@ -364,19 +366,19 @@
         {{-- <h4>Selected Payment</h4> --}}
         <h5>Activate by kit</h5>
         <div class="row">
-            <div class="col-md-9 mt-2">
+            <div class="col-md-9">
                 <p class="" style="font-size: 16px;">Scratch your key kit and enter your key code</p>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-warning text-end float-end text-light" id="openkitform">Enter your Code</button>
+                <button class="btn btn-warning text-center float-end text-light" id="openkitform">Enter your Code</button>
             </div>
         </div>
         <div class="row kitform" style="display: none;height:100px">
             {{-- <hr> --}}
 
-            <form action="/api/user/activate" method="POST" class="php-email-form">
+            <form action="/api/user/activate" method="POST" class="php-email-form mt-3">
                 @csrf
-                <div class="mb-3">
+                <div class="mb-2">
                     {{-- <label for="Username">Enter kit Code<span class="text-danger">*</span></label> --}}
                     <input type="text" name="kit" required class="form-control" id="kit" placeholder="Enter Kit Code">
                 </div>
@@ -386,9 +388,9 @@
                     <div class="sent-message">
                         <span class="dynamic-message">Your message has been sent. Thank you!</span>
                     </div>
+                    <button type="submit" class="btn btn-success m-2 col-md-2 ">Acivate</button>
 
                 </div>
-                <button type="submit" class="btn btn-success m-2 col-md-2 ">Acivate</button>
 
             </form>
         </div>

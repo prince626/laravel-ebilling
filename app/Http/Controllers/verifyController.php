@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 
 class verifyController extends Controller
 {
+
+    // verify User -------------------->
     public function verify(Request $req, $token)
     {
         try {

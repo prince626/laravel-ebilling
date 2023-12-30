@@ -31,10 +31,7 @@ class updateController extends Controller
                 }
                 $existingUser = User::where('email', '=', $req->email)->where('user_id', '!=', $id)->first();
                 $existingphone = User::where('phone', '=', $req->phone)->where('user_id', '!=', $id)->first();
-                // $matchCode = categorycode::where('category_code', $req->category)->first();
-                // if (!$matchCode) {
-                //     return SendResponse::jsonError($ret, 'Intigrity_error', 'category');
-                // }
+                
                 if ($existingUser) {
                     return SendResponse::jsonError($ret, 'Integrity_error', 'Email already in use by another user');
                 }
@@ -42,9 +39,8 @@ class updateController extends Controller
                     return SendResponse::jsonError($ret, 'Integrity_error', 'Phone No already in use by another user');
                 }
                 $ret->trace .= 'Intigrity_check, ';
-                $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
 
-                $user = UpdateHelper::loginUpdateUser($user, $req, $salt);
+                $user = UpdateHelper::loginUpdateUser($user, $req);
 
                 $ret->trace .= 'Data_updated, ';
                 UpdateHelper::notification($req, 'isUser', $user, 'User profile data has been update successfully', 'success');

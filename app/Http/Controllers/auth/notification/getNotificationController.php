@@ -64,8 +64,8 @@ class getNotificationController extends Controller
             $user->status = 'read';
             $user->save();
             $ret->trace .= 'notification_updated, ';
-            $response = SendResponse::SendResponse($ret, 'Success', $user);
-            // $response = redirect('api/user/notifications');
+            $response = SendResponse::SendResponse($ret, 'Success','read');
+            $response = redirect('api/user/notifications');
             return $response;
         }
     }
@@ -83,7 +83,7 @@ class getNotificationController extends Controller
             $user->save();
             $ret->trace .= 'notifications_read, ';
 
-            $response = SendResponse::SendResponse($ret, 'Success', $user);
+            $response = SendResponse::SendResponse($ret, 'Success', 'read');
             // $response = redirect('api/user/get/dashboard');
             return $response;
         }
@@ -123,15 +123,11 @@ class getNotificationController extends Controller
         // Find all notifications for the specified user
         $activity = logaction::where('user_id', auth()->id())->get();
 
-        if ($activity->isEmpty()) {
-            return SendResponse::jsonError($ret, 'Integrity_error', 'user not found');
-        } else {
-            $ret->trace .= 'Integrity_Check, ';
-            $response = SendResponse::SendResponse($ret, 'Success', $activity);
+        $ret->trace .= 'Integrity_Check, ';
+        $response = SendResponse::SendResponse($ret, 'Success', $activity);
 
-            // Redirect the user to the notifications page
-            $response = view('user.activity')->with(['activity' => $activity]);
-            return $response;
-        }
+        // Redirect the user to the notifications page
+        $response = view('user.activity')->with(['activity' => $activity]);
+        return $response;
     }
 }

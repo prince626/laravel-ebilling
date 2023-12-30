@@ -92,7 +92,6 @@ class paymentController extends Controller
                 return $response;
             }
             $response = UpdateHelper::notification($req, 'isUser', $subscription, 'subscription_failed', 'alert');
-
             $response = SendResponse::jsonError($ret, 'Payment_failed.', 'payment_not_succeed');
             // $response = redirect('/subscription');
             $ret->trace .= 'Database_inserted, ';

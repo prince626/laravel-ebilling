@@ -41,8 +41,8 @@
         <h1>Create Ticket</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/api/user/dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item active">Support & Ticket</li>
+                <li class="breadcrumb-item"><a href="/api/user/dashboard" class="active">Dashboard</a></li>
+                <li class="breadcrumb-item ">Support & Ticket</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

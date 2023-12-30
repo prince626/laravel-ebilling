@@ -84,7 +84,7 @@ class createTicketController extends Controller
             'message' => $request->input('message'),
             'status' => 'unread',
         ]);
-        UpdateHelper::notification($request, 'isUser', $tickets, $request->input('message'), 'success');
+        // UpdateHelper::notification($request, 'isUser', $tickets, $request->input('message'), 'success');
         $ret->trace .= 'database_inserted, ';
         $response =  SendResponse::sendResponse($ret, 'send message successfully', $tickets);
         // $response = redirect('/api/user/userChat/' . $id)->with('success', 'Message sent successfully');

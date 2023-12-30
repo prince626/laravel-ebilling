@@ -214,7 +214,7 @@ class updateSubscription extends Controller
 
             if ($subsHistory) {
                 $subscription->startDate = $now;
-                $subscription->amount = $amount;
+                $subscription->amount =intval($amount);
                 $subscription->subscriptionType = $req->addons && $addons ? $addons->name : null;
                 $subscription->expiryDate = $expiryDate;
                 $subscription->Duration = $userDuration;

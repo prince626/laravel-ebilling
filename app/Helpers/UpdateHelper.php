@@ -62,7 +62,7 @@ class UpdateHelper
         $user->save();
         return $user;
     }
-    public static function loginUpdateUser($user, $req, $salt)
+    public static function loginUpdateUser($user, $req)
     {
         $user->name = $req->name;
         $user->companyName = $req->companyName;
