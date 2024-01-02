@@ -38,20 +38,20 @@
                                 <ul class="fa-ul m-auto" style="font-size: 14px;">
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>1 Biller / Location</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Users / Devices</li>
-                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 </ul>
-                                <div class="d-grid">
-                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                                <div class="d-grid pt-3">
+                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Plus Tier -->
-                    <div class="col-lg-4">
-                        <div class="card mb-5 mb-lg-0 pb-3 pricing-card">
+                    <div class="col-lg-4 ">
+                        <div class="card mb-5 mb-lg-0 pb-3  pricing-card">
                             <div class="card-body ">
                                 <h5 class="card-title  text-center fs-2">Multi Store</h5>
                                 <p style="
@@ -72,12 +72,12 @@
                                 <ul class="fa-ul m-auto" style="font-size: 14px;">
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Biller / Location</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Users / Devices</li>
-                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 </ul>
-                                <div class="d-grid">
-                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                                <div class="d-grid pt-3">
+                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                                 </div>
                             </div>
@@ -106,12 +106,12 @@
                                 <ul class="fa-ul text-center m-auto" style="font-size: 14px;">
                                     <li class=""><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Biller / Location</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Unlimited Users / Devices</li>
-                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                     <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                    <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 </ul>
-                                <div class="d-grid">
-                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                                <div class="d-grid pt-3">
+                                    <a href="/api/user/plans/selectplans"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                                 </div>
                             </div>

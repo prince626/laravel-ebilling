@@ -30,7 +30,7 @@ class UpdateHelper
     }
     public static function createNewUser(Request $req, $token)
     {
-        $salt ='Rg6vd360a78c6da7QMCIdbUOdk';
+        $salt = env('MY_HASHING_SALT');
         $randomId = mt_rand(10000, 99999);
         $emailOtp = 12345;
         $phoneOtp = 12345;
@@ -50,7 +50,7 @@ class UpdateHelper
     }
     public static function updateUser($user, $request, $createToken, $salt, $emailOtp, $phoneOtp)
     {
-        $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+        $salt = env('MY_HASHING_SALT');
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;

@@ -73,7 +73,7 @@ class signupController extends Controller
             }
             $ret->trace .= 'Intigrity_check, ';
 
-            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = env('MY_HASHING_SALT');
             $emailOtp = 12345;
             $phoneOtp = 12345;
             $createToken = HashHelper::createCustomToken();

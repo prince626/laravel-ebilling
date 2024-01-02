@@ -37,8 +37,8 @@ class loginController extends Controller
             $ret->trace .= 'validated, ';
 
             $user = User::where(['email' => $req->email])->first();
-            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
-
+            // $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = env('MY_HASHING_SALT');
             if (!$user) {
                 return SendResponse::jsonError($ret, 'Integrity_error', 'User Not Valid');
             }

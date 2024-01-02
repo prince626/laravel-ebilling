@@ -104,7 +104,9 @@ Route::post('/contact', [contactController::class, 'contact']);
 
 Route::middleware(['auth:api'])->prefix('user')->group(function () {
 
+    Route::get('/plans/{name}', [planController::class, 'all_plans']);
 
+    
     Route::get('/get', [loginController::class, 'get']);
 
     Route::get('/contact', function () {

@@ -61,7 +61,7 @@ class forgetPasswordController extends Controller
             if (!$user) {
                 return SendResponse::jsonError($ret, 'Integrity_error', 'User Not Found');
             }
-            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = env('MY_HASHING_SALT');
 
             if (HashHelper::verifyWithSalt($req->currentPassword, $user->password, $salt)) {
                 // $hashPassword = HashHelper::encrypt($req->password);
@@ -120,7 +120,8 @@ class forgetPasswordController extends Controller
             $ret->trace .= 'Intigrity_check, ';
 
             $createToken =  HashHelper::createCustomToken();
-            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = env('MY_HASHING_SALT');
+            
             $emailOtp = 12345;
             $phoneOtp = 12345;
             $user->save([
@@ -171,7 +172,7 @@ class forgetPasswordController extends Controller
                 return ApiHelpers::validationError($validator->errors(), $ret);
             }
             $ret->trace .= 'validated, ';
-            $salt = 'Rg6vd360a78c6da7QMCIdbUOdk';
+            $salt = env('MY_HASHING_SALT');
             // $hashmobilelOtp = HashHelper::hashWithSalt($req->mobileOtp, $salt);
             // $hashemailOtp = HashHelper::hashWithSalt($req->emailOtp, $salt);
 

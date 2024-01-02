@@ -114,12 +114,12 @@
                             <ul class="fa-ul m-auto" style="font-size: 14px;">
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>1 Biller / Location</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Users / Devices</li>
-                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                             </ul>
-                            <div class="d-grid">
-                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                            <div class="d-grid pt-3">
+                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                             </div>
                         </div>
@@ -148,12 +148,12 @@
                             <ul class="fa-ul m-auto" style="font-size: 14px;">
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>3 Biller / Location</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Users / Devices</li>
-                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                             </ul>
-                            <div class="d-grid">
-                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                            <div class="d-grid pt-3">
+                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                             </div>
                         </div>
@@ -182,12 +182,12 @@
                             <ul class="fa-ul text-center m-auto" style="font-size: 14px;">
                                 <li class=""><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 Biller / Location</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Unlimited Users / Devices</li>
-                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>10 GB Disk Space</li>
                                 <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Monthly Bandwidth</li>
+                                <li><i class="bi bi-check-lg fs-5 text-success fw-bolder p-1"></i>Powerful Admin Panel</li>
                             </ul>
-                            <div class="d-grid">
-                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Get Started Now</button></a>
+                            <div class="d-grid pt-3">
+                                <a href="/api/user/user_update_plan/{{$subscription->subs_id}}"><button class="btn btn-warning text-light">Buy Now</button></a>
 
                             </div>
                         </div>

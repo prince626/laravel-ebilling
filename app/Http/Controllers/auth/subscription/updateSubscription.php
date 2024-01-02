@@ -127,7 +127,7 @@ class updateSubscription extends Controller
                 }
 
                 $discountAmount = $amount - $refundAmount;
-
+                $expiryDate = is_string($expiryDate) ? Carbon::parse($expiryDate) : $expiryDate;
                 // $createSubscription = [
                 //     'user_id' => $subscription->user_id,
                 //     'subs_id' => $subscription->subs_id,
@@ -203,7 +203,7 @@ class updateSubscription extends Controller
             $now = Carbon::now('Asia/Kolkata')->format('Y-m-d'); // Current date and time
             $updateexpiryDate = Carbon::parse($subscription->expiryDate);
             $updateduration = $updateexpiryDate->diffInDays($now);
-            
+
             if ($now > $updateexpiryDate) {
                 $expiryDate->addDays(0);
             } else {
@@ -214,7 +214,7 @@ class updateSubscription extends Controller
 
             if ($subsHistory) {
                 $subscription->startDate = $now;
-                $subscription->amount =intval($amount);
+                $subscription->amount = intval($amount);
                 $subscription->subscriptionType = $req->addons && $addons ? $addons->name : null;
                 $subscription->expiryDate = $expiryDate;
                 $subscription->Duration = $userDuration;

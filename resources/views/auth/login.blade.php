@@ -188,12 +188,9 @@
                             thisForm.querySelector('.sent-message').classList.add('d-block');
 
                             if (data.status == 'success') {
-                                // console.log(data.data.token);
-                                // document.cookie = `token=${data.data.token}; path=http://localhost:8000/;`;
+
                                 window.location.href = `http://localhost:8000/api/user/dashboard`;
-                                // setTimeout(function() {
-                                //     window.location.href = 'http://localhost:8000/invoices';
-                                // }, 1000);
+
                             }
                             // else {
                             //     thisForm.reset();
@@ -201,7 +198,12 @@
                             //     // window.location.href = 'http://localhost:8000/api/user/get_tickets'; 
                             // }
                         } else {
-                            throw new Error(data ? data.status + ' ' + data.data : 'Form submission failed and no error message returned from: ' + action);
+                            displayError(thisForm, `${data.status}: ${data.data}, Attempts Remaining: ${data.attempts_remaining?data.attempts_remaining:'5'}/5`);
+                            setTimeout(function() {
+                                thisForm.querySelector('.error-message').innerHTML = null;
+                                thisForm.querySelector('.error-message').classList.remove('d-block');
+                            }, 3000);
+                            // throw new Error(data ? data.status + ' ' + data.data : 'Form submission failed and no error message returned from: ' + action);
                         }
                     })
                     .catch((error) => {

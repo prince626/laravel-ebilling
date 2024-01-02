@@ -120,6 +120,8 @@ class SubscriptionHelper
     }
     public static function update_subscriptionHistory($req, $plan, $subscription, $addons, $userDuration, $expiryDate, $userDurationType, $businessCategory, $amount)
     {
+        $expiryDate = is_string($expiryDate) ? Carbon::parse($expiryDate) : $expiryDate;
+
         $now = Carbon::now('Asia/Kolkata')->format('Y-m-d');
         $subsHistory = subscriptionhistory::create([
             'user_id' => $subscription->user_id,

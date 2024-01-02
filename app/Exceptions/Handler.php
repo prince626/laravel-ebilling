@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ApiHelpers;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,4 +49,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    // public function render($request, Throwable $exception)
+    // {
+       
+    //     if ($exception instanceof ThrottleRequestsException) {
+    //         $headers = $exception->getHeaders();
+    //         $attemptsRemaining = $headers['X-RateLimit-Remaining'] ?? null; 
+            
+            
+
+    //         return response()->json([
+    //             'error' => 'Rate limit exceeded. Please try again later.',
+    //             'attempts_remaining' => $attemptsRemaining,
+    //         ], 429);
+    //     }
+
+    //     return parent::render($request, $exception);
+    // }
 }

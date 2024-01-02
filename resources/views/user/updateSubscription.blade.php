@@ -54,7 +54,7 @@
                 <div class="col-md-4">
                     <h5>Select Your Plan</h5>
                     <select class="form-select" id="plan" name="plan" style="" required aria-label="Default select example" required>
-                        <option value="null">SELECT</option>
+                        <option value="null">First Select Category</option>
                     </select>
                 </div>
                 {{-- <div class="col-md-4">
@@ -71,7 +71,7 @@
     <div class="col-md-4">
             <h5>Duration</h5>
             <select class="form-select" id="duration" name="duration" required aria-label="Default select example" required>
-                <option value="null">SELECT</option>
+                <option value="null">First Select Plan</option>
             </select>
     </div>
     </div>
@@ -89,7 +89,7 @@
         </div> --}}
         <div class="col-md-7 ">
             <select class="form-select" id="addons" name="addons" aria-label="Default select example" required>
-                <option value="null">SELECT</option>
+                <option value="null">First Select Duration</option>
             </select>
         </div>
         <div class="col-md-3 text-end pt-3">
@@ -200,7 +200,7 @@
                     <div class="container p-0">
                         <div class="card px-4">
                             <p class="h2 py-3">Payment Details</p>
-                            <div class="box" >
+                            <div class="box viewpayment_details" >
                             <p class="" id="showselected">Selected Amount : <span>₹</span><span id="selectedAmount"></span></p>
                             <p class="" id="showrefund">Refund Amount : <span>₹</span><span id="refundAmount"></span></p>
                             <p class="" id="showtotal">Total Amount : <span>₹</span><span id="totalAmount"></span></p>
@@ -352,7 +352,14 @@
         const TotalAmount = document.getElementById('totalAmount');
         const showrefund = document.getElementById('showrefund');
         const showtotal = document.getElementById('showtotal');
+        const viewpayment_details = document.querySelector('.viewpayment_details');
+
         const paymentStatusButton = document.getElementById('paymentStatus');
+
+        const categorySelect = document.getElementById('category');
+        const planSelect = document.getElementById('plan');
+        const duration = document.getElementById('duration');
+
 
         // Event listener for the "Pay Now" button
         payNowButtons.forEach(function (button) {
@@ -362,12 +369,20 @@
             const refundAmountValue = refundAmountElement.textContent;
 
             // Log or use the values as needed
-            console.log('Selected Amount:', selectedAmountValue);
-            console.log('Refund Amount:', refundAmountValue);
+           
+
+            console.log(categorySelect.value,planSelect.value,duration.value);
+
+            if (!categorySelect.value || !planSelect.value || !duration.value) {
+                viewpayment_details.style.display = 'none';
+                console.log('none');
+            } else {
+                viewpayment_details.style.display = 'block';
+                console.log('block');
+            }
 
             if (refundAmountValue > 0) {
                 const newTotalAmount = selectedAmountValue - refundAmountValue;
-                console.log('Total', newTotalAmount);
                 TotalAmount.textContent = newTotalAmount;
                 paymentStatusButton.textContent = 'Pay INR ' + newTotalAmount + ' ' + ' ' + '→';;
             } else {
@@ -522,8 +537,7 @@
                             option.value = price.planId;
                             option.setAttribute('data-price', price.amount);
                             option.textContent = price.duration + ' ' + price.durationType;
-
-                            duration.appendChild(option);
+                           duration.appendChild(option);
                         }
 
                     });
@@ -588,7 +602,6 @@
                     const selectedPrice = selectedOption.getAttribute('data-price');
                     var selectedAddonsName = selectedOption.textContent;
 
-                    console.log('datasdjbkj',selectedPrice);
 
                     if (selectedPrice) {
                         addonsName.textContent = selectedAddonsName;
@@ -604,7 +617,6 @@
                         selectedAddonPriceDisplay.textContent = 'INR ' + ' ' + selectedPrice;
                         addonPriceSelected = parseFloat(selectedPrice);
                         // afteraddons.style.display = 'block';
-                        console.log('datasdjbkj')
                     } else {
                         selectedAddonPriceDisplay.textContent = '';
                         addonPriceSelected = false;
@@ -728,8 +740,7 @@
             
 
             if (selectedCategoryName !== subscriptionCategory) {
-                console.log('subscriptionCategory:', subscriptionCategory);
-                console.log('selectedCategoryName:', selectedCategoryName);
+                
                 // Category doesn't match, perform actions (e.g., display subscription details, create refund)
                 displaySubscriptionDetails();
             } else {
@@ -800,8 +811,6 @@
             showrefund.style.display = 'block';
             showtotal.style.display = 'block';
 
-            console.log('RefudiscountAmountt:', discountAmount);
-            // console.log('Refund date:', now);
 
         }
         // Function to reset actions when the category matches
@@ -809,7 +818,6 @@
             // Reset actions (e.g., hide subscription details)
             getrefundAmount.textContent = 0;
 
-            console.log('Category matches, resetting actions.');
         }
 
         // Attach the checkCategoryMatch function to the change event of the category select

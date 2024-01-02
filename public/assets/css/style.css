@@ -1663,7 +1663,10 @@ section.pricing {
 }
 
 .pricing ul li {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  line-height: 38px;
+  font-weight: normal;
+  font-family: 'Roboto', sans-serif;
   list-style: none;
 }
 
